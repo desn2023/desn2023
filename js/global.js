@@ -1,0 +1,1 @@
+console.log("global.js successfully loaded from desn2023.");
