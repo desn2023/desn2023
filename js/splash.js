@@ -1,0 +1,1 @@
+console.log("splash.js successfully loaded from desn2023.");
