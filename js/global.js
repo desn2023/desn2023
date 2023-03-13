@@ -195,3 +195,7 @@ window.onload = function() {
     countdown();
     showcase();
 }
+
+window.onresize = function() {
+    underscoreCheck();
+}
