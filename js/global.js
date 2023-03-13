@@ -154,13 +154,15 @@ function showcase() { // shuffle, reduce, split and populate
 
 // UNDERSCORE FLASH
 
-function underscore() {
+let underscore = document.querySelector(underscoreParams.class);
+
+function underscoreInit() {
 
     setTimeout(underscoreCheck, underscoreParams.delay);
 
 }
 
-function underscoreCheck(underscore = document.querySelector(underscoreParams.class)) {
+function underscoreCheck() {
         
     if (underscore.style.width == underscoreParams.endWidth) {
             setInterval(underscoreFlash, underscoreParams.interval);
@@ -171,7 +173,7 @@ function underscoreCheck(underscore = document.querySelector(underscoreParams.cl
 
 }
 
-function underscoreFlash(underscore = document.querySelector(underscoreParams.class)) {
+function underscoreFlash() {
 
     if (underscore.style.opacity == 1) {
         underscore.style.opacity = 0;
@@ -179,9 +181,6 @@ function underscoreFlash(underscore = document.querySelector(underscoreParams.cl
         underscore.style.opacity = 1;
     }
 }
-
-
-
 
 // RUNNING
 
@@ -191,7 +190,14 @@ placeholders.forEach(function(element) { // remove placeholders
 });
 
 window.onload = function() {
-    underscore();
+    underscoreInit();
     countdown();
     showcase();
+}
+
+window.onresize = function() {
+    
+    if (underscore.style.height !== "") {
+        underscore.style.height = "";
+    }
 }

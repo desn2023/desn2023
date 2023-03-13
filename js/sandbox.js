@@ -22,3 +22,8 @@
 })(jQuery);
 
 $(".showcase__item").shuffle();
+
+
+window.onload = function () {
+    document.querySelector(".underscore").style.height = "";
+}
