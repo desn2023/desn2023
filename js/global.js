@@ -93,13 +93,13 @@ window.onload = function() {
 
 // COUNTDOWN CLOCK
 
-(function() {
+function countdown() {
 
     var deadline = '2023/04/20 16:00';
 
     function pad(num, size) {
         var s = "0" + num;
-        return s.substr(s.length - size);
+        return s.substring(s.length - size);
     }
 
     // fixes "Date.parse(date)" on safari
@@ -140,4 +140,6 @@ window.onload = function() {
     }
 
     clock('js-clock', deadline);
-})();
+}
+
+countdown();
