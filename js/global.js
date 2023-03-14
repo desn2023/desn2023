@@ -9,7 +9,7 @@ console.log("global.js successfully loaded from desn2023.");
 let underscoreParams = { // underscore-related variables
     class: ".underscore", // class of underscore span
     endWidth: "7vw", // width of underscore span at the end of initial animation
-    delay: 5000, // when to start flashing
+    delay: 4000, // when to start flashing
     interval: 750 // length of flash
 }
 
@@ -196,7 +196,7 @@ window.onload = function() {
 }
 
 window.onresize = function() {
-    
+
     if (underscore.style.height !== "") {
         underscore.style.height = "";
     }
