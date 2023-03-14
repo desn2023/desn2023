@@ -17,7 +17,8 @@ let showcaseParams = { // showcase-related variables
     quantity: 9 // number of items to show
 }
 
-
+let body = document.querySelector("body");
+let underscore = document.querySelector(underscoreParams.class);
 
 
 // UTILITY
@@ -154,7 +155,8 @@ function showcase() { // shuffle, reduce, split and populate
 
 // UNDERSCORE FLASH
 
-let underscore = document.querySelector(underscoreParams.class);
+let underscoreInterval;
+let heightInterval;
 
 function underscoreInit() {
 
@@ -165,8 +167,7 @@ function underscoreInit() {
 function underscoreCheck() {
         
     if (underscore.style.width == underscoreParams.endWidth) {
-            setInterval(underscoreFlash, underscoreParams.interval);
-            underscore.style.height = "";
+            underscoreInterval = setInterval(underscoreFlash, underscoreParams.interval);
     } else {
         setTimeout(underscoreCheck, 2000);
     }
@@ -182,6 +183,16 @@ function underscoreFlash() {
     }
 }
 
+function underscoreHeight() {
+    if (underscore.style.height !== "") {
+        underscore.style.height = "";
+    }
+}
+
+
+
+
+
 // RUNNING
 
 let placeholders = document.querySelectorAll(".is--placeholder");
@@ -193,11 +204,6 @@ window.onload = function() {
     underscoreInit();
     countdown();
     showcase();
-}
-
-window.onresize = function() {
-
-    if (underscore.style.height !== "") {
-        underscore.style.height = "";
-    }
+    underscoreHeight();
+    heightInterval = setInterval(underscoreHeight, 250);
 }
