@@ -6,13 +6,22 @@ barba.init({
     preventRunning: true,
     transitions: [{
         name: 'opacity-transition',
-        beforeEnter() {
-            // Show the loading indicator
-            loader.style.display = 'block';
-        },
-        afterEnter() {
-            // Hide the loading indicator
-            loader.style.display = 'none';
+        before() {
+            return new Promise((resolve, reject) => {
+                if (Barba.HistoryManager.history.current && Barba.HistoryManager.history.current.container) {
+                    // If the current container exists, resolve the promise immediately
+                    resolve();
+                } else {
+                    // If the current container doesn't exist, show the loading indicator and wait for the current container to load
+                    loader.style.display = 'block';
+
+                    // Wait for the current container to load before resolving the promise
+                    this.oldContainerLoading.then(() => {
+                        loader.style.display = 'none';
+                        resolve();
+                    });
+                }
+            });
         },
         leave(data) {
             return gsap.to(data.current.container, {
@@ -39,4 +48,4 @@ barba.init({
     }]
 });
 
-console.log("loader with bar final");
+console.log("hey!");
