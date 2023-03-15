@@ -17,3 +17,5 @@ barba.init({
         }
     }]
 });
+
+console.log("this is live");
