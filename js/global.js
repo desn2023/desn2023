@@ -4,21 +4,35 @@ console.log("global.js successfully loaded from desn2023.");
 
 
 
-// IMPORTANT VARIABLES
-
-let underscoreParams = { // underscore-related variables
-    class: ".underscore", // class of underscore span
-    endWidth: "7vw", // width of underscore span at the end of initial animation
-    delay: 4000, // when to start flashing
-    interval: 750 // length of flash
-}
-
-let showcaseParams = { // showcase-related variables
-    quantity: 9 // number of items to show
-}
+// GLOBAL NO BARBA
 
 let body = document.querySelector("body");
-let underscore = document.querySelector(underscoreParams.class);
+
+
+
+
+
+
+// SPLASH PAGE STUFF: EVERYTHING BELOW --> BARBA AFTER ENTER
+
+let splashParams = { // all variables for underscore animation, showcase, and countdown
+    underscore: {
+        class: ".underscore", // class of underscore span
+        endWidth: "7vw", // width of underscore span at the end of initial animation
+        delay: 4000, // when to start flashing
+        interval: 750 // length of flash
+    },
+    showcase: {
+        quantity: 9 // number of items to show
+    },
+    countdown: {
+        deadline: "2023/04/20 16:00"
+    }
+}
+
+
+
+
 
 
 // UTILITY
@@ -38,9 +52,9 @@ function shuffleArray(array) { // randomizes order of items in an array
 
 // COUNTDOWN CLOCK
 
-function countdown() {
+function countdownInit() { // set and start countdown
 
-    var deadline = '2023/04/20 16:00';
+    // moved deadline to splashParams
 
     function pad(num, size) {
         var s = "0" + num;
@@ -84,7 +98,7 @@ function countdown() {
         }, 1000);
     }
 
-    clock('js-clock', deadline);
+    clock('js-clock', splashParams.countdown.deadline);
 }
 
 
@@ -92,7 +106,9 @@ function countdown() {
 
 // SHOWCASE ITEMS
 
-function showcase() { // shuffle, reduce, split and populate
+function showcaseInit() { // shuffle, reduce, split and populate
+
+    showcaseRemovePlaceholders(); // remove placeholder items
 
     // get elements
 
@@ -112,7 +128,7 @@ function showcase() { // shuffle, reduce, split and populate
 
         // reduce items
 
-        let quantity = showcaseParams.quantity; // number of items to show
+        let quantity = splashParams.showcase.quantity; // number of items to show
 
         while (showcaseItems.length > quantity) { // reduce array length to 9
             showcaseItems.pop();
@@ -150,24 +166,31 @@ function showcase() { // shuffle, reduce, split and populate
     }
 }
 
+function showcaseRemovePlaceholders() {
+    let placeholders = document.querySelectorAll(".is--placeholder");
+    placeholders.forEach(function(element) { // remove placeholders
+        element.remove();
+    });
+}
+
+
 
 
 
 // UNDERSCORE FLASH
 
-let underscoreInterval;
-let heightInterval;
+let underscore = document.querySelector(splashParams.underscore.class);
+let flashInterval;
+let removeHeightInterval;
 
 function underscoreInit() {
-
-    setTimeout(underscoreCheck, underscoreParams.delay);
-
+    setTimeout(underscoreCheck, splashParams.underscore.delay);
 }
 
 function underscoreCheck() {
         
-    if (underscore.style.width == underscoreParams.endWidth) {
-            underscoreInterval = setInterval(underscoreFlash, underscoreParams.interval);
+    if (underscore.style.width == splashParams.underscore.endWidth) {
+            flashInterval = setInterval(underscoreFlash, splashParams.underscore.interval);
     } else {
         setTimeout(underscoreCheck, 2000);
     }
@@ -183,7 +206,7 @@ function underscoreFlash() {
     }
 }
 
-function underscoreHeight() {
+function underscoreRemoveHeight() {
     if (underscore.style.height !== "") {
         underscore.style.height = "";
     }
@@ -195,15 +218,10 @@ function underscoreHeight() {
 
 // RUNNING
 
-let placeholders = document.querySelectorAll(".is--placeholder");
-placeholders.forEach(function(element) { // remove placeholders
-    element.remove();
-});
-
 window.onload = function() {
     underscoreInit();
-    countdown();
-    showcase();
-    underscoreHeight();
-    heightInterval = setInterval(underscoreHeight, 250);
+    countdownInit();
+    showcaseInit();
+    underscoreRemoveHeight();
+    removeHeightInterval = setInterval(underscoreRemoveHeight, 250);
 }
