@@ -39,4 +39,4 @@ barba.init({
     }]
 });
 
-console.log("loader with bar");
+console.log("loader with bar final");
