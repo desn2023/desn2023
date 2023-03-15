@@ -28,8 +28,12 @@ barba.init({
             });
         },
         onProgress: (state) => {
-            // Update the loading indicator based on the progress of the transition
-            loader.style.width = state.progress * 100 + '%';
+            // Update the width of the bar based on the progress of the transition
+            gsap.to(bar, {
+                width: state.progress * 100 + '%',
+                duration: 0.2,
+                ease: 'power2.inOut'
+            });
         }
     }]
 });
