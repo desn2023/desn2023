@@ -1,4 +1,5 @@
 barba.init({
+    preventRunning: true,
     transitions: [{
         name: 'opacity-transition',
         leave(data) {
