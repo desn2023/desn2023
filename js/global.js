@@ -1,5 +1,6 @@
 // Define the loading indicator element
 const loader = document.querySelector('#loader');
+const bar = loader.querySelector('#bar');
 
 barba.init({
     preventRunning: true,
@@ -38,4 +39,4 @@ barba.init({
     }]
 });
 
-console.log("loader update");
+console.log("loader with bar");
