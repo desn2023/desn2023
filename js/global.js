@@ -1,3 +1,5 @@
+console.log("Updated Barba!");
+
 barba.init({
     preventRunning: true,
     sync: true,
@@ -28,6 +30,10 @@ barba.init({
 
 
 
+
+
+//PROGRES BAR WHEN NEW CONTENT IS LOADING (NOT WORKING)
+
 // // Create a loading bar element and append it to your document
 // var loadingBar = document.createElement('div');
 // loadingBar.id = 'loading-bar';
@@ -50,13 +56,11 @@ barba.init({
 // loadingBar.style.display = 'none';
 //});
 
-console.log("hey!");
 
 
 
 
-
-
+//LAZY LOADING (PARTIALLY WORKING)
 
 // // Find all elements with data-images attribute
 // const images = Array.from(document.querySelectorAll('[data-image]'));
@@ -71,8 +75,6 @@ console.log("hey!");
 //         bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
 //     );
 // };
-
-
 
 // // If there are images on the page
 // if (images && images.length) {
@@ -93,10 +95,7 @@ console.log("hey!");
 
 
 
-
-
-
-
+//ADDING DATA-IMAGE ATTRIBUTE TO COLLECTION LISTS (NOT WORKING)
 
 // // Define your Webflow API key and site ID
 // const API_KEY = 'dd98d6c4aa97216b338d42fd7d4ee31d11677fe694d450cd029985a3244b44f0';
