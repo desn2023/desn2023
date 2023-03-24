@@ -10,7 +10,7 @@ barba.init({
             return gsap.to(data.current.container, {
                 delay: 0.5,
                 opacity: 0,
-                duration: 0.3,
+                duration: 0.4,
                 ease: "power2.out"
             });
         },
@@ -21,7 +21,7 @@ barba.init({
         afterEnter(data) {
             return gsap.from(data.next.container, {
                 opacity: 0,
-                duration: 0.3,
+                duration: 0.4,
                 ease: "power2.out"
             });
         },
