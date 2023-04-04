@@ -25,5 +25,17 @@ barba.init({
                 ease: "power2.out"
             });
         },
-    }]
+    }],
+
+    views: [{
+        namespace: 'home',
+        beforeEnter() {
+          // insert a function to run here
+          
+        },
+        afterEnter() {
+          // insert a function to run here
+          
+        }
+      }]
 });
