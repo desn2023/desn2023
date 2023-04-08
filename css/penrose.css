@@ -1,0 +1,31 @@
+body {
+    background: black;
+}
+
+#penrose-wrapper {
+    height: 100vh;
+    overflow: hidden;
+}
+
+#penrose-svg {
+    transform-origin: top left;
+}
+
+.sect {
+    stroke: hsl(0, 0%, 30%);
+    stroke-width: 1px;
+    stroke-opacity: 1;
+    fill-opacity: 0;
+}
+
+.sect.top {
+    fill: #ED3D3D;
+}
+
+.sect.left {
+    fill: white;
+}
+
+.sect.right {
+    fill: black;
+}

@@ -39,3 +39,7 @@ barba.init({
         }
       }]
 });
+
+window.onresize = function () {
+    penrose.setSize();
+}
