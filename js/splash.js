@@ -17,7 +17,7 @@ let body = document.querySelector("body");
 
 let splashParams = { // all variables for underscore animation, showcase, and countdown
     underscore: {
-        class: ".underscore", // class of underscore span
+        class: ".old__underscore", // class of underscore span
         endWidth: "7vw", // width of underscore span at the end of initial animation
         delay: 4000, // when to start flashing
         interval: 750 // length of flash
@@ -112,8 +112,8 @@ function showcaseInit() { // shuffle, reduce, split and populate
 
     // get elements
 
-    let showcaseItems = Array.from(document.querySelectorAll(".showcase__item:not(.is--placeholder)"));
-    let showcaseRows = document.querySelectorAll(".showcase__row"); // change class name if necessary
+    let showcaseItems = Array.from(document.querySelectorAll(".old__showcase__item:not(.is--placeholder)"));
+    let showcaseRows = document.querySelectorAll(".old__showcase__row"); // change class name if necessary
 
     showcaseItems.forEach(function(item, i) {
         item.id = "item-" + i;
