@@ -1,11 +1,11 @@
 @media (hover: none) {
-    .cursor__wrapper {
+    .old__cursor__wrapper {
         display: none;
     }
 }
 
 @media (pointer: none) {
-    .cursor__wrapper {
+    .old__cursor__wrapper {
         display: none;
     }
 }
