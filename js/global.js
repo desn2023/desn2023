@@ -1,4 +1,4 @@
-console.log("v1.0.0");
+console.log("v1.0.1");
 
 barba.init({
     preventRunning: true,
@@ -30,16 +30,16 @@ barba.init({
     views: [{
         namespace: 'home',
         beforeEnter() {
-          // insert a function to run here
-          
+            // insert a function to run here
+
         },
         afterEnter() {
-          // insert a function to run here
-          
+            // insert a function to run here
+
         }
-      }]
+    }]
 });
 
-window.onresize = function () {
+window.onresize = function() {
     penrose.setSize();
 }
