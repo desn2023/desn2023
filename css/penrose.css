@@ -16,6 +16,7 @@ body {
     stroke-width: 1px;
     stroke-opacity: 1;
     fill-opacity: 0;
+    pointer-events: all;
 }
 
 .sect.top {
@@ -28,4 +29,8 @@ body {
 
 .sect.right {
     fill: black;
+}
+
+.sect-zone {
+    pointer-events: all;
 }

@@ -261,10 +261,16 @@
             <path d="M738.214 907.005L686.902 936.573V877.44L738.214 847.874V907.005Z" class="sect right"/>
             <path d="M532.968 907.005L481.656 936.573V877.44L532.968 847.874V907.005Z" class="sect right"/>
             <path d="M327.72 907.005L276.408 936.573V877.44L327.72 847.874V907.005Z" class="sect right"/>
+            <g id="penrose-zones-group"></g>
+            <rect width="2" height="2" />
         </svg>    
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="js/penrose.js"></script>
     <script>
+        window.onload = function () {
+            penrose.init();
+        }
         window.onresize = function () {
             penrose.setSize();
         }
