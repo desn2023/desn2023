@@ -40,7 +40,7 @@ penrose.zoneExit = function (sectId) {
         fillOpacity: 0,
         // duration: 3,
         // delay: 1,
-        duration: 0.25 + Math.random() * 0.75,
+        duration: 0.25 + Math.random() * 0.5,
         delay: 0.75 + Math.random(),
         onComplete: function () {
             delete penrose.tweensZoneExit[sectId];

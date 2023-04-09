@@ -1,12 +1,3 @@
-body {
-    background: black;
-}
-
-#penrose-wrapper {
-    height: 100vh;
-    overflow: hidden;
-}
-
 #penrose-svg {
     transform-origin: top left;
     pointer-events: all;
@@ -30,8 +21,4 @@ body {
 
 .sect.right {
     fill: black;
-}
-
-.sect-zone {
-    pointer-events: all;
 }
