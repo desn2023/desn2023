@@ -1,7 +1,7 @@
 // do not touch, Justin is working on this
 
 const penrose = {
-    zoneRadius: 100, // distance at which the transition is triggered
+    zoneSize: 80, // distance at which the transition is triggered
 
     wrapper: document.querySelector("#penrose-wrapper"),
     svg: document.querySelector("#penrose-svg"),
@@ -9,16 +9,17 @@ const penrose = {
     zones: new Array(),
     sects: document.querySelectorAll(".sect"),
     origW: 1066,
-    origH: 1045
+    origH: 1045,
+    active: []
 }
 
-penrose.zoneEnter = function (e) {
-    sectID = parseInt(e.currentTarget.getAttribute("sectid"));
-    console.log("!");
 
-    gsap.to(penrose.sects[sectID], {
+
+penrose.zoneEnter = function (sect) {
+
+    gsap.to(sect, {
         fillOpacity: 1,
-        duration: 0.25
+        duration: 1
     });
 }
 
@@ -46,40 +47,41 @@ penrose.setSize = function () {
 
 }
 
-penrose.initSect = function (sect, index) {
+penrose.mouseMove = function (e) {
 
-    // get centre coords of sector
-    const bbox = sect.getBBox();
-    const centreX = bbox.x + bbox.width / 2;
-    const centreY = bbox.y + bbox.height / 2;
+    // penrose.pointer.setAttribute("x", e.offsetX - penrose.zoneHalf);
+    // penrose.pointer.setAttribute("y", e.offsetY - penrose.zoneHalf);
 
-    // create zone shape
-    const zoneShape = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    zoneShape.classList.add("sect-zone");
-    zoneShape.setAttribute("sectid", index);
+    penrose.pointer.x = e.offsetX - penrose.zoneSize / 2;
+    penrose.pointer.y = e.offsetY - penrose.zoneSize / 2;
 
-    // set centre of circle to same coords as centre of sector
-    zoneShape.setAttribute("cx", centreX);
-    zoneShape.setAttribute("cy", centreY);
+    const intersects = penrose.svg.getIntersectionList(penrose.pointer, null);
 
-    // circle radius is distance at which the transition is triggered
-    zoneShape.setAttribute("r", penrose.zoneRadius);
+    intersects.forEach(function (sect) {
+        penrose.zoneEnter(sect);
+    });
+}
 
-    // events
-    sect.onmouseover = penrose.sectEnter;
-    sect.onmouseout = penrose.sectLeave;
-    zoneShape.onmouseover = penrose.zoneEnter;
-    zoneShape.onmouseout = penrose.zoneLeave;
+penrose.initPointer = function () {
 
-    // add to svg
-    penrose.zonesGroup.appendChild(zoneShape);
-    // add to list
-    penrose.zones.push(zoneShape);
+    // penrose.pointer = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    // penrose.pointer.setAttribute("width", penrose.zoneSize);
+    // penrose.pointer.setAttribute("height", penrose.zoneSize);
+    // penrose.pointer.setAttribute("x", 0);
+    // penrose.pointer.setAttribute("y", 0);
+    // penrose.pointer.setAttribute("fill", "blue");
 
+    // penrose.svg.appendChild(penrose.pointer);
+
+    penrose.pointer = penrose.svg.createSVGRect();
+    penrose.pointer.width = penrose.zoneSize;
+    penrose.pointer.height = penrose.zoneSize;
+
+    penrose.svg.onmousemove = penrose.mouseMove;
 }
 
 penrose.init = function () {
     penrose.setSize(); // sizing
-    penrose.sects.forEach(penrose.initSect); // create zone shapes set event handlers
+    penrose.initPointer();
 }
 
