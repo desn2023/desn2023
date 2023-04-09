@@ -9,6 +9,7 @@ body {
 
 #penrose-svg {
     transform-origin: top left;
+    pointer-events: all;
 }
 
 .sect {
