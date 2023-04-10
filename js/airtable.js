@@ -121,7 +121,7 @@ function createImgRef(imgObj) { // obj with less properties
 
 // get records
 
-let tableName = "Projects"; // "Graduate Profiles" || "Projects"
+let tableName = "Projects"; // "Graduate Profiles" || "Projects" || "Featured Projects"
 
 let table = base.getTable(tableName);
 let imgFields;
@@ -131,6 +131,8 @@ if (tableName == "Projects") {
     imgFields = ["Thumbnail image", "Hero image", "B - Images", "D - Images", "F - Images"];
 } else if (tableName == "Graduate Profiles") {
     imgFields = ["Portrait", "Profile picture"];
+} else if (tableName == "Featured Projects") {
+    imgFields = ["Thumbnail image"];
 }
 
 let queryFields = imgFields.concat(otherFields);
