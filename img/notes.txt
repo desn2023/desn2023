@@ -1,0 +1,15 @@
+Google Cloud
+
+	• Cloud shell icon in corner (of desn2023-img)
+	• clear
+	• ls (list files)
+	• rm test.json (or old file name)
+	• More info – upload file command to /home/info
+	• python upload_images_to_google_cloud.py test.json
+
+On website
+
+	• use srcset
+	• apply blur in CSS
+
+https://github.com/dombrant/blurry-image-load
