@@ -13,6 +13,7 @@ const penrose = {
     zoneSizeH: 60, // y distance at which the transition is triggered
     zoneMultiply: 1.5, // how much zone grows
     glitch: false, // allows multiple tweens to run at same time, causing glitches in animation
+    heartInterval: 1500,
 
     colours: [
         [".top", "#333333"],
@@ -56,9 +57,13 @@ const penrose = {
         [0.2, 0.2]
     ],
 
+    heartSects: [196,191,230,15,152,5,91,95,85,90,96,0,11,158,202,235,236,192,197,49,205,52,44,153,16,7,170,175],
+
     wrapper: document.querySelector("#penrose-wrapper"),
     origW: 1066, // dimensions of svg
     origH: 1045, // dimensions of svg
+    counter: 0,
+    mouse: false,
     active: [], // all sectors intersecting with pointer zone
     tweensZoneEnter: {}, // all ongoing enter animations
     tweensZoneExit: {} // all ongoing exit animations
@@ -133,8 +138,10 @@ penrose.mouseUp = function (e) {
 }
 
 penrose.mouseEnter = function (e) {
-    penrose.initPointer();
-    penrose.initHover();
+    // penrose.initPointer();
+    // penrose.initHover();
+
+    penrose.killAnim();
 }
 
 penrose.mouseLeave = function (e) {
@@ -151,6 +158,56 @@ penrose.mouseLeave = function (e) {
     penrose.initAnim();
 }
 
+penrose.showHeart = function () {
+
+    if (penrose.counter >= penrose.heartInterval) {
+
+        penrose.counter = 0;    
+        penrose.killMouse();
+        penrose.svg.onmouseleave = null;
+        penrose.svg.onmouseenter = null;
+
+        penrose.heartAnim = gsap.timeline ({
+            onComplete: function () {
+                penrose.setColours();
+                penrose.pointer.width = penrose.zoneSizeW;
+                penrose.pointer.height = penrose.zoneSizeH;
+                penrose.reinitMouse();
+                penrose.svg.onmouseenter = penrose.mouseEnter;
+                penrose.svg.onmouseleave = penrose.mouseLeave;
+            }            
+        });
+
+
+        gsap.killTweensOf(".sect");
+
+        penrose.heartAnim.to(".sect", {
+            fillOpacity: 1,
+            fill: "#ED3D3D",
+            duration: 0.25,
+            stagger: 0.01
+        });
+
+        penrose.heartAnim.to(".sect", {
+            fillOpacity: 1,
+            fill: "#ED3D3D",
+            duration: 0
+        });
+
+        penrose.heartAnim.to(".sect:not(.heart)", {
+            fillOpacity: 0,
+            duration: 0.25,
+            stagger: 0.01
+        });
+
+        penrose.heartAnim.to(".sect.heart", {
+            fillOpacity: 0,
+            duration: 0.25,
+            stagger: 0.01,
+            delay: 0.5
+        });
+    }
+}
 
 
 
@@ -206,6 +263,11 @@ penrose.transition = function () { // fade sectors based on penrose.pointer posi
             }
 
             penrose.zoneEnter(sect); // fire enter animation
+
+            if (penrose.mouse) {
+                penrose.counter++;
+                penrose.showHeart();
+            }
         }
     });
 
@@ -248,6 +310,22 @@ penrose.addSVG = function () {
     });
 }
 
+penrose.addHeart = function () {
+    penrose.heartSects.forEach(function(num) {
+        penrose.svg.querySelector("#sect-" + num).classList.add("heart");
+    });
+}
+
+penrose.initStrokes = function () {
+    penrose.sects.forEach(function(sect) {
+        gsap.to(sect, {
+            strokeOpacity: 1,
+            duration: 0.25,
+            delay: Math.random() * 0.5
+        });
+    });
+}
+
 penrose.initPointer = function () { // create pointer zone
 
     penrose.pointer = penrose.svg.createSVGRect();
@@ -273,9 +351,22 @@ penrose.initMouse = function () {
     penrose.svg.onmouseleave = penrose.mouseLeave;
 }
 
+penrose.reinitMouse = function() {
+    penrose.svg.onmousemove = penrose.mouseMove;
+    penrose.svg.onmousedown = penrose.mouseDown;
+    penrose.svg.onmouseup = penrose.mouseUp;
+
+    penrose.sects.forEach(function(sect) {
+        sect.onmouseover = penrose.sectEnter;
+        sect.onmouseout = penrose.sectExit;
+    });
+
+    penrose.mouse = false;
+}
+
 penrose.initAnim = function () {
 
-    penrose.killMouse();
+    penrose.mouse = false;
 
     if (
         penrose.tweensZoneEnter !== undefined &&
@@ -320,24 +411,33 @@ penrose.killAnim = function () {
     penrose.anim.kill();
     penrose.pointer.width = penrose.zoneSizeW / penrose.zoneMultiplyAnim;
     penrose.pointer.height = penrose.zoneSizeH / penrose.zoneMultiplyAnim;
+    penrose.mouse = true;
 }
 
 penrose.killMouse = function () {
+
     penrose.svg.onmousemove = null;
-    penrose.sects.forEach(function (sect) {
+    penrose.svg.onmousedown = null;
+    penrose.svg.onmouseup = null;
+
+    penrose.sects.forEach(function(sect) {
         sect.onmouseover = null;
         sect.onmouseout = null;
     });
+
+    penrose.mouse = false;
 }
 
 penrose.init = function () {
     penrose.addSVG();
     penrose.setSize(); // sizing
     penrose.sects.forEach(function (sect, index) { sect.id = "sect-" + index; }); // add ids to all sectors
+    penrose.addHeart();
+    penrose.initStrokes();
     penrose.initPointer(); // create pointer svg rect and set mousemove event handler
     penrose.initHover(); // set event handlers for hovering directly on sector
-    penrose.initAnim();
     penrose.initMouse(); // set event handlers for clicking and dragggin
+    penrose.initAnim();
 }
 
 
