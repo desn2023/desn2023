@@ -3,8 +3,8 @@
 /* TO-DO
 
     - preset animation
-    - stroke lighting
-    - set only new sectors to colour
+    - heart
+    - transition in
 
 */
 
@@ -25,16 +25,27 @@ const penrose = {
         "#19BAFF"
     ],
 
+    zoneMultiplyAnim: 2,
     animDuration: 4,
-    animCoords: [ // as percentage of x,y
-        [0, 0.2], // top left
-        [1, 0.2], // top right
-        [0, 0.8], // bottom left
-        [1, 0.8], // bottom right
-        [0, 0.2], // top left
-        [0, 0.8], // bottom left
-        [1, 0.2], // top right
-        [1, 0.8], // bottom right
+    // animCoords: [ // x shape pattern, as percentage of x,y
+    //     [0.2, 0.20], // top left
+    //     [0.8, 0.21], // top right
+    //     [0.2, 0.82], // bottom left
+    //     [0.8, 0.83], // bottom right
+    //     [0.2, 0.24], // top left
+    //     [0.2, 0.85], // bottom left
+    //     [0.8, 0.26], // top right
+    //     [0.8, 0.87] // bottom right
+    // ],
+    animCoords: [ // zigzag pattern
+        [0.2, 0.2],
+        [0.8, 0.4],
+        [0.2, 0.6],
+        [0.8, 0.8],
+        [0.2, 0.8],
+        [0.8, 0.6],
+        [0.2, 0.4],
+        [0.8, 0.2]
     ],
 
     wrapper: document.querySelector("#penrose-wrapper"),
@@ -113,7 +124,13 @@ penrose.mouseUp = function (e) {
     });
 }
 
+penrose.mouseEnter = function (e) {
+    penrose.initPointer();
+    penrose.initHover();
+}
+
 penrose.mouseLeave = function (e) {
+    
     penrose.pointer.width = penrose.zoneSizeW / penrose.zoneMultiply;
     penrose.pointer.height = penrose.zoneSizeH / penrose.zoneMultiply;
 
@@ -122,7 +139,11 @@ penrose.mouseLeave = function (e) {
     penrose.setColours([penrose.colours[0]], {
         duration: 0.5
     });
+
+    penrose.initAnim();
 }
+
+
 
 
 
@@ -240,40 +261,72 @@ penrose.initHover = function () { // events for hovering directly on a sector
 penrose.initMouse = function () {
     penrose.svg.onmousedown = penrose.mouseDown;
     penrose.svg.onmouseup = penrose.mouseUp;
+    penrose.svg.onmouseenter = penrose.mouseEnter;
     penrose.svg.onmouseleave = penrose.mouseLeave;
 }
 
 penrose.initAnim = function () {
 
+    penrose.killMouse();
+
+    if (
+        penrose.tweensZoneEnter !== undefined &&
+        penrose.tweensZoneEnter !== null &&
+        penrose.tweensZoneEnter.length > 0
+    )
+    penrose.tweensZoneEnter.forEach(function (tween) {
+        tween.kill();
+    });
+
+    penrose.pointer.width = penrose.zoneSizeW * penrose.zoneMultiplyAnim;
+    penrose.pointer.height = penrose.zoneSizeH * penrose.zoneMultiplyAnim;
+
     penrose.anim = gsap.timeline({repeat: -1}); // repeat indefinitely
 
-    penrose.pointer.x = penrose.animCoords[0][0];
-    penrose.pointer.y = penrose.animCoords[0][1];
+    const reorderNum = Math.round(penrose.animCoords.length * Math.random());
+    penrose.animCoords.push(...penrose.animCoords.splice(0, reorderNum));
+    console.log(penrose.animCoords);
 
     penrose.transition();
 
-    penrose.animCoords.push(penrose.animCoords.splice(0, 1)[0]); // move first coord to end
+    penrose.animCoords.push(...penrose.animCoords.splice(0, 1)); // move first coord to end
 
-    penrose.animCoords.forEach(function(coord, index) {
+    penrose.animCoords.forEach(function (coord, index) {
 
         penrose.anim.to(penrose.pointer, { // x animation
             x: coord[0] * penrose.origW,
             duration: penrose.animDuration,
-            ease: "", // edit
+            ease: "none", // edit
             onUpdate: penrose.transition
         });
 
         penrose.anim.to(penrose.pointer, { // y animation
             y: coord[1] * penrose.origH,
             duration: penrose.animDuration,
-            ease: "" // CustomWiggle
+            ease: "none", // CustomWiggle
         }, "<"); // start of previous animation
 
     });
+
+    // penrose.animCoords.splice(0, 0, penrose.animCoords [
+    //     penrose.animCoords.length - 1
+    // ]); // put last item back first
+
+    // penrose.animCoords[penrose.animCoords.length - 1].pop();
 }
 
 penrose.killAnim = function () {
     penrose.anim.kill();
+    penrose.pointer.width = penrose.zoneSizeW / penrose.zoneMultiplyAnim;
+    penrose.pointer.height = penrose.zoneSizeH / penrose.zoneMultiplyAnim;
+}
+
+penrose.killMouse = function () {
+    penrose.svg.onmousemove = null;
+    penrose.sects.forEach(function (sect) {
+        sect.onmouseover = null;
+        sect.onmouseout = null;
+    });
 }
 
 penrose.init = function () {
@@ -282,6 +335,7 @@ penrose.init = function () {
     penrose.sects.forEach(function (sect, index) { sect.id = "sect-" + index; }); // add ids to all sectors
     penrose.initPointer(); // create pointer svg rect and set mousemove event handler
     penrose.initHover(); // set event handlers for hovering directly on sector
+    penrose.initAnim();
     penrose.initMouse(); // set event handlers for clicking and dragggin
 }
 
