@@ -14,3 +14,5 @@ On website
 
 https://github.com/dombrant/blurry-image-load
 https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+https://github.com/aFarkas/lazysizes#lqipblurry-image-placeholderblur-up-image-technique
+https://cloud.google.com/billing/docs/how-to/modify-project?hl=en&visit_id=638167903322843344-1452981922&rd=1
