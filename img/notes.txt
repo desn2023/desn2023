@@ -13,3 +13,4 @@ On website
 	• apply blur in CSS
 
 https://github.com/dombrant/blurry-image-load
+https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API

@@ -40,6 +40,49 @@ barba.init({
     }]
 });
 
-window.onresize = function() {
-    penrose.setSize();
+const imgRefs = {
+    refClass: "img-ref",
+    columns: [
+        { col: "", cls: "" }
+    ]
+};
+
+imgRefs.run = function (refClass = "img-ref") {
+    
+    // get img-ref nodes
+
+    // for each img-ref
+
+        // get parent
+
+        // for each column
+
+            // find the container
+
+            // count number of images
+
+            // if does not match, don't do anything
+
+            // if matches
+
+                // by index,
+
+                // remove loading tags
+
+                // add class for watching with observer
+            
+                // change src to srcset and add urls
 }
+
+imgRefs.buildURL = function (attid) {
+
+}
+
+// create blurryImageLoad
+
+// create intersection observer
+
+// callback has .load(node)
+
+// target all images with the class
+
