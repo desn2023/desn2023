@@ -1,44 +1,56 @@
 // declare functions
 
-function shuffleArray(array) { // shuffle items in array
-
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    return array;
+let gradsAnimIn = {
+    opacity: 1,
+    duration: 0.25,
+    stagger: 0.15,
+    ease: "power2.out"
 }
 
-function sortGrads() { // fire this function on page load
+function filterGrads() { // fire this function on page load
 
     // get the grads list element
-    var gradsList = document.querySelector(".grads__list");
+    let gradsList = document.querySelector(".grads__list");
 
     // get all grads items in array/nodelist
-    var gradsItems = document.getElementsByClassName("grads__item");
+    let gradsItems = document.querySelectorAll(".grads__item");
 
     // sort items into two arrays based on has top discipline/does not have top discipline
-    let categoryElem = document.querySelector(".grads__option.is--active");
+    let categoryElem = document.querySelector(".grads__option.is--selected");
     let categoryTxt = categoryElem.innerText; // e.g. "Branding"
-    
-    // sort and randomize both arrays
-    let twoGroups = sortIntoArrays(categoryTxt, gradsItems, true);
 
-    // remove the elements the HTML
-    gradsItems.forEach(function(grad) {
-        grad.remove();
+    // convert to array
+    gradsItems = Array.from(gradsItems);
+
+    // remove items that don't match filter
+    gradsItems.forEach(function (item) {
+        let disciplinesList = item.querySelector(".disciplines__list");
+
+        if (categoryTxt !== "All Disciplines" && disciplinesList.innerHTML.indexOf(categoryTxt) == -1) {
+            // gradsItems[index].pop();
+            item.remove();
+        }
     });
+
+    gsap.to(gradsItems. gradsAnimIn);
     
-    // re-append in a randomized order
+    // // sort and randomize both arrays
+    // let twoGroups = sortIntoArrays(categoryTxt, gradsItems, true);
 
-    for (let i=0; i<twoGroups.topItems.length; i++){
-        gradsList.append(twoGroups.topItems[i]);
-    };
+    // // remove the elements the HTML
+    // gradsItems.forEach(function(grad) {
+    //     grad.remove();
+    // });
+    
+    // // re-append in a randomized order
 
-    for (let i=0; i<twoGroups.bottomItems.length; i++){
-        gradsList.append(twoGroups.bottomItems[i]);
-    };
+    // for (let i=0; i<twoGroups.topItems.length; i++){
+    //     gradsList.append(twoGroups.topItems[i]);
+    // };
+
+    // for (let i=0; i<twoGroups.bottomItems.length; i++){
+    //     gradsList.append(twoGroups.bottomItems[i]);
+    // };
 }
 
 function sortIntoArrays(categoryTxt, items, randomize) {
