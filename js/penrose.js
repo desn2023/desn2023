@@ -321,7 +321,7 @@ penrose.initStrokes = function () {
         gsap.to(sect, {
             strokeOpacity: 1,
             duration: 0.25,
-            delay: Math.random() * 0.5
+            delay: 0.5 + Math.random() * 0.5
         });
     });
 }
