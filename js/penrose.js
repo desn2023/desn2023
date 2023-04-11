@@ -28,24 +28,32 @@ const penrose = {
     zoneMultiplyAnim: 2,
     animDuration: 4,
     // animCoords: [ // x shape pattern, as percentage of x,y
-    //     [0.2, 0.20], // top left
-    //     [0.8, 0.21], // top right
-    //     [0.2, 0.82], // bottom left
-    //     [0.8, 0.83], // bottom right
-    //     [0.2, 0.24], // top left
-    //     [0.2, 0.85], // bottom left
-    //     [0.8, 0.26], // top right
-    //     [0.8, 0.87] // bottom right
+    //     [0.8, 0.2], // top right
+    //     [0.2, 0.8], // bottom left
+    //     [0.8, 0.8], // bottom right
+    //     [0.2, 0.2], // top left
+    //     [0.2, 0.8], // bottom left
+    //     [0.8, 0.2], // top right
+    //     [0.8, 0.8], // bottom right
+    //     [0.2, 0.2]  // top left
     // ],
-    animCoords: [ // zigzag pattern
-        [0.2, 0.2],
-        [0.8, 0.4],
-        [0.2, 0.6],
-        [0.8, 0.8],
+    // animCoords: [ // zigzag pattern (more zags)
+    //     [0.8, 0.4],
+    //     [0.2, 0.6],
+    //     [0.8, 0.8],
+    //     [0.2, 0.8],
+    //     [0.8, 0.6],
+    //     [0.2, 0.4],
+    //     [0.8, 0.2],
+    //     [0.2, 0.2]
+    // ],
+    animCoords: [ // zigzag pattern (less zags) 
+        [0.8, 0.5],
         [0.2, 0.8],
-        [0.8, 0.6],
-        [0.2, 0.4],
-        [0.8, 0.2]
+        [0.8, 0.8],
+        [0.2, 0.5],
+        [0.8, 0.2],
+        [0.2, 0.2]
     ],
 
     wrapper: document.querySelector("#penrose-wrapper"),
@@ -278,18 +286,17 @@ penrose.initAnim = function () {
         tween.kill();
     });
 
+    // make pointer zone bigger
     penrose.pointer.width = penrose.zoneSizeW * penrose.zoneMultiplyAnim;
     penrose.pointer.height = penrose.zoneSizeH * penrose.zoneMultiplyAnim;
 
     penrose.anim = gsap.timeline({repeat: -1}); // repeat indefinitely
 
-    const reorderNum = Math.round(penrose.animCoords.length * Math.random());
-    penrose.animCoords.push(...penrose.animCoords.splice(0, reorderNum));
-    console.log(penrose.animCoords);
+    // set pointer initial position
+    penrose.pointer.x = penrose.animCoords[penrose.animCoords.length - 1][0];
+    penrose.pointer.y = penrose.animCoords[penrose.animCoords.length - 1][1];
 
     penrose.transition();
-
-    penrose.animCoords.push(...penrose.animCoords.splice(0, 1)); // move first coord to end
 
     penrose.animCoords.forEach(function (coord, index) {
 
@@ -307,12 +314,6 @@ penrose.initAnim = function () {
         }, "<"); // start of previous animation
 
     });
-
-    // penrose.animCoords.splice(0, 0, penrose.animCoords [
-    //     penrose.animCoords.length - 1
-    // ]); // put last item back first
-
-    // penrose.animCoords[penrose.animCoords.length - 1].pop();
 }
 
 penrose.killAnim = function () {
