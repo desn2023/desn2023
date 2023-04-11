@@ -13,7 +13,7 @@ const penrose = {
     zoneSizeH: 60, // y distance at which the transition is triggered
     zoneMultiply: 1.5, // how much zone grows
     glitch: false, // allows multiple tweens to run at same time, causing glitches in animation
-    heartInterval: 1500,
+    heartInterval: 300,
 
     colours: [
         [".top", "#333333"],
@@ -204,7 +204,7 @@ penrose.showHeart = function () {
             fillOpacity: 0,
             duration: 0.25,
             stagger: 0.01,
-            delay: 0.5
+            delay: 1
         });
     }
 }
