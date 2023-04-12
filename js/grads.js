@@ -71,7 +71,7 @@ grads.filter = function () { // fire this function on page load
 
         // remove items that don't match filter
 
-        if (categoryTxt == "All Disciplines") {
+        if (categoryTxt.indexOf("All Disciplines") !== -1) {
             grads.items.forEach(function (item) {
                 item.style.display = "block";
                 filteredItems.push(item);
