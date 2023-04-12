@@ -1,10 +1,14 @@
-console.log("v03");
+console.log("v04");
 
 let global;
 
 global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
     menuBg: function () {
+
+        if (global.observer !== undefined) {
+            global.observer.unobserve(global.marker);
+        }
 
         let container = document.querySelectorAll(".wrapper");
 
@@ -56,16 +60,16 @@ global = {
             });
         }
 
-        let observer = new IntersectionObserver(callback, options);
-        let marker = document.querySelectorAll(".marker");
+        global.observer = new IntersectionObserver(callback, options);
+        global.marker = document.querySelectorAll(".marker");
 
-        if (marker.length > 1) {
-            marker = marker[1];
+        if (global.marker.length > 1) {
+            global.marker = global.marker[1];
         } else {
-            marker = marker[0];
+            global.marker = global.marker[0];
         }
 
-        observer.observe(marker);
+        global.observer.observe(global.marker);
     }
 }
 
@@ -74,7 +78,7 @@ barba.init ({
     sync: true,
     transitions: [{
         name: 'opacity-transition',
-        beforeOnce(data) {
+        afterOnce(data) {
             if (
                 data.current.namespace !== "home" &&
                 data.current.namespace !== "profile"
