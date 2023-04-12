@@ -1,4 +1,4 @@
-console.log("v02");
+console.log("v01");
 
 let global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
@@ -48,10 +48,10 @@ let global = {
             });
         }
 
-        global.observer = new IntersectionObserver(callback, options);
-        global.marker = document.querySelector(".marker");
+        let observer = new IntersectionObserver(callback, options);
+        let marker = document.querySelector(".marker");
 
-        global.observer.observe(marker);
+        observer.observe(marker);
     }
 }
 
@@ -84,7 +84,6 @@ barba.init ({
         },
         beforeEnter(data) {
             window.scrollTo(0,0);
-            global.observer.unobserve(global.marker);
             gsap.to(".nav", {
                 backgroundColor: "transparent",
                 duration: 0.4
@@ -99,6 +98,11 @@ barba.init ({
         },
         afterEnter(data) {
             global.menuBg();
+
+            window.Webflow && window.Webflow.destroy();
+            window.Webflow && window.Webflow.ready();
+            window.Webflow && window.Webflow.require('ix2').init();
+            document.dispatchEvent(new Event('readystatechange'));
         }
     }],
 
