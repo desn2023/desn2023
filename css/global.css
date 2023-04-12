@@ -22,3 +22,7 @@
 .filter__item.is--selected .filter__dot {
     background-color: black;
 }
+
+.filter__dot {
+    flex-shrink: 0;
+}

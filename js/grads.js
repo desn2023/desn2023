@@ -155,6 +155,23 @@ grads.filterClick = function (e) {
     grads.filter();
 }
 
+grads.toggleAllClick = function (e) {
+
+    grads.filters.forEach(function (select) {
+        select.classList.remove("is--selected");
+    });
+
+    grads.options.forEach(function (option) {
+        if (option.innerText.indexOf("All Disciplines") !== -1) {
+            option.classList.add("is--selected");
+        } else {
+            option.classList.remove("is--selected");
+        }
+    });
+
+    grads.filter();
+}
+
 grads.init = function () {
 
     grads.filter();
@@ -170,4 +187,7 @@ grads.init = function () {
     grads.filters.forEach(function (option) {
         option.onclick = grads.filterClick;
     });
+
+    let toggleAll = document.querySelector(".toggle.is--all");
+    toggleAll.onmouseup = grads.toggleAllClick;
 }

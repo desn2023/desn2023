@@ -1,24 +1,24 @@
 console.log("v1.0.1");
 
-function runScripts(namespace) { // custom scripts for pages
-    switch (namespace) {
-        case "home":
-            penrose.init();
-            window.onresize = function() {
-                penrose.setSize();
-            }
-            break;
-        case "graduates":
-            grads.init();
-            break;
-        case "work":
-            break;
-        case "events":
-            break;
-        case "about":
-            break;
-    }
-}
+// function runScripts(namespace) { // custom scripts for pages
+//     switch (namespace) {
+//         case "home":
+//             penrose.init();
+//             window.onresize = function() {
+//                 penrose.setSize();
+//             }
+//             break;
+//         case "graduates":
+//             grads.init();
+//             break;
+//         case "work":
+//             break;
+//         case "events":
+//             break;
+//         case "about":
+//             break;
+//     }
+// }
 
 
 barba.init({
@@ -45,60 +45,41 @@ barba.init({
         afterEnter(data) {
             Webflow.ready();
             Webflow.require('ix2').init();
-            runScripts(data.current.namespace);
+            // runScripts(data.current.namespace);
         }
     }],
 
     views: [
         {
             namespace: 'home',
-            beforeEnter() {
-                // insert a function to run here
-
-            },
-            afterEnter(data) {
-                runScripts("home");
+            afterEnter() {
+                penrose.init();
+                window.onresize = function() {
+                    penrose.setSize();
+                }
             }
         },
         {
             namespace: 'graduates',
-            beforeEnter() {
-                // insert a function to run here
-
-            },
             afterEnter() {
-                runScripts("graduates");
+                grads.init();
             }
         },
         {
             namespace: 'work',
-            beforeEnter() {
-                // insert a function to run here
-
-            },
             afterEnter() {
-                runScripts("work");
+
             }
         },
         {
             namespace: 'events',
-            beforeEnter() {
-                // insert a function to run here
-
-            },
             afterEnter() {
-                runScripts("events");
 
             }
         },
         {
             namespace: 'about',
-            beforeEnter() {
-                // insert a function to run here
-
-            },
             afterEnter() {
-                runScripts("about");
 
             }
         }
