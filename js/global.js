@@ -1,46 +1,33 @@
 console.log("v1.0.1");
 
-const navAnims = {
-    desktop: {
-        removeBg: function () {
-
-        },
-        addBg: function () {
-
-        },
-        invert: function () {
-
-        }
-    },
-    mobile: {
-        close: function () {
-            
-        }
-    }
-}
-
 barba.init ({
     preventRunning: true,
     sync: true,
     transitions: [{
         name: 'opacity-transition',
+        beforeLeave(data) {
 
+        },
         leave(data) {
             return gsap.to(data.current.container, {
                 // delay: 0.5,
                 opacity: 0,
                 duration: 0.4,
-                ease: "power2.out"
+                ease: "power2.inOut"
             });
         },
         beforeEnter(data) {
             window.scrollTo(0,0);
+            gsap.to(".nav", {
+                backgroundColor: "transparent",
+                duration: 0.4
+            });
         },
         enter(data) {
             return gsap.from(data.next.container, {
                 opacity: 0,
                 duration: 0.4,
-                ease: "power2.out"
+                ease: "power2.inOut"
             });
         },
         afterEnter(data) {
@@ -54,6 +41,12 @@ barba.init ({
     views: [
         {
             namespace: 'home',
+            beforeEnter() {
+                gsap.to(".nav", {
+                    filter: "invert(0%)",
+                    duration: 0.4
+                });    
+            },
             afterEnter() {
                 penrose.init();
                 window.onresize = function() {
@@ -63,12 +56,24 @@ barba.init ({
         },
         {
             namespace: 'graduates',
+            beforeEnter() {
+                gsap.to(".nav", {
+                    filter: "invert(100%)",
+                    duration: 0.4
+                }); 
+            },
             afterEnter() {
                 grads.init();
             }
         },
         {
             namespace: 'work',
+            beforeEnter() {
+                gsap.to(".nav", {
+                    filter: "invert(100%)",
+                    duration: 0.4
+                }); 
+            },
             afterEnter() {
             }
         },
