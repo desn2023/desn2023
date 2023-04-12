@@ -1,5 +1,20 @@
 console.log("v1.0.1");
 
+function runScripts(namespace) {
+    switch (namespace) {
+        case "home":
+            penrose.init();
+            window.onresize = function() {
+                penrose.setSize();
+            }
+            break;
+        case "graduates":
+            grads.init();
+            break;
+    }
+}
+
+
 barba.init({
     preventRunning: true,
     sync: true,
@@ -24,6 +39,7 @@ barba.init({
         afterEnter(data) {
             Webflow.ready();
             Webflow.require('ix2').init();
+            runScripts(data.next.namespace);
         }
     }],
 

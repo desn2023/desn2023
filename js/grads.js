@@ -59,7 +59,6 @@ grads.filter = function () { // fire this function on page load
         disciplineH1s.forEach(function(h1, index) {
             if (h1.innerText == disciplineTop.innerText && index !== 0) {
                 topItem = h1.parentElement.parentElement;
-                console.log(topItem);
             }
         });
 
@@ -99,6 +98,26 @@ grads.optionClick = function (e) {
         e.currentTarget.classList.add("is--selected");
 
         let categoryTxt = e.currentTarget.querySelector(".title").innerText.replace(/(\r\n|\n|\r)/gm, "");
+
+        let filterMobile = document.querySelector(".filter__mobile");
+        let toggleAll = filterMobile.querySelector(".toggle.is--all");
+        let toggleFilter = filterMobile.querySelector(".toggle.is--filter");
+        let selectorMobile = filterMobile.querySelector(".selector.is--mobile");
+        let filtersContainer = filterMobile.querySelector(".filter__wrapper__wrapper");
+
+        if (categoryTxt.indexOf("All Disciplines") !== -1) {
+            toggleAll.click();
+            // toggleAll.style.opacity = 1;
+            // toggleFilter.style.opacity = 0.5;
+            // selectorMobile.style.transform = "translate3d(0%, 0px, 0px)";
+            // filtersContainer.style.height = "0px";
+        } else {
+            toggleFilter.click();
+            // toggleAll.style.opacity = 1;
+            // toggleFilter.style.opacity = 0.5;
+            // selectorMobile.style.transform = "translate3d(100%, 0px, 0px)";
+            // filtersContainer.style.height = "";
+        }        
 
         grads.filters.forEach(function (filter) {
             if (filter.innerText.indexOf(categoryTxt) !== -1) {
