@@ -1,7 +1,7 @@
 console.log("v1.0.1");
 
 let global = {
-    invertSelector: ".logo, .nav__links, .nav__search, .menu__mobile"
+    invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile"
 }
 
 barba.init ({
@@ -102,6 +102,21 @@ barba.init ({
         {
             namespace: 'about',
             afterEnter() {
+            }
+        },
+        {
+            namespace: 'profile',
+            beforeEnter() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(0%)",
+                    duration: 0.4
+                });    
+            },
+            beforeLeave() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(100%)",
+                    duration: 0.4
+                }); 
             }
         }
     ]
