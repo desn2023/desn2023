@@ -1,4 +1,4 @@
-console.log("v1.0.1");
+console.log("v01");
 
 let global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
