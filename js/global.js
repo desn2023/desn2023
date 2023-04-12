@@ -1,5 +1,11 @@
 console.log("v1.0.1");
 
+function runScripts(data) {
+    const views = barba.views.byNamespace;
+    const nextView = views.get(data.next.namespace);
+    nextView.afterEnter();
+}
+
 barba.init({
     preventRunning: true,
     sync: true,
@@ -8,7 +14,7 @@ barba.init({
 
         leave(data) {
             return gsap.to(data.current.container, {
-                delay: 0.5,
+                // delay: 0.5,
                 opacity: 0,
                 duration: 0.4,
                 ease: "power2.out"
@@ -18,16 +24,18 @@ barba.init({
             return gsap.from(data.next.container, {
                 opacity: 0,
                 duration: 0.4,
-                ease: "power2.out",
-                onComplete: function() {
-                    Webflow.ready();
-                    Webflow.require('ix2').init();
-                }
+                ease: "power2.out"
             });
         },
+        afterEnter(data) {
+            Webflow.ready();
+            Webflow.require('ix2').init();
+            runScripts(data);
+        }
     }],
 
-    views: [{
+    views: [
+        {
             namespace: 'home',
             beforeEnter() {
                 // insert a function to run here

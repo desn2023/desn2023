@@ -103,6 +103,17 @@ grads.optionClick = function (e) {
     }
 }
 
+grads.filterClick = function (e) {
+    if (!e.currentTarget.classList.contains("is--selected")) {
+
+        grads.filters.forEach(function (select) {
+            select.classList.remove("is--selected");
+        });
+
+        e.currentTarget.classList.add("is--selected");
+    }
+}
+
 grads.init = function () {
 
     grads.filter();
@@ -111,5 +122,11 @@ grads.init = function () {
 
     grads.options.forEach(function (option) {
         option.onclick = grads.optionClick;
+    });
+
+    grads.filters = Array.from(document.querySelectorAll(".filter__item"));
+
+    grads.filters.forEach(function (option) {
+        option.onclick = grads.filterClick;
     });
 }

@@ -18,3 +18,7 @@
 .disciplines__item:last-child .title.is--bullet {
     display: none;
 }
+
+.filter__item.is--selected .filter__dot {
+    background-color: black;
+}
