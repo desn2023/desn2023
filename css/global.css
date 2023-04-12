@@ -2,11 +2,19 @@
     .old__cursor__wrapper {
         display: none;
     }
+
+    #penrose-svg, .sect {
+        pointer-events: none;
+    }
 }
 
 @media (pointer: none) {
     .old__cursor__wrapper {
         display: none;
+    }
+
+    #penrose-svg, .sect {
+        pointer-events: none;
     }
 }
 
@@ -25,4 +33,13 @@
 
 .filter__dot {
     flex-shrink: 0;
+}
+
+.is--full .grads__item {
+    opacity: 0;
+}
+
+.grad__discipline, .disciplines__wrapper {
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
+    mask-image: linear-gradient(to right, black 85%, transparent);
 }

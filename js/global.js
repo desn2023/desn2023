@@ -41,6 +41,12 @@ barba.init({
                 duration: 0.4,
                 ease: "power2.out"
             });
+        },
+        afterEnter(data) {
+            window.Webflow && window.Webflow.destroy();
+            window.Webflow && window.Webflow.ready();
+            window.Webflow && window.Webflow.require('ix2').init();
+            document.dispatchEvent(new Event('readystatechange'));
         }
     }],
 
@@ -48,8 +54,6 @@ barba.init({
         {
             namespace: 'home',
             afterEnter() {
-                Webflow.ready();
-                Webflow.require('ix2').init();
                 penrose.init();
                 window.onresize = function() {
                     penrose.setSize();
@@ -59,30 +63,22 @@ barba.init({
         {
             namespace: 'graduates',
             afterEnter() {
-                Webflow.ready();
-                Webflow.require('ix2').init();
                 grads.init();
             }
         },
         {
             namespace: 'work',
             afterEnter() {
-                Webflow.ready();
-                Webflow.require('ix2').init();
             }
         },
         {
             namespace: 'events',
             afterEnter() {
-                Webflow.ready();
-                Webflow.require('ix2').init();
             }
         },
         {
             namespace: 'about',
             afterEnter() {
-                Webflow.ready();
-                Webflow.require('ix2').init();
             }
         }
     ]
