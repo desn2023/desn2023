@@ -231,11 +231,11 @@ grads.toggleFilterClick = function (e) {
         height: "auto"
     }, "<");
 
-    // tl.to(".container.is--filter", {
-    //     duration: 0.2,
-    //     ease: "none",
-    //     opacity: 1
-    // }, "<0.1");
+    tl.to(".container.is--filter", {
+        duration: 0.2,
+        ease: "none",
+        opacity: 1
+    }, "<0.1");
 }
 
 grads.init = function () {
