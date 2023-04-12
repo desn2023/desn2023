@@ -1,10 +1,25 @@
 console.log("v1.0.1");
 
+let global = {
+    invertSelector: ".logo, .nav__links, .nav__search, .menu__mobile"
+}
+
 barba.init ({
     preventRunning: true,
     sync: true,
     transitions: [{
         name: 'opacity-transition',
+        beforeOnce(data) {
+            if (
+                data.current.namespace !== "home" &&
+                data.current.namespace !== "profile"
+            ) {
+                gsap.to(global.invertSelector, {
+                    duration: 0,
+                    filter: "invert(100%)"
+                });
+            }
+        },
         beforeLeave(data) {
 
         },
@@ -18,7 +33,7 @@ barba.init ({
         },
         beforeEnter(data) {
             window.scrollTo(0,0);
-            gsap.to(".nav", {
+            gsap.to(global.invertSelector, {
                 backgroundColor: "transparent",
                 duration: 0.4
             });
@@ -42,7 +57,7 @@ barba.init ({
         {
             namespace: 'home',
             beforeEnter() {
-                gsap.to(".nav", {
+                gsap.to(global.invertSelector, {
                     filter: "invert(0%)",
                     duration: 0.4
                 });    
@@ -52,15 +67,17 @@ barba.init ({
                 window.onresize = function() {
                     penrose.setSize();
                 }
+            },
+            beforeLeave() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(100%)",
+                    duration: 0.4
+                }); 
             }
         },
         {
             namespace: 'graduates',
             beforeEnter() {
-                gsap.to(".nav", {
-                    filter: "invert(100%)",
-                    duration: 0.4
-                }); 
             },
             afterEnter() {
                 grads.init();
@@ -69,7 +86,7 @@ barba.init ({
         {
             namespace: 'work',
             beforeEnter() {
-                gsap.to(".nav", {
+                gsap.to(global.invertSelector, {
                     filter: "invert(100%)",
                     duration: 0.4
                 }); 

@@ -18,40 +18,59 @@ function shuffleArray(array) { // shuffle items in array
 function filterProjects() { // hides items that are not in active categories, show items that are in active categories
 
     // find out which categories are active
+    var workCategories = document.getElementsByClassName("work__option.is--active");
+
+        // get all work items in array/nodelist
+        var workItems = document.getElementsByClassName("work__item");
+
+        // var workCategory = document.get
+
+        // let categoryElem = document.querySelector(".work__disciplines.is--active");
+        // let categoryTxt = categoryElem.innerText; // e.g. "Branding"
 
     // loop through all project items
-    // hide items that don't have any of the active categories --> remove is--selected class
-    // show items that have any of the active categories --> add is--selected class
+    for (let i=0; i<workItems.length; i++){
+
+        // hide items that don't have any of the active categories --> remove is--selected class
+        workItems.remove(".is--selected"[i]);
+
+        // show items that have any of the active categories --> add is--selected class
+        for (let n=0; n<workCategories.length; n++){
+            if (workCategory == workCategories[i]){
+                workItems.append(".is--selected"[i]);
+            }
+        }
+    };
 }
 
 function sortProjects() { // fire this function on page load
 
-    // get the grads list element
-    var gradsList = document.querySelector(".grads__list");
+    // get the work list element
+    var workList = document.querySelector(".work__list");
 
-    // get all grads items in array/nodelist
-    var gradsItems = document.getElementsByClassName("grads__item");
+    // get all work items in array/nodelist
+    var workItems = document.getElementsByClassName("work__item");
 
     // sort items into two arrays based on has top discipline/does not have top discipline
-    let categoryElem = document.querySelector(".grads__option.is--active");
+    let categoryElem = document.querySelector(".work__disciplines.is--active");
     let categoryTxt = categoryElem.innerText; // e.g. "Branding"
     
     // sort and randomize both arrays
-    let twoGroups = sortIntoArrays(categoryTxt, gradsItems, true);
+    let twoGroups = sortIntoArrays(categoryTxt, workItems, true);
 
     // remove the elements the HTML
-    gradsItems.forEach(function(grad) {
-        grad.remove();
+    workItems.forEach(function(work) {
+        work.remove();
     });
     
     // re-append in a randomized order
 
     for (let i=0; i<twoGroups.topItems.length; i++){
-        gradsList.append(twoGroups.topItems[i]);
+        workList.append(twoGroups.topItems[i]);
     };
 
     for (let i=0; i<twoGroups.bottomItems.length; i++){
-        gradsList.append(twoGroups.bottomItems[i]);
+        workList.append(twoGroups.bottomItems[i]);
     };
 }
 
@@ -65,13 +84,13 @@ function sortIntoArrays(categoryTxt, items, randomize) {
     }
 
     // sort into two groups based on top category
-    items.forEach(function(grad) {
-        let gradTop = grad.querySelector(".grads__td");
+    items.forEach(function(work) {
+        let workTop = work.querySelector(".work__td");
 
-        if (gradTop == categoryTxt) { // this needs to accomodate multiple categories
-            twoGroups.topItems.push(grad);
+        if (workTop == categoryTxt) { // this needs to accomodate multiple categories
+            twoGroups.topItems.push(work);
         } else {
-            twoGroups.bottomItems.push(grad);
+            twoGroups.bottomItems.push(work);
         }
     });
 
