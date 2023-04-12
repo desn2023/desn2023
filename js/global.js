@@ -14,11 +14,7 @@ barba.init({
                 ease: "power2.out"
             });
         },
-        afterLeave(data) {
-            data.current.container.remove();
-        },
-
-        afterEnter(data) {
+        enter(data) {
             return gsap.from(data.next.container, {
                 opacity: 0,
                 duration: 0.4,
