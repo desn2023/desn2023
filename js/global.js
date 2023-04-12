@@ -36,7 +36,8 @@ global = {
                     if (
                         namespace !== "home" &&
                         namespace !== "profile" &&
-                        namespace !== "about"
+                        namespace !== "about" &&
+                        namespace !== "events"
                     ) {
                         gsap.to(global.invertSelector, {
                             filter: "invert(100%)",
@@ -51,9 +52,9 @@ global = {
                 } else {
                     let namespace = container.getAttribute("data-barba-namespace");
                     if (
-                        namespace !== "home" &&
                         namespace !== "profile" &&
-                        namespace !== "about"
+                        namespace !== "about" &&
+                        namespace !== "events"
                     ) {
                         gsap.to(".nav", {
                             backgroundColor: "white",
@@ -95,7 +96,8 @@ barba.init ({
             if (
                 data.current.namespace !== "home" &&
                 data.current.namespace !== "profile" &&
-                data.current.namespace !== "about"
+                data.current.namespace !== "about" &&
+                data.current.namespace !== "events"
             ) {
                 gsap.to(global.invertSelector, {
                     duration: 0,
@@ -176,12 +178,32 @@ barba.init ({
         },
         {
             namespace: 'events',
-            afterEnter() {
+            beforeEnter() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(0%)",
+                    duration: 0.4
+                });    
+            },
+            beforeLeave() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(100%)",
+                    duration: 0.4
+                }); 
             }
         },
         {
             namespace: 'about',
-            afterEnter() {
+            beforeEnter() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(0%)",
+                    duration: 0.4
+                });    
+            },
+            beforeLeave() {
+                gsap.to(global.invertSelector, {
+                    filter: "invert(100%)",
+                    duration: 0.4
+                }); 
             }
         },
         {
@@ -207,7 +229,8 @@ let initialNamespace = document.querySelector(".wrapper").getAttribute("data-bar
 if (
     initialNamespace !== "home" &&
     initialNamespace !== "profile" &&
-    initialNamespace !== "about"
+    initialNamespace !== "about" &&
+    initialNamespace !== "events"
 ) {
     gsap.to(global.invertSelector, {
         duration: 0,
