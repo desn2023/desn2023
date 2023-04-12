@@ -1,3 +1,8 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 @media (hover: none) {
     .old__cursor__wrapper {
         display: none;
@@ -18,9 +23,14 @@
     }
 }
 
-* {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@media (max-width: 991px) {
+    .home__content .grads__list .grads__item:nth-child(3) {
+        display: none;
+    }
+
+    .home__content .project__list .project__item:nth-child(3) {
+        display: none;
+    }
 }
 
 .disciplines__item:last-child .title.is--bullet {

@@ -1,27 +1,25 @@
 console.log("v1.0.1");
 
-// function runScripts(namespace) { // custom scripts for pages
-//     switch (namespace) {
-//         case "home":
-//             penrose.init();
-//             window.onresize = function() {
-//                 penrose.setSize();
-//             }
-//             break;
-//         case "graduates":
-//             grads.init();
-//             break;
-//         case "work":
-//             break;
-//         case "events":
-//             break;
-//         case "about":
-//             break;
-//     }
-// }
+const navAnims = {
+    desktop: {
+        removeBg: function () {
 
+        },
+        addBg: function () {
 
-barba.init({
+        },
+        invert: function () {
+
+        }
+    },
+    mobile: {
+        close: function () {
+            
+        }
+    }
+}
+
+barba.init ({
     preventRunning: true,
     sync: true,
     transitions: [{
@@ -34,6 +32,9 @@ barba.init({
                 duration: 0.4,
                 ease: "power2.out"
             });
+        },
+        beforeEnter(data) {
+            window.scrollTo(0,0);
         },
         enter(data) {
             return gsap.from(data.next.container, {
@@ -83,6 +84,11 @@ barba.init({
         }
     ]
 });
+
+
+
+
+
 
 const imgRefs = {
     refClass: "img-ref",
