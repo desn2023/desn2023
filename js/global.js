@@ -1,4 +1,4 @@
-console.log("v04");
+console.log("v05");
 
 let global;
 
@@ -35,7 +35,8 @@ global = {
 
                     if (
                         namespace !== "home" &&
-                        namespace !== "profile"
+                        namespace !== "profile" &&
+                        namespace !== "about"
                     ) {
                         gsap.to(global.invertSelector, {
                             filter: "invert(100%)",
@@ -48,14 +49,26 @@ global = {
                         });
                     }
                 } else {
-                    gsap.to(".nav", {
-                        backgroundColor: "white",
-                        duration: 0,
-                    });
-                    gsap.to(global.invertSelector, {
-                        filter: "invert(100%)",
-                        duration: 0
-                    });
+                    let namespace = container.getAttribute("data-barba-namespace");
+                    if (
+                        namespace !== "home" &&
+                        namespace !== "profile" &&
+                        namespace !== "about"
+                    ) {
+                        gsap.to(".nav", {
+                            backgroundColor: "white",
+                            duration: 0,
+                        });
+                        gsap.to(global.invertSelector, {
+                            filter: "invert(100%)",
+                            duration: 0
+                        });
+                    } else {
+                        gsap.to(".nav", {
+                            backgroundColor: "black",
+                            duration: 0,
+                        });
+                    }
                 }
             });
         }
@@ -81,7 +94,8 @@ barba.init ({
         afterOnce(data) {
             if (
                 data.current.namespace !== "home" &&
-                data.current.namespace !== "profile"
+                data.current.namespace !== "profile" &&
+                data.current.namespace !== "about"
             ) {
                 gsap.to(global.invertSelector, {
                     duration: 0,
@@ -188,8 +202,20 @@ barba.init ({
     ]
 });
 
+let initialNamespace = document.querySelector(".wrapper").getAttribute("data-barba-namespace");
 
+if (
+    initialNamespace !== "home" &&
+    initialNamespace !== "profile" &&
+    initialNamespace !== "about"
+) {
+    gsap.to(global.invertSelector, {
+        duration: 0,
+        filter: "invert(100%)"
+    });
+}
 
+global.menuBg();
 
 const imgRefs = {
     refClass: "img-ref",
