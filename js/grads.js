@@ -157,6 +157,38 @@ grads.filterClick = function (e) {
 
 grads.toggleAllClick = function (e) {
 
+    let tl = gsap.timeline();
+    
+    tl.to(".container.is--filter", {
+        duration: 0.2,
+        ease: "none",
+        opacity: 0
+    });
+
+    tl.to(e.currentTarget, {
+        duration: 0.2,
+        ease: "none",
+        opacity: 1
+    }, "<");
+
+    tl.to(".toggle.is--filter", {
+        duration: 0.2,
+        ease: "none",
+        opacity: 0.5
+    }, "<0.1");
+
+    tl.to(".selector.is--mobile", {
+        duration: 0.4,
+        ease: "power2.inOut",
+        translateX: "0%"
+    }, "<");
+
+    tl.to(".container.is--filter", {
+        duration: 0.4,
+        ease: "power2.inOut",
+        height: 0
+    }, "<");
+
     grads.filters.forEach(function (select) {
         select.classList.remove("is--selected");
     });
@@ -170,6 +202,40 @@ grads.toggleAllClick = function (e) {
     });
 
     grads.filter();
+}
+
+grads.toggleFilterClick = function (e) {
+    let tl = gsap.timeline();
+    
+    tl.to(e.currentTarget, {
+        duration: 0.2,
+        ease: "none",
+        opacity: 1
+    });
+
+    tl.to(".toggle.is--all", {
+        duration: 0.2,
+        ease: "none",
+        opacity: 0.5
+    }, "<0.1");
+
+    tl.to(".selector.is--mobile", {
+        duration: 0.4,
+        ease: "power2.inOut",
+        translateX: "100%"
+    }, "<");
+
+    tl.to(".container.is--filter", {
+        duration: 0.4,
+        ease: "power2.inOut",
+        height: "auto"
+    }, "<");
+
+    // tl.to(".container.is--filter", {
+    //     duration: 0.2,
+    //     ease: "none",
+    //     opacity: 1
+    // }, "<0.1");
 }
 
 grads.init = function () {
@@ -188,6 +254,9 @@ grads.init = function () {
         option.onclick = grads.filterClick;
     });
 
-    let toggleAll = document.querySelector(".toggle.is--all");
-    toggleAll.onmouseup = grads.toggleAllClick;
+    const toggleAll = document.querySelector(".toggle.is--all");
+    toggleAll.onclick = grads.toggleAllClick;
+
+    const toggleFilter = document.querySelector(".toggle.is--filter");
+    toggleFilter.onclick = grads.toggleFilterClick;
 }
