@@ -27,17 +27,66 @@ barba.init({
         },
     }],
 
-    views: [{
-        namespace: 'home',
-        beforeEnter() {
-            // insert a function to run here
+    views: [
+        {
+            namespace: 'home',
+            beforeEnter() {
+                // insert a function to run here
 
+            },
+            afterEnter() {
+                penrose.init();
+
+                window.onresize = function () {
+                    penrose.setSize();
+                }
+            }
         },
-        afterEnter() {
-            // insert a function to run here
+        {
+            namespace: 'graduates',
+            beforeEnter() {
+                // insert a function to run here
 
+            },
+            afterEnter() {
+                // insert a function to run here
+                grads.init();
+            }
+        },
+        {
+            namespace: 'work',
+            beforeEnter() {
+                // insert a function to run here
+
+            },
+            afterEnter() {
+                // insert a function to run here
+
+            }
+        },
+        {
+            namespace: 'events',
+            beforeEnter() {
+                // insert a function to run here
+
+            },
+            afterEnter() {
+                // insert a function to run here
+
+            }
+        },
+        {
+            namespace: 'about',
+            beforeEnter() {
+                // insert a function to run here
+
+            },
+            afterEnter() {
+                // insert a function to run here
+
+            }
         }
-    }]
+    ]
 });
 
 const imgRefs = {
@@ -88,12 +137,3 @@ imgRefs.buildURL = function (attid) {
 
 
 // on load
-
-
-window.onload = function () {
-    grads.init();
-}
-
-window.onresize = function () {
-    penrose.setSize();
-}
