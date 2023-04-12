@@ -1,6 +1,6 @@
 console.log("v1.0.1");
 
-function runScripts(namespace) {
+function runScripts(namespace) { // custom scripts for pages
     switch (namespace) {
         case "home":
             penrose.init();
@@ -10,6 +10,12 @@ function runScripts(namespace) {
             break;
         case "graduates":
             grads.init();
+            break;
+        case "work":
+            break;
+        case "events":
+            break;
+        case "about":
             break;
     }
 }
@@ -39,7 +45,7 @@ barba.init({
         afterEnter(data) {
             Webflow.ready();
             Webflow.require('ix2').init();
-            runScripts(data.next.namespace);
+            runScripts(data.current.namespace);
         }
     }],
 
@@ -50,12 +56,8 @@ barba.init({
                 // insert a function to run here
 
             },
-            afterEnter() {
-                penrose.init();
-
-                window.onresize = function() {
-                    penrose.setSize();
-                }
+            afterEnter(data) {
+                runScripts("home");
             }
         },
         {
@@ -65,8 +67,7 @@ barba.init({
 
             },
             afterEnter() {
-                // insert a function to run here
-                grads.init();
+                runScripts("graduates");
             }
         },
         {
@@ -76,8 +77,7 @@ barba.init({
 
             },
             afterEnter() {
-                // insert a function to run here
-
+                runScripts("work");
             }
         },
         {
@@ -87,7 +87,7 @@ barba.init({
 
             },
             afterEnter() {
-                // insert a function to run here
+                runScripts("events");
 
             }
         },
@@ -98,7 +98,7 @@ barba.init({
 
             },
             afterEnter() {
-                // insert a function to run here
+                runScripts("about");
 
             }
         }
