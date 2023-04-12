@@ -86,3 +86,11 @@ imgRefs.buildURL = function (attid) {
 
 // target all images with the class
 
+
+// on load
+
+grads.init();
+
+window.onresize = function () {
+    penrose.setSize();
+}

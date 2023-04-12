@@ -1,95 +1,117 @@
 // declare functions
 
-let gradsAnimIn = {
-    opacity: 1,
-    duration: 0.25,
-    stagger: 0.15,
-    ease: "power2.out"
-}
+let grads = {
+    animFirst: true,
+    animIn: {
+        opacity: 1,
+        duration: 0.25,
+        stagger: 0.1,
+        ease: "power2.out"
+    },
+    animOut: {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    }
+};
 
-function filterGrads() { // fire this function on page load
+grads.filter = function () { // fire this function on page load
 
     // get the grads list element
-    let gradsList = document.querySelector(".grads__list");
+    grads.list = document.querySelector(".grads__list");
 
     // get all grads items in array/nodelist
-    let gradsItems = document.querySelectorAll(".grads__item");
+    grads.items = Array.from(document.querySelectorAll(".grads__item"));
+
+    let animInTl;
+
+    if (grads.animFirst) {
+        grads.items.forEach(function (item) {
+            item.style.opacity = 0;
+        });
+        animInTl = gsap.timeline();
+        grads.animFirst = false;
+    } else {
+        animInTl = gsap.timeline();
+        animInTl.to(grads.items, grads.animOut);
+    }
 
     // sort items into two arrays based on has top discipline/does not have top discipline
     let categoryElem = document.querySelector(".grads__option.is--selected");
     let categoryTxt = categoryElem.innerText; // e.g. "Branding"
 
     // convert to array
-    gradsItems = Array.from(gradsItems);
+    grads.items = Array.from(grads.items);
 
-    // remove items that don't match filter
-    gradsItems.forEach(function (item) {
+    // filtered items
+
+    let filteredItems = [];
+
+    grads.items.forEach(function (item) {
+        
+        // sort disciplines
+
         let disciplinesList = item.querySelector(".disciplines__list");
 
-        if (categoryTxt !== "All Disciplines" && disciplinesList.innerHTML.indexOf(categoryTxt) == -1) {
-            // gradsItems[index].pop();
-            item.remove();
+        let disciplineTop = item.querySelector(".grads__td");
+        let disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
+
+        let topItem;
+        disciplineH1s.forEach(function(h1, index) {
+            if (h1.innerText == disciplineTop.innerText && index !== 0) {
+                topItem = h1.parentElement.parentElement;
+                console.log(topItem);
+            }
+        });
+
+        if (topItem !== undefined) {
+            topItem.remove();
+            disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
         }
-    });
 
-    gsap.to(gradsItems. gradsAnimIn);
-    
-    // // sort and randomize both arrays
-    // let twoGroups = sortIntoArrays(categoryTxt, gradsItems, true);
+        // remove items that don't match filter
 
-    // // remove the elements the HTML
-    // gradsItems.forEach(function(grad) {
-    //     grad.remove();
-    // });
-    
-    // // re-append in a randomized order
-
-    // for (let i=0; i<twoGroups.topItems.length; i++){
-    //     gradsList.append(twoGroups.topItems[i]);
-    // };
-
-    // for (let i=0; i<twoGroups.bottomItems.length; i++){
-    //     gradsList.append(twoGroups.bottomItems[i]);
-    // };
-}
-
-function sortIntoArrays(categoryTxt, items, randomize) {
-
-    let twoGroups = {
-        topItems: new Array(),
-        bottomItems: new Array()
-    }
-
-    // sort into two groups based on top category
-    items.forEach(function(grad) {
-        let gradTop = grad.querySelector(".grads__td");
-
-        if (gradTop == categoryTxt) {
-            twoGroups.topItems.push(grad);
+        if (categoryTxt == "All Disciplines") {
+            grads.items.forEach(function (item) {
+                item.style.display = "block";
+                filteredItems.push(item);
+            });
         } else {
-            twoGroups.bottomItems.push(grad);
+            if (disciplinesList.innerHTML.indexOf(categoryTxt) == -1) {
+                item.style.display = "none";
+            } else {
+                item.style.display = "block";
+                filteredItems.push(item);
+            }
         }
     });
 
-    // randomize
-    if (randomize) {
-        twoGroups.topItems = shuffleArray(twoGroups.topItems);
-        twoGroups.bottomItems = shuffleArray(twoGroups.bottomItems);
-    }
-
-    return twoGroups;
+    animInTl.to(filteredItems, grads.animIn);
+    
 }
 
+grads.optionClick = function (e) {
+    if (!e.currentTarget.classList.contains("is--selected")) {
 
+        grads.options.forEach(function (select) {
+            select.classList.remove("is--selected");
+        });
 
+        e.currentTarget.classList.add("is--selected");
 
+        grads.filter();
+    }
+}
 
+grads.init = function () {
 
+    grads.filter();
 
+    grads.options = Array.from(document.querySelectorAll(".grads__option"));
 
+    grads.options.forEach(function (option) {
+        option.onclick = grads.optionClick;
+    });
+}
 
-
-
-
-
-
+x
