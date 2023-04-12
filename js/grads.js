@@ -38,7 +38,7 @@ grads.filter = function () { // fire this function on page load
 
     // sort items into two arrays based on has top discipline/does not have top discipline
     let categoryElem = document.querySelector(".grads__option.is--selected");
-    let categoryTxt = categoryElem.innerText; // e.g. "Branding"
+    let categoryTxt = categoryElem.innerText.replace(/(\r\n|\n|\r)/gm, ""); // e.g. "Branding"
 
     // convert to array
     grads.items = Array.from(grads.items);
