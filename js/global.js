@@ -72,7 +72,7 @@ barba.init ({
             }
         },
         beforeLeave(data) {
-
+            global.observer.unobserve(global.marker);
         },
         leave(data) {
             return gsap.to(data.current.container, {
@@ -84,7 +84,6 @@ barba.init ({
         },
         beforeEnter(data) {
             window.scrollTo(0,0);
-            global.observer.unobserve(global.marker);
             gsap.to(".nav", {
                 backgroundColor: "transparent",
                 duration: 0.4
