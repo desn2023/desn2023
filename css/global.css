@@ -15,6 +15,6 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.disciplines__item:last-child .title:not(.is--bullet) {
+.disciplines__item:last-child .title.is--bullet {
     display: none;
 }

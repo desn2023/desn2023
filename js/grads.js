@@ -113,5 +113,3 @@ grads.init = function () {
         option.onclick = grads.optionClick;
     });
 }
-
-x

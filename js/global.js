@@ -89,7 +89,10 @@ imgRefs.buildURL = function (attid) {
 
 // on load
 
-grads.init();
+
+window.onload = function () {
+    grads.init();
+}
 
 window.onresize = function () {
     penrose.setSize();
