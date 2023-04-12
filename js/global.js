@@ -1,4 +1,4 @@
-console.log("v05");
+console.log("v06");
 
 let global;
 
