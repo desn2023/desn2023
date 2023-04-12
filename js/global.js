@@ -22,13 +22,16 @@ barba.init({
             return gsap.from(data.next.container, {
                 opacity: 0,
                 duration: 0.4,
-                ease: "power2.out"
+                ease: "power2.out",
+                onComplete: function() {
+                    Webflow.ready();
+                    Webflow.require('ix2').init();
+                }
             });
         },
     }],
 
-    views: [
-        {
+    views: [{
             namespace: 'home',
             beforeEnter() {
                 // insert a function to run here
@@ -37,7 +40,7 @@ barba.init({
             afterEnter() {
                 penrose.init();
 
-                window.onresize = function () {
+                window.onresize = function() {
                     penrose.setSize();
                 }
             }
@@ -96,34 +99,34 @@ const imgRefs = {
     ]
 };
 
-imgRefs.run = function (refClass = "img-ref") {
-    
+imgRefs.run = function(refClass = "img-ref") {
+
     // get img-ref nodes
 
     // for each img-ref
 
-        // get parent
+    // get parent
 
-        // for each column
+    // for each column
 
-            // find the container
+    // find the container
 
-            // count number of images
+    // count number of images
 
-            // if does not match, don't do anything
+    // if does not match, don't do anything
 
-            // if matches
+    // if matches
 
-                // by index,
+    // by index,
 
-                // remove loading tags
+    // remove loading tags
 
-                // add class for watching with observer
-            
-                // change src to srcset and add urls
+    // add class for watching with observer
+
+    // change src to srcset and add urls
 }
 
-imgRefs.buildURL = function (attid) {
+imgRefs.buildURL = function(attid) {
 
 }
 
