@@ -83,7 +83,9 @@ global = {
             global.marker = global.marker[0];
         }
 
-        global.observer.observe(global.marker);
+        if (global.marker !== undefined) {
+            global.observer.observe(global.marker);
+        }
     }
 }
 
@@ -122,6 +124,7 @@ barba.init ({
                 backgroundColor: "transparent",
                 duration: 0.4
             });
+            penrose.counter = 0;
         },
         enter(data) {
             return gsap.from(data.next.container, {
