@@ -1,11 +1,5 @@
 console.log("v1.0.1");
 
-function runScripts(data) {
-    const views = barba.views.byNamespace;
-    const nextView = views.get(data.next.namespace);
-    nextView.afterEnter();
-}
-
 barba.init({
     preventRunning: true,
     sync: true,
@@ -30,7 +24,6 @@ barba.init({
         afterEnter(data) {
             Webflow.ready();
             Webflow.require('ix2').init();
-            runScripts(data);
         }
     }],
 

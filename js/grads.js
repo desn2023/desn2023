@@ -36,7 +36,6 @@ grads.filter = function () { // fire this function on page load
         animInTl.to(grads.items, grads.animOut);
     }
 
-    // sort items into two arrays based on has top discipline/does not have top discipline
     let categoryElem = document.querySelector(".grads__option.is--selected");
     let categoryTxt = categoryElem.innerText.replace(/(\r\n|\n|\r)/gm, ""); // e.g. "Branding"
 
@@ -99,6 +98,17 @@ grads.optionClick = function (e) {
 
         e.currentTarget.classList.add("is--selected");
 
+        let categoryTxt = e.currentTarget.querySelector(".title").innerText.replace(/(\r\n|\n|\r)/gm, "");
+
+        grads.filters.forEach(function (filter) {
+            if (filter.innerText.indexOf(categoryTxt) !== -1) {
+                filter.classList.add("is--selected");
+            
+            } else {
+                filter.classList.remove("is--selected");
+            }
+        });
+
         grads.filter();
     }
 }
@@ -112,6 +122,18 @@ grads.filterClick = function (e) {
 
         e.currentTarget.classList.add("is--selected");
     }
+
+    let categoryTxt = e.currentTarget.querySelector(".title").innerText.replace(/(\r\n|\n|\r)/gm, "");
+
+    grads.options.forEach(function (option) {
+        if (option.innerText.indexOf(categoryTxt) !== -1) {
+            option.classList.add("is--selected");
+        } else {
+            option.classList.remove("is--selected");
+        }
+    });
+
+    grads.filter();
 }
 
 grads.init = function () {
