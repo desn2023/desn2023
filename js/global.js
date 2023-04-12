@@ -1,7 +1,58 @@
 console.log("v1.0.1");
 
 let global = {
-    invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile"
+    invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
+    menuBg: function () {
+
+        let container = document.querySelector(".wrapper");
+
+        let options = {
+            root: null,
+            rootMargin: "-44px 0px 0px 0px",
+            threshold: 0
+        }
+
+        let callback = function (entries, observer) {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    let namespace = container.getAttribute("data-barba-namespace");
+                    gsap.to(".nav", {
+                        backgroundColor: "transparent",
+                        duration: 0
+                    });
+
+                    if (
+                        namespace !== "home" &&
+                        namespace !== "profile"
+                    ) {
+                        gsap.to(global.invertSelector, {
+                            filter: "invert(100%)",
+                            duration: 0
+                        });
+                    } else {
+                        gsap.to(global.invertSelector, {
+                            filter: "invert(0%)",
+                            duration: 0
+                        });
+                    }
+                } else {
+                    gsap.to(".nav", {
+                        backgroundColor: "white",
+                        duration: 0,
+                    });
+                    gsap.to(global.invertSelector, {
+                        filter: "invert(100%)",
+                        duration: 0
+                    });
+                }
+            });
+        }
+
+        let observer = new IntersectionObserver(callback, options);
+        let marker = document.querySelector(".marker");
+
+        observer.observe(marker);
+    }
 }
 
 barba.init ({
@@ -33,7 +84,7 @@ barba.init ({
         },
         beforeEnter(data) {
             window.scrollTo(0,0);
-            gsap.to(global.invertSelector, {
+            gsap.to(".nav", {
                 backgroundColor: "transparent",
                 duration: 0.4
             });
@@ -46,6 +97,8 @@ barba.init ({
             });
         },
         afterEnter(data) {
+            global.menuBg();
+
             window.Webflow && window.Webflow.destroy();
             window.Webflow && window.Webflow.ready();
             window.Webflow && window.Webflow.require('ix2').init();
