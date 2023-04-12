@@ -102,3 +102,50 @@ function sortIntoArrays(categoryTxt, items, randomize) {
     function alphabetArray(node) {
     
     }
+
+    menuBg2: function (marker) {
+        global.menuBgOn = false;
+
+        window.onscroll = function (e) {
+
+            let markerRect = marker.getBoundingClientRect();
+            console.log(markerRect.top);
+
+            if (markerRect.top < 44 && global.menuBgOn == false) {
+                gsap.to(".nav", {
+                    backgroundColor: "white",
+                    duration: 0,
+                });
+                gsap.to(global.invertSelector, {
+                    filter: "invert(100%)",
+                    duration: 0
+                });
+                global.menuBgOn = true;
+
+            } else if (markerRect.top >= 44 && global.menuBgOn == true) {
+
+                let container = document.querySelectorAll(".wrapper");
+                let namespace = container.getAttribute("data-barba-namespace");
+                gsap.to(".nav", {
+                    backgroundColor: "transparent",
+                    duration: 0
+                });
+
+                if (
+                    namespace !== "home" &&
+                    namespace !== "profile"
+                ) {
+                    gsap.to(global.invertSelector, {
+                        filter: "invert(100%)",
+                        duration: 0
+                    });
+                } else {
+                    gsap.to(global.invertSelector, {
+                        filter: "invert(0%)",
+                        duration: 0
+                    });
+                }
+                global.menuBgOn = false;
+            }
+        }
+    }
