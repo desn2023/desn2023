@@ -33,7 +33,7 @@ grads.toggleAllAnim = function (instant = false) {
         opacity: 0
     });
 
-    tl.to(e.currentTarget, {
+    tl.to(".toggle.is--all", {
         duration: Math.min(0.2, n),
         ease: "none",
         opacity: 1
