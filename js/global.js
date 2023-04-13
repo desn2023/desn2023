@@ -1,4 +1,4 @@
-console.log("v15");
+console.log("v16");
 
 let body = document.querySelector("body");
 let global;
@@ -18,8 +18,19 @@ global = {
     blackPages: ["home", "about", "profile", "events"],
     whitePages: ["graduates", "work", "casestudy"],
 
+    mobileMenuClose: function () {
+        let menu = document.querySelector(".menu__close");
+
+        if (menu.style.display == "block") {
+            menu.click();
+            setTimeout(function () { return null; }, 400);
+        } else {
+            return null;
+        }
+    },
+
     bannerIn: function (after) {
-        let tl = gsap.timeline({
+        let tl = gsap.timeline ({
             onComplete: after
         });
 
@@ -249,6 +260,7 @@ barba.init({
                 window.onscroll = "";
                 global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
+                return global.mobileMenuClose();
             },
             leave(data) { // SEAN
                 return gsap.to(data.current.container, {
@@ -274,8 +286,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.bannerIn(global.navScroll);
-                // global.navScroll();
+                global.bannerIn();
+                global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -294,6 +306,7 @@ barba.init({
                 global.invertNav(100, 0.4);
                 global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
+                return global.mobileMenuClose();
             },
             leave(data) { // SEAN
                 return gsap.to(data.current.container, {
@@ -318,8 +331,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.bannerIn(global.navScroll);
-                // global.navScroll();
+                global.bannerIn();
+                global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -337,6 +350,7 @@ barba.init({
                 window.onscroll = "";
                 global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
+                return global.mobileMenuClose();
             },
             leave(data) { // SEAN
                 return gsap.to(data.current.container, {
@@ -363,8 +377,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.bannerIn(global.navScroll);
-                // global.navScroll();
+                global.bannerIn();
+                global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -383,6 +397,7 @@ barba.init({
                 global.navBg("transparent", 0.4);
                 body.style.backgroundColor = "black";
                 // global.blackBetween(data);
+                return global.mobileMenuClose();
             },
             leave(data) { // SEAN
                 return gsap.to(data.current.container, {
@@ -408,8 +423,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.bannerIn(global.navScroll);
-                // global.navScroll();
+                global.bannerIn();
+                global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         }
