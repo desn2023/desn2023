@@ -2,6 +2,15 @@ console.log("v08");
 
 let body = document.querySelector("body");
 let global;
+let home;
+
+home = {
+    init: function () { // SEAN
+        // query elements
+        // global.elementNext(document.querySelectorAll(selector));
+    
+    }
+}
 
 global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
@@ -10,21 +19,29 @@ global = {
     invertNav: function (pct, dur = 0) {
         gsap.to(global.invertSelector, {
             filter: "invert(" + pct + ")",
-            duration: dur
+            duration: dur,
+            ease: "none"
         });
     },
 
     navBg: function (colour, dur = 0) {
         gsap.to(".nav", {
             backgroundColor: colour,
-            duration: dur
+            duration: dur,
+            ease: "none"
         });
     },
 
     blackBetween: function (data) {
+
+        let path = data.trigger.getAttribute("href").replace (
+            window.location.protocol + "/" + window.location.hostname + "/", ""
+        );
+
+
         if (
             global.blackPages.indexOf(data.current.namespace) !== -1 &&
-            global.blackPages.indexOf(data.next.namespace) !== -1
+            global.blackPages.indexOf(path) !== -1
         ) {
             body.style.backgroundColor = "black";
         }
@@ -138,7 +155,7 @@ barba.init ({
             window.onscroll = "";
             global.blackBetween(data);
         },
-        leave(data) {
+        leave(data) { // SEAN
             return gsap.to(data.current.container, {
                 // delay: 0.5,
                 opacity: 0,
@@ -154,7 +171,7 @@ barba.init ({
             });
             penrose.counter = 0;
         },
-        enter(data) {
+        enter(data) { // SEAN
             return gsap.from(data.next.container, {
                 opacity: 0,
                 duration: 0.4,
@@ -178,6 +195,7 @@ barba.init ({
                 global.invertNav(0, 0.4);
             },
             afterEnter() {
+                home.init();
                 penrose.init();
                 window.onresize = function() {
                     penrose.setSize();
