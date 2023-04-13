@@ -259,7 +259,7 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
-                global.navBg("transparent", 0.4);
+                // global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
                 return global.mobileMenuClose();
             },
@@ -273,7 +273,7 @@ barba.init ({
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
-                // global.navBg("transparent", 0.4);
+                global.navBg("transparent");
                 // // gsap.to(".nav", {
                 // //     backgroundColor: "transparent",
                 // //     duration: 0.4
@@ -305,7 +305,7 @@ barba.init ({
             beforeLeave(data) {
                 window.onscroll = "";
                 global.invertNav(100, 0.4);
-                global.navBg("transparent", 0.4);
+                global.navBg("white", 0.4);
                 // global.blackBetween(data);
                 return global.mobileMenuClose();
             },
@@ -319,6 +319,7 @@ barba.init ({
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
+                global.navBg("transparent");
                 // gsap.to(".nav", {
                 //     backgroundColor: "transparent",
                 //     duration: 0.4
@@ -349,7 +350,7 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
-                global.navBg("transparent", 0.4);
+                // global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
                 return global.mobileMenuClose();
             },
@@ -364,6 +365,7 @@ barba.init ({
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.invertNav(0, 0.4);
+                global.navBg("transparent");
                 gsap.to("body", {
                     backgroundColor: "black",
                     duration: 0.4,
@@ -401,7 +403,7 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
-                global.navBg("transparent", 0.4);
+                // global.navBg("transparent", 0.4);
                 body.style.backgroundColor = "black";
                 // global.blackBetween(data);
                 return global.mobileMenuClose();
@@ -416,6 +418,7 @@ barba.init ({
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
+                global.navBg("transparent");
                 // global.navBg("transparent", 0.4);
                 // gsap.to(".nav", {
                 //     backgroundColor: "transparent",
