@@ -8,7 +8,7 @@ home = {
     init: function () { // SEAN
         // query elements
         // global.elementNext(document.querySelectorAll(selector));
-    
+
     }
 }
 
@@ -16,6 +16,7 @@ global = {
     namespaces: ["home", "about", "profile", "events", "casestudy", "graduates", "work"],
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
     blackPages: ["home", "about", "profile", "events"],
+    whitePages: ["graduates", "work", "casestudy"],
 
     invertNav: function (pct, dur = 0) {
         gsap.to(global.invertSelector, {
@@ -35,7 +36,7 @@ global = {
     replaceChar: function (input) { // delets domain, line breaks, slashes from string
 
         // replace domain
-        input = input.replace (
+        input = input.replace(
             window.location.protocol + "/" + window.location.hostname, ""
         );
 
@@ -48,7 +49,7 @@ global = {
 
         // replace slashes
         for (let i = 0; i < input.split("/").length - 1; i++) {
-            input = input.replace("/","");
+            input = input.replace("/", "");
         }
 
         return input;
@@ -110,6 +111,8 @@ global = {
             global.blackPages.indexOf(path) !== -1
         ) {
             body.style.backgroundColor = "black";
+        } else {
+
         }
     },
 
@@ -141,8 +144,8 @@ global = {
             rootMargin: "-44px 0px 0px 0px",
             threshold: 0
         }
-    
-        if (global.observer !== undefined) {
+
+        if (global.observer !== undefined && global.marker !== undefined) {
             global.observer.unobserve(global.marker);
         }
 
@@ -184,65 +187,203 @@ global = {
     }
 }
 
-barba.init ({
+barba.init({
     preventRunning: true,
     sync: true,
-    transitions: [{
-        name: 'opacity-transition',
-        afterOnce(data) {
-            if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                global.invertNav(100);
+    transitions: [
+        {   name: 'white-white-transition',
+
+            from: { namespace: global.whitePages },
+            to: { namespace: global.whitePages },
+
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                global.navBg("transparent", 0.4);
+                // global.blackBetween(data);
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                // global.navBg("transparent", 0.4);
+                // // gsap.to(".nav", {
+                // //     backgroundColor: "transparent",
+                // //     duration: 0.4
+                // // });
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.navScroll();
+                body.style.backgroundColor = "transparent";
             }
         },
-        beforeLeave(data) {
-            window.onscroll = "";
-            global.blackBetween(data);
+        {   name: 'black-white-transition',
+
+            from: { namespace: global.blackPages },
+            to: { namespace: global.whitePages },
+
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                global.invertNav(100, 0.4);
+                global.navBg("transparent", 0.4);
+                // global.blackBetween(data);
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                // gsap.to(".nav", {
+                //     backgroundColor: "transparent",
+                //     duration: 0.4
+                // });
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.navScroll();
+                body.style.backgroundColor = "transparent";
+            }
         },
-        leave(data) { // SEAN
-            return gsap.to(data.current.container, {
-                // delay: 0.5,
-                opacity: 0,
-                duration: 0.4,
-                ease: "power2.inOut"
-            });
+        {   name: 'white-black-transition',
+
+            from: { namespace: global.whitePages },
+            to: { namespace: global.blackPages },
+
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                global.navBg("transparent", 0.4);
+                // global.blackBetween(data);
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                global.invertNav(0, 0.4);
+                // global.navBg("transparent", 0.4);
+                // gsap.to(".nav", {
+                //     backgroundColor: "transparent",
+                //     duration: 0.4
+                // });
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.navScroll();
+                body.style.backgroundColor = "transparent";
+            }
         },
-        beforeEnter(data) {
-            window.scrollTo(0,0);
-            gsap.to(".nav", {
-                backgroundColor: "transparent",
-                duration: 0.4
-            });
-        },
-        enter(data) { // SEAN
-            return gsap.from(data.next.container, {
-                opacity: 0,
-                duration: 0.4,
-                ease: "power2.inOut"
-            });
-        },
-        afterEnter(data) {
-            global.navScroll();
-            body.style.backgroundColor = "transparent";
+        {   name: 'black-black transition',
+
+            from: { namespace: global.blackPages },
+            to: { namespace: global.blackPages },
+
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                global.navBg("transparent", 0.4);
+                // global.blackBetween(data);
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                // global.navBg("transparent", 0.4);
+                // gsap.to(".nav", {
+                //     backgroundColor: "transparent",
+                //     duration: 0.4
+                // });
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.navScroll();
+                body.style.backgroundColor = "transparent";
+            }
         }
-    }],
+    ],
 
     views: [
         {
             namespace: 'home',
             beforeEnter() {
-                global.invertNav(0, 0.4);
+                // global.invertNav(0, 0.4);
             },
             afterEnter() {
                 home.init();
                 // reset penrose
                 penrose.counter = 0;
                 penrose.init();
-                window.onresize = function() {
+                window.onresize = function () {
                     penrose.setSize();
                 }
             },
             beforeLeave() {
-                global.invertNav(100, 0.4);
+                // global.invertNav(100, 0.4);
+                // global.navBg("transparent", 0.4);
             }
         },
         {
@@ -259,31 +400,31 @@ barba.init ({
         {
             namespace: 'events',
             beforeEnter() {
-                global.invertNav(0, 0.4);     
+                // global.invertNav(0, 0.4);     
             },
             beforeLeave() {
-                global.invertNav(100, 0.4);
-                global.navBg("transparent", 0.4);
+                // global.invertNav(100, 0.4);
+                // global.navBg("transparent", 0.4);
             }
         },
         {
             namespace: 'about',
             beforeEnter() {
-                global.invertNav(0, 0.4); 
+                // global.invertNav(0, 0.4); 
             },
             beforeLeave() {
-                global.invertNav(100, 0.4);
-                global.navBg("transparent", 0.4);
+                // global.invertNav(100, 0.4);
+                // global.navBg("transparent", 0.4);
             }
         },
         {
             namespace: 'profile',
             beforeEnter() {
-                global.invertNav(0, 0.4);    
+                // global.invertNav(0, 0.4);    
             },
             beforeLeave() {
-                global.invertNav(100, 0.4);
-                global.navBg("transparent", 0.4);
+                // global.invertNav(100, 0.4);
+                // global.navBg("transparent", 0.4);
             }
         }
     ]
@@ -292,7 +433,62 @@ barba.init ({
 let initialNamespace = document.querySelector(".wrapper").getAttribute("data-barba-namespace");
 
 if (global.blackPages.indexOf(initialNamespace) == -1) {
-    global.invertNav(100); 
+    global.invertNav(100);
 }
 
 global.navScroll();
+
+
+
+
+
+// COUNTDOWN CLOCK
+
+function countdownInit() { // set and start countdown
+
+    // moved deadline to splashParams
+
+    function pad(num, size) {
+        var s = "0" + num;
+        return s.substring(s.length - size);
+    }
+
+    // fixes "Date.parse(date)" on safari
+    function parseDate(date) {
+        const parsed = Date.parse(date);
+        if (!isNaN(parsed)) return parsed
+        return Date.parse(date.replace(/-/g, '/').replace(/[a-z]+/gi, ' '));
+    }
+
+    function getTimeRemaining(endtime) {
+        let total = parseDate(endtime) - Date.parse(new Date())
+        let seconds = Math.floor((total / 1000) % 60)
+        let minutes = Math.floor((total / 1000 / 60) % 60)
+        let hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+        let days = Math.floor(total / (1000 * 60 * 60 * 24))
+
+        return { total, days, hours, minutes, seconds };
+    }
+
+    function clock(id, endtime) {
+        let days = document.getElementById(id + '-days')
+        let hours = document.getElementById(id + '-hours')
+        let minutes = document.getElementById(id + '-minutes')
+        let seconds = document.getElementById(id + '-seconds')
+
+        var timeinterval = setInterval(function () {
+            var time = getTimeRemaining(endtime);
+
+            if (time.total <= 0) {
+                clearInterval(timeinterval);
+            } else {
+                days.innerHTML = pad(time.days, 2);
+                hours.innerHTML = pad(time.hours, 2);
+                minutes.innerHTML = pad(time.minutes, 2);
+                seconds.innerHTML = pad(time.seconds, 2);
+            }
+        }, 1000);
+    }
+
+    clock('js-clock', splashParams.countdown.deadline);
+}
