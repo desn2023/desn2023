@@ -1,4 +1,4 @@
-console.log("v12");
+console.log("v13");
 
 let body = document.querySelector("body");
 let global;
@@ -263,6 +263,7 @@ barba.init ({
             },
             beforeLeave() {
                 global.invertNav(100, 0.4);
+                global.navBg("transparent", 0.4);
             }
         },
         {
@@ -272,6 +273,7 @@ barba.init ({
             },
             beforeLeave() {
                 global.invertNav(100, 0.4);
+                global.navBg("transparent", 0.4);
             }
         },
         {
@@ -281,6 +283,7 @@ barba.init ({
             },
             beforeLeave() {
                 global.invertNav(100, 0.4);
+                global.navBg("transparent", 0.4);
             }
         }
     ]

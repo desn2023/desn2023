@@ -15,6 +15,49 @@ let grads = {
     }
 };
 
+grads.toggleAllAnim = function (instant = false) {
+
+    let n;
+
+    if (instant) {
+        n = 0;
+    } else {
+        n = 1000;
+    }
+
+    let tl = gsap.timeline();
+    
+    tl.to(".container.is--filter", {
+        duration: Math.min(0.2, n),
+        ease: "none",
+        opacity: 0
+    });
+
+    tl.to(e.currentTarget, {
+        duration: Math.min(0.2, n),
+        ease: "none",
+        opacity: 1
+    }, "<");
+
+    tl.to(".toggle.is--filter", {
+        duration: Math.min(0.2, n),
+        ease: "none",
+        opacity: 0.5
+    }, "<0.1");
+
+    tl.to(".selector.is--mobile", {
+        duration: Math.min(0.4, n),
+        ease: "power2.inOut",
+        translateX: "0%"
+    }, "<");
+
+    tl.to(".container.is--filter", {
+        duration: Math.min(0.4, n),
+        ease: "power2.inOut",
+        height: 0
+    }, "<");
+}
+
 grads.filter = function () { // fire this function on page load
 
     // get the grads list element
@@ -159,35 +202,7 @@ grads.toggleAllClick = function (e) {
 
     let tl = gsap.timeline();
     
-    tl.to(".container.is--filter", {
-        duration: 0.2,
-        ease: "none",
-        opacity: 0
-    });
-
-    tl.to(e.currentTarget, {
-        duration: 0.2,
-        ease: "none",
-        opacity: 1
-    }, "<");
-
-    tl.to(".toggle.is--filter", {
-        duration: 0.2,
-        ease: "none",
-        opacity: 0.5
-    }, "<0.1");
-
-    tl.to(".selector.is--mobile", {
-        duration: 0.4,
-        ease: "power2.inOut",
-        translateX: "0%"
-    }, "<");
-
-    tl.to(".container.is--filter", {
-        duration: 0.4,
-        ease: "power2.inOut",
-        height: 0
-    }, "<");
+    grads.toggleAllAnim();
 
     grads.filters.forEach(function (select) {
         select.classList.remove("is--selected");
@@ -259,4 +274,6 @@ grads.init = function () {
 
     const toggleFilter = global.elementNext(document.querySelectorAll(".toggle.is--filter"));
     toggleFilter.onclick = grads.toggleFilterClick;
+
+    grads.toggleAllAnim(true);
 }
