@@ -1,4 +1,4 @@
-console.log("v14");
+console.log("v15");
 
 let body = document.querySelector("body");
 let global;
@@ -18,6 +18,42 @@ global = {
     blackPages: ["home", "about", "profile", "events"],
     whitePages: ["graduates", "work", "casestudy"],
 
+    bannerIn: function (after) {
+        let tl = gsap.timeline({
+            onComplete: after
+        });
+
+        if (document.querySelector(".banner") !== null) {
+            tl.to(".banner", {
+                opacity: 1,
+                duration: 0
+            });
+            tl.to(".banner", {
+                height: "50px",
+                duration: 0.4,
+                ease: "power1.inOut"
+            });
+        }
+    },
+
+    bannerOut: function (after) {
+        let tl = gsap.timeline({
+            onComplete: after
+        });
+
+        if (document.querySelector(".banner") !== null) {
+            tl.to(".banner", {
+                height: "0px",
+                duration: 0.4,
+                ease: "power1.inOut"
+            });
+            tl.to(".banner", {
+                opacity: 0,
+                duration: 0
+            });
+        }
+    },
+
     invertNav: function (pct, dur = 0) {
         gsap.to(global.invertSelector, {
             filter: "invert(" + pct + ")",
@@ -36,7 +72,7 @@ global = {
     replaceChar: function (input) { // delets domain, line breaks, slashes from string
 
         // replace domain
-        input = input.replace(
+        input = input.replace (
             window.location.protocol + "/" + window.location.hostname, ""
         );
 
@@ -139,9 +175,17 @@ global = {
 
     navScroll: function () {
 
+        let margin;
+
+        if (document.querySelector(".banner") == null) {
+            margin = "-43px 0px 0px 0px";
+        } else {
+            margin = "-93px 0px 0px 0px";
+        }
+
         let options = {
             root: null,
-            rootMargin: "-44px 0px 0px 0px",
+            rootMargin: margin,
             threshold: 0
         }
 
@@ -230,7 +274,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.navScroll();
+                global.bannerIn(global.navScroll);
+                // global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -273,7 +318,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.navScroll();
+                global.bannerIn(global.navScroll);
+                // global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -317,7 +363,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.navScroll();
+                global.bannerIn(global.navScroll);
+                // global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -334,6 +381,7 @@ barba.init({
             beforeLeave(data) {
                 window.onscroll = "";
                 global.navBg("transparent", 0.4);
+                body.style.backgroundColor = "black";
                 // global.blackBetween(data);
             },
             leave(data) { // SEAN
@@ -360,7 +408,8 @@ barba.init({
                 });
             },
             afterEnter(data) {
-                global.navScroll();
+                global.bannerIn(global.navScroll);
+                // global.navScroll();
                 body.style.backgroundColor = "transparent";
             }
         }
