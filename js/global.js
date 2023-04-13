@@ -1,4 +1,4 @@
-console.log("v17");
+console.log("v18");
 
 let body = document.querySelector("body");
 let global;
@@ -19,9 +19,10 @@ global = {
     whitePages: ["graduates", "work", "casestudy"],
 
     mobileMenuClose: function () {
-        let menu = document.querySelector(".menu__close");
+        let menuBg = document.querySelector(".nav__background");
 
-        if (menu.style.display == "block") {
+        if (menuBg.style.display == "block") {
+            let menu = document.querySelector(".menu__close");
             menu.click();
             setTimeout(function () { return null; }, 400);
         } else {
