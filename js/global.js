@@ -544,10 +544,11 @@ global.navScroll();
 
 
 
-
 // COUNTDOWN CLOCK
 
-function countdownInit() { // set and start countdown
+global.countdownDeadline = "2023/04/20 16:00";
+
+global.countdownInit = function () { // set and start countdown
 
     // moved deadline to splashParams
 
@@ -593,5 +594,7 @@ function countdownInit() { // set and start countdown
         }, 1000);
     }
 
-    clock('js-clock', splashParams.countdown.deadline);
+    clock('js-clock', global.countdownDeadline);
 }
+
+global.countdownInit();
