@@ -443,6 +443,7 @@ barba.init({
                 penrose.counter = 0;
                 penrose.init();
                 window.onresize = function () {
+                    global.mobileMenuClose();
                     penrose.setSize();
                 }
             },
@@ -456,11 +457,19 @@ barba.init({
             beforeEnter() {
             },
             afterEnter() {
+                window.onresize = function () {
+                    global.mobileMenuClose();
+                }
                 grads.init();
             }
         },
         {
-            namespace: 'work'
+            namespace: 'work',
+            afterEnter() {
+                window.onresize = function () {
+                    global.mobileMenuClose();
+                }
+            }
         },
         {
             namespace: 'events',
@@ -470,6 +479,11 @@ barba.init({
             beforeLeave() {
                 // global.invertNav(100, 0.4);
                 // global.navBg("transparent", 0.4);
+            },
+            afterEnter() {
+                window.onresize = function () {
+                    global.mobileMenuClose();
+                }
             }
         },
         {
@@ -480,6 +494,11 @@ barba.init({
             beforeLeave() {
                 // global.invertNav(100, 0.4);
                 // global.navBg("transparent", 0.4);
+            },
+            afterEnter() {
+                window.onresize = function () {
+                    global.mobileMenuClose();
+                }
             }
         },
         {
@@ -490,6 +509,19 @@ barba.init({
             beforeLeave() {
                 // global.invertNav(100, 0.4);
                 // global.navBg("transparent", 0.4);
+            },
+            afterEnter() {
+                window.onresize = function () {
+                    global.mobileMenuClose();
+                }
+            }
+        },
+        {
+            namespace: 'casestudy',
+            afterEnter() {
+                window.onresize = function () {
+                    global.mobileMenuClose();
+                }
             }
         }
     ]
