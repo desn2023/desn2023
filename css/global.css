@@ -24,11 +24,9 @@
 }
 
 @media (max-width: 991px) {
-    .home__content .grads__list .grads__item:nth-child(3) {
-        display: none;
-    }
-
-    .home__content .project__list .project__item:nth-child(3) {
+    .home__content .grads__list .grads__item:nth-child(3),
+    .home__content .project__list .project__item:nth-child(3),
+    .profile__more .grads__list .grads__item:nth-child(3) {
         display: none;
     }
 }
@@ -63,7 +61,8 @@
     opacity: 0;
 }
 
-.grad__discipline, .disciplines__wrapper {
+
+.grad__discipline, .disciplines__wrapper, .is--ellipses {
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
     mask-image: linear-gradient(to right, black 85%, transparent);
 }
