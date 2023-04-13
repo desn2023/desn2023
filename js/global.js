@@ -1,4 +1,4 @@
-console.log("v11");
+console.log("v12");
 
 let body = document.querySelector("body");
 let global;
@@ -62,6 +62,8 @@ global = {
 
         href = global.replaceChar(href);
 
+        let listIndex = global.namespaces.indexOf(href);
+
         if (href == "") {
             href = "home";
             return href;
@@ -73,6 +75,8 @@ global = {
             return "profile";
         } else if (href.indexOf("work") !== -1) {
             return "casestudy";
+        } else if (listIndex !== -1) {
+            return global.namespaces[listIndex];
         }
 
     },
