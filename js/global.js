@@ -1,4 +1,4 @@
-console.log("v08");
+console.log("v09");
 
 let body = document.querySelector("body");
 let global;
@@ -13,6 +13,7 @@ home = {
 }
 
 global = {
+    namespaces: ["home", "about", "profile", "events", "casestudy", "graduates", "work"],
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
     blackPages: ["home", "about", "profile", "events"],
 
@@ -31,13 +32,68 @@ global = {
             ease: "none"
         });
     },
+    replaceChar: function (input) { // delets domain, line breaks, slashes from string
+
+        // replace domain
+        input = input.replace (
+            window.location.protocol + "/" + window.location.hostname, ""
+        );
+
+        // replace # and ? parts
+        input = input.split("#")[0];
+        input = input.split("?")[0];
+
+        // replace breaks
+        input = input.replace(/(\r\n|\n|\r)/gm, "");
+
+        // replace slashes
+        for (let i = 0; i < input.split("/").length - 1; i++) {
+            input = input.replace("/","");
+        }
+
+        return input;
+    },
+
+    isElement: function (input) { // returns true if input is an element
+        return input instanceof Element;
+    },
+
+    hrefToNamespace: function (href) {
+
+        href = global.replaceChar(href);
+
+        if (href == "") {
+            href = "home";
+            return href;
+        } else if (href == "graduates") {
+            return href;
+        } else if (href == "work") {
+            return href;
+        } else if (href.indexOf("graduates") !== -1) {
+            return "profile";
+        } else if (href.indexOf("work") !== -1) {
+            return "casestudy";
+        }
+
+    },
 
     blackBetween: function (data) {
 
-        let path = data.trigger.getAttribute("href").replace (
-            window.location.protocol + "/" + window.location.hostname + "/", ""
-        );
+        let path;
 
+        if (global.isElement(data.trigger)) {
+            if (data.trigger.tagName == "A") {
+                path = global.hrefToNamespace(data.trigger.getAttribute("href"));
+            } else {
+                return null;
+            }
+        } else if (data.trigger == "back") {
+            return null;
+        } else if (data.trigger == "forward") {
+            return null;
+        } else {
+            return null;
+        }
 
         if (
             global.blackPages.indexOf(data.current.namespace) !== -1 &&
@@ -82,46 +138,23 @@ global = {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     let namespace = container.getAttribute("data-barba-namespace");
-                    // gsap.to(".nav", {
-                    //     backgroundColor: "transparent",
-                    //     duration: 0
-                    // });
+
                     global.navBg("transparent");
 
                     if (
                         global.blackPages.indexOf(namespace) == -1
                     ) {
-                        // gsap.to(global.invertSelector, {
-                        //     filter: "invert(100%)",
-                        //     duration: 0
-                        // });
                         global.invertNav(100);
                     } else {
-                        // gsap.to(global.invertSelector, {
-                        //     filter: "invert(0%)",
-                        //     duration: 0
-                        // });
                         global.invertNav(0);
                     }
                 } else {
                     let namespace = container.getAttribute("data-barba-namespace");
                     if (global.blackPages.indexOf(namespace) == -1 || namespace == "home"
                     ) {
-                        // gsap.to(".nav", {
-                        //     backgroundColor: "white",
-                        //     duration: 0,
-                        // });
                         global.navBg("white");
-                        // gsap.to(global.invertSelector, {
-                        //     filter: "invert(100%)",
-                        //     duration: 0
-                        // });
                         global.invertNav(100);
                     } else {
-                        // gsap.to(".nav", {
-                        //     backgroundColor: "black",
-                        //     duration: 0,
-                        // });
                         global.navBg("black");
                     }
                 }
@@ -144,10 +177,6 @@ barba.init ({
         name: 'opacity-transition',
         afterOnce(data) {
             if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                // gsap.to(global.invertSelector, {
-                //     duration: 0,
-                //     filter: "invert(100%)"
-                // });
                 global.invertNav(100);
             }
         },
@@ -169,7 +198,6 @@ barba.init ({
                 backgroundColor: "transparent",
                 duration: 0.4
             });
-            penrose.counter = 0;
         },
         enter(data) { // SEAN
             return gsap.from(data.next.container, {
@@ -188,24 +216,18 @@ barba.init ({
         {
             namespace: 'home',
             beforeEnter() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(0%)",
-                //     duration: 0.4
-                // });    
                 global.invertNav(0, 0.4);
             },
             afterEnter() {
                 home.init();
+                // reset penrose
+                penrose.counter = 0;
                 penrose.init();
                 window.onresize = function() {
                     penrose.setSize();
                 }
             },
             beforeLeave() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(100%)",
-                //     duration: 0.4
-                // }); 
                 global.invertNav(100, 0.4);
             }
         },
@@ -223,51 +245,27 @@ barba.init ({
         {
             namespace: 'events',
             beforeEnter() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(0%)",
-                //     duration: 0.4
-                // });
                 global.invertNav(0, 0.4);     
             },
             beforeLeave() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(100%)",
-                //     duration: 0.4
-                // });
                 global.invertNav(100, 0.4);
             }
         },
         {
             namespace: 'about',
             beforeEnter() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(0%)",
-                //     duration: 0.4
-                // });
                 global.invertNav(0, 0.4); 
             },
             beforeLeave() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(100%)",
-                //     duration: 0.4
-                // }); 
                 global.invertNav(100, 0.4);
             }
         },
         {
             namespace: 'profile',
             beforeEnter() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(0%)",
-                //     duration: 0.4
-                // });
                 global.invertNav(0, 0.4);    
             },
             beforeLeave() {
-                // gsap.to(global.invertSelector, {
-                //     filter: "invert(100%)",
-                //     duration: 0.4
-                // });
                 global.invertNav(100, 0.4);
             }
         }
@@ -277,10 +275,6 @@ barba.init ({
 let initialNamespace = document.querySelector(".wrapper").getAttribute("data-barba-namespace");
 
 if (global.blackPages.indexOf(initialNamespace) == -1) {
-    // gsap.to(global.invertSelector, {
-    //     duration: 0,
-    //     filter: "invert(100%)"
-    // });
     global.invertNav(100); 
 }
 
