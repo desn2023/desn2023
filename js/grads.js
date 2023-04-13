@@ -18,7 +18,7 @@ let grads = {
 grads.filter = function () { // fire this function on page load
 
     // get the grads list element
-    grads.list = global.elementNext(document.querySelector(".grads__list"));
+    grads.list = global.elementNext(document.querySelectorAll(".grads__list"));
 
     // get all grads items in array/nodelist
     grads.items = Array.from(grads.list.querySelectorAll(".grads__item"));
@@ -254,9 +254,9 @@ grads.init = function () {
         option.onclick = grads.filterClick;
     });
 
-    const toggleAll = global.elementNext(document.querySelector(".toggle.is--all"));
+    const toggleAll = global.elementNext(document.querySelectorAll(".toggle.is--all"));
     toggleAll.onclick = grads.toggleAllClick;
 
-    const toggleFilter = global.elementNext(document.querySelector(".toggle.is--filter"));
+    const toggleFilter = global.elementNext(document.querySelectorAll(".toggle.is--filter"));
     toggleFilter.onclick = grads.toggleFilterClick;
 }

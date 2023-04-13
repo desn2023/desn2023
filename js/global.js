@@ -111,6 +111,10 @@ global = {
 
     elementNext: function (nodelist) {
 
+        if (global.isElement(nodelist)) {
+            return nodelist;
+        }
+
         if (nodelist == undefined) {
             return nodelist;
         }
