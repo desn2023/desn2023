@@ -1,10 +1,12 @@
-console.log("v07");
+console.log("v08");
 
 let body = document.querySelector("body");
 let global;
 
 global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
+    blackPages: ["home", "about", "profile", "events"],
+
     invertNav: function (pct, dur = 0) {
         gsap.to(global.invertSelector, {
             filter: "invert(" + pct + ")",
@@ -19,8 +21,6 @@ global = {
         });
     },
 
-    blackPages: ["home", "about", "profile", "events"],
-
     blackBetween: function (data) {
         if (
             global.blackPages.indexOf(data.current.namespace) !== -1 &&
@@ -31,6 +31,11 @@ global = {
     },
 
     elementNext: function (nodelist) {
+
+        if (nodelist == undefined) {
+            return nodelist;
+        }
+
         let element;
 
         if (nodelist.length > 1) {
@@ -131,6 +136,7 @@ barba.init ({
         },
         beforeLeave(data) {
             window.onscroll = "";
+            global.blackBetween(data);
         },
         leave(data) {
             return gsap.to(data.current.container, {
