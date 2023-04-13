@@ -1,4 +1,4 @@
-console.log("v10");
+console.log("v11");
 
 let body = document.querySelector("body");
 let global;
@@ -81,9 +81,14 @@ global = {
 
         let path;
 
+        let child = data.trigger.querySelector("a");
+
         if (global.isElement(data.trigger)) {
-            if (data.trigger.tagName == "A") {
+            if (data.trigger.tagName == "A" && data.trigger.hasAttribute("href")) {
                 path = global.hrefToNamespace(data.trigger.getAttribute("href"));
+            }
+            else if (global.isElement(child) && child.hasAttribute("href")) {
+                path = global.hrefToNamespace(child.getAttribute("href"));
             } else {
                 return null;
             }
@@ -96,6 +101,7 @@ global = {
         }
 
         if (
+            path !== null && path !== undefined &&
             global.blackPages.indexOf(data.current.namespace) !== -1 &&
             global.blackPages.indexOf(path) !== -1
         ) {
