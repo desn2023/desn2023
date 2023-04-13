@@ -1,87 +1,113 @@
-console.log("v06");
+console.log("v07");
 
+let body = document.querySelector("body");
 let global;
 
 global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
-    menuBg: function () {
+    invertNav: function (pct, dur = 0) {
+        gsap.to(global.invertSelector, {
+            filter: "invert(" + pct + ")",
+            duration: dur
+        });
+    },
 
-        if (global.observer !== undefined) {
-            global.observer.unobserve(global.marker);
+    navBg: function (colour, dur = 0) {
+        gsap.to(".nav", {
+            backgroundColor: colour,
+            duration: dur
+        });
+    },
+
+    blackPages: ["home", "about", "profile", "events"],
+
+    blackBetween: function (data) {
+        if (
+            global.blackPages.indexOf(data.current.namespace) !== -1 &&
+            global.blackPages.indexOf(data.next.namespace) !== -1
+        ) {
+            body.style.backgroundColor = "black";
         }
+    },
 
-        let container = document.querySelectorAll(".wrapper");
+    elementNext: function (nodelist) {
+        let element;
 
-        if (container.length > 1) {
-            container = container[1];
+        if (nodelist.length > 1) {
+            element = nodelist[1];
         } else {
-            container = container[0];
+            element = nodelist[0];
         }
+
+        return element;
+    },
+
+    navScroll: function () {
 
         let options = {
             root: null,
             rootMargin: "-44px 0px 0px 0px",
             threshold: 0
         }
+    
+        if (global.observer !== undefined) {
+            global.observer.unobserve(global.marker);
+        }
+
+        let container = global.elementNext(document.querySelectorAll(".wrapper"));
 
         let callback = function (entries, observer) {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     let namespace = container.getAttribute("data-barba-namespace");
-                    gsap.to(".nav", {
-                        backgroundColor: "transparent",
-                        duration: 0
-                    });
+                    // gsap.to(".nav", {
+                    //     backgroundColor: "transparent",
+                    //     duration: 0
+                    // });
+                    global.navBg("transparent");
 
                     if (
-                        namespace !== "home" &&
-                        namespace !== "profile" &&
-                        namespace !== "about" &&
-                        namespace !== "events"
+                        global.blackPages.indexOf(namespace) == -1
                     ) {
-                        gsap.to(global.invertSelector, {
-                            filter: "invert(100%)",
-                            duration: 0
-                        });
+                        // gsap.to(global.invertSelector, {
+                        //     filter: "invert(100%)",
+                        //     duration: 0
+                        // });
+                        global.invertNav(100);
                     } else {
-                        gsap.to(global.invertSelector, {
-                            filter: "invert(0%)",
-                            duration: 0
-                        });
+                        // gsap.to(global.invertSelector, {
+                        //     filter: "invert(0%)",
+                        //     duration: 0
+                        // });
+                        global.invertNav(0);
                     }
                 } else {
                     let namespace = container.getAttribute("data-barba-namespace");
-                    if (
-                        namespace !== "profile" &&
-                        namespace !== "about" &&
-                        namespace !== "events"
+                    if (global.blackPages.indexOf(namespace) == -1 || namespace == "home"
                     ) {
-                        gsap.to(".nav", {
-                            backgroundColor: "white",
-                            duration: 0,
-                        });
-                        gsap.to(global.invertSelector, {
-                            filter: "invert(100%)",
-                            duration: 0
-                        });
+                        // gsap.to(".nav", {
+                        //     backgroundColor: "white",
+                        //     duration: 0,
+                        // });
+                        global.navBg("white");
+                        // gsap.to(global.invertSelector, {
+                        //     filter: "invert(100%)",
+                        //     duration: 0
+                        // });
+                        global.invertNav(100);
                     } else {
-                        gsap.to(".nav", {
-                            backgroundColor: "black",
-                            duration: 0,
-                        });
+                        // gsap.to(".nav", {
+                        //     backgroundColor: "black",
+                        //     duration: 0,
+                        // });
+                        global.navBg("black");
                     }
                 }
             });
         }
 
         global.observer = new IntersectionObserver(callback, options);
-        global.marker = document.querySelectorAll(".marker");
-
-        if (global.marker.length > 1) {
-            global.marker = global.marker[1];
-        } else {
-            global.marker = global.marker[0];
-        }
+        global.marker = global.elementNext(document.querySelectorAll(".marker"));
 
         if (global.marker !== undefined) {
             global.observer.observe(global.marker);
@@ -95,16 +121,12 @@ barba.init ({
     transitions: [{
         name: 'opacity-transition',
         afterOnce(data) {
-            if (
-                data.current.namespace !== "home" &&
-                data.current.namespace !== "profile" &&
-                data.current.namespace !== "about" &&
-                data.current.namespace !== "events"
-            ) {
-                gsap.to(global.invertSelector, {
-                    duration: 0,
-                    filter: "invert(100%)"
-                });
+            if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                // gsap.to(global.invertSelector, {
+                //     duration: 0,
+                //     filter: "invert(100%)"
+                // });
+                global.invertNav(100);
             }
         },
         beforeLeave(data) {
@@ -134,7 +156,8 @@ barba.init ({
             });
         },
         afterEnter(data) {
-            global.menuBg();
+            global.navScroll();
+            body.style.backgroundColor = "transparent";
         }
     }],
 
@@ -142,10 +165,11 @@ barba.init ({
         {
             namespace: 'home',
             beforeEnter() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(0%)",
-                    duration: 0.4
-                });    
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(0%)",
+                //     duration: 0.4
+                // });    
+                global.invertNav(0, 0.4);
             },
             afterEnter() {
                 penrose.init();
@@ -154,10 +178,11 @@ barba.init ({
                 }
             },
             beforeLeave() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(100%)",
-                    duration: 0.4
-                }); 
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(100%)",
+                //     duration: 0.4
+                // }); 
+                global.invertNav(100, 0.4);
             }
         },
         {
@@ -169,59 +194,57 @@ barba.init ({
             }
         },
         {
-            namespace: 'work',
-            beforeEnter() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(100%)",
-                    duration: 0.4
-                }); 
-            },
-            afterEnter() {
-            }
+            namespace: 'work'
         },
         {
             namespace: 'events',
             beforeEnter() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(0%)",
-                    duration: 0.4
-                });    
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(0%)",
+                //     duration: 0.4
+                // });
+                global.invertNav(0, 0.4);     
             },
             beforeLeave() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(100%)",
-                    duration: 0.4
-                }); 
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(100%)",
+                //     duration: 0.4
+                // });
+                global.invertNav(100, 0.4);
             }
         },
         {
             namespace: 'about',
             beforeEnter() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(0%)",
-                    duration: 0.4
-                });    
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(0%)",
+                //     duration: 0.4
+                // });
+                global.invertNav(0, 0.4); 
             },
             beforeLeave() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(100%)",
-                    duration: 0.4
-                }); 
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(100%)",
+                //     duration: 0.4
+                // }); 
+                global.invertNav(100, 0.4);
             }
         },
         {
             namespace: 'profile',
             beforeEnter() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(0%)",
-                    duration: 0.4
-                });    
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(0%)",
+                //     duration: 0.4
+                // });
+                global.invertNav(0, 0.4);    
             },
             beforeLeave() {
-                gsap.to(global.invertSelector, {
-                    filter: "invert(100%)",
-                    duration: 0.4
-                }); 
+                // gsap.to(global.invertSelector, {
+                //     filter: "invert(100%)",
+                //     duration: 0.4
+                // });
+                global.invertNav(100, 0.4);
             }
         }
     ]
@@ -229,65 +252,12 @@ barba.init ({
 
 let initialNamespace = document.querySelector(".wrapper").getAttribute("data-barba-namespace");
 
-if (
-    initialNamespace !== "home" &&
-    initialNamespace !== "profile" &&
-    initialNamespace !== "about" &&
-    initialNamespace !== "events"
-) {
-    gsap.to(global.invertSelector, {
-        duration: 0,
-        filter: "invert(100%)"
-    });
+if (global.blackPages.indexOf(initialNamespace) == -1) {
+    // gsap.to(global.invertSelector, {
+    //     duration: 0,
+    //     filter: "invert(100%)"
+    // });
+    global.invertNav(100); 
 }
 
-global.menuBg();
-
-const imgRefs = {
-    refClass: "img-ref",
-    columns: [
-        { col: "", cls: "" }
-    ]
-};
-
-imgRefs.run = function(refClass = "img-ref") {
-
-    // get img-ref nodes
-
-    // for each img-ref
-
-    // get parent
-
-    // for each column
-
-    // find the container
-
-    // count number of images
-
-    // if does not match, don't do anything
-
-    // if matches
-
-    // by index,
-
-    // remove loading tags
-
-    // add class for watching with observer
-
-    // change src to srcset and add urls
-}
-
-imgRefs.buildURL = function(attid) {
-
-}
-
-// create blurryImageLoad
-
-// create intersection observer
-
-// callback has .load(node)
-
-// target all images with the class
-
-
-// on load
+global.navScroll();
