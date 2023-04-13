@@ -62,7 +62,7 @@
 }
 
 
-.grad__discipline, .disciplines__wrapper, .is--ellipses {
+.grad__discipline, .disciplines__wrapper, .is-ellipses {
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
     mask-image: linear-gradient(to right, black 85%, transparent);
 }
