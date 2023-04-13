@@ -1,4 +1,4 @@
-console.log("v18");
+console.log("v19");
 
 let body = document.querySelector("body");
 let global;
@@ -364,6 +364,11 @@ barba.init({
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.invertNav(0, 0.4);
+                gsap.to("body" {
+                    backgroundColor: "black",
+                    duration: 0.4,
+                    ease: "none"
+                });
                 // global.navBg("transparent", 0.4);
                 // gsap.to(".nav", {
                 //     backgroundColor: "transparent",
@@ -373,6 +378,7 @@ barba.init({
             enter(data) { // SEAN
                 return gsap.from(data.next.container, {
                     opacity: 0,
+                    delay: 0.2,
                     duration: 0.4,
                     ease: "power2.inOut"
                 });
