@@ -1,4 +1,4 @@
-console.log("v19");
+console.log("v20");
 
 let body = document.querySelector("body");
 let global;
@@ -243,7 +243,7 @@ global = {
     }
 }
 
-barba.init({
+barba.init ({
     preventRunning: true,
     sync: true,
     transitions: [
@@ -364,7 +364,7 @@ barba.init({
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.invertNav(0, 0.4);
-                gsap.to("body" {
+                gsap.to("body", {
                     backgroundColor: "black",
                     duration: 0.4,
                     ease: "none"
