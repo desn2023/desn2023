@@ -1,4 +1,4 @@
-console.log("v09");
+console.log("v10");
 
 let body = document.querySelector("body");
 let global;
