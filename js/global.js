@@ -346,7 +346,7 @@ barba.init ({
                     window.scrollTo(0, 0);
                     global.navBg("transparent");
                     global.invertNav(100, 0.4);
-                    return gsap.to("body", {
+                    gsap.to("body", {
                         backgroundColor: "white",
                         duration: 0.4,
                         ease: "none"
