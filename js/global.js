@@ -1,4 +1,4 @@
-console.log("v24");
+console.log("v25");
 
 let body = document.querySelector("body");
 let global;
@@ -66,11 +66,11 @@ global = {
         }
     },
 
-    invertNav: function (pct, dur = 0) {
+    invertNav: function (pct, dur = 0, eas = "none") {
         gsap.to(global.invertSelector, {
             filter: "invert(" + pct + ")",
             duration: dur,
-            ease: "none"
+            ease: eas
         });
     },
 
@@ -333,7 +333,7 @@ barba.init ({
                         body.style.backgroundColor = "black";
                     }
                 } else {
-                    global.invertNav(100, 0.4); // add easing?
+                    global.invertNav(100, 0.4, "power2.in"); // add easing?
                 }
                 return global.mobileMenuClose();
             },
