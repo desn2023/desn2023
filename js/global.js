@@ -276,6 +276,9 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
                 // global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
                 return global.mobileMenuClose();
@@ -389,6 +392,9 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
                 // global.navBg("transparent", 0.4);
                 // global.blackBetween(data);
                 return global.mobileMenuClose();
@@ -442,9 +448,15 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
-                // global.navBg("transparent", 0.4);
-                body.style.backgroundColor = "black";
-                // global.blackBetween(data);
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
+
+                if (global.checkNavScroll() && data.current.namespace == "home") {
+
+                } else {
+                    body.style.backgroundColor = "black";
+                }
                 return global.mobileMenuClose();
             },
             leave(data) { // SEAN
@@ -456,8 +468,19 @@ barba.init ({
                 });
             },
             beforeEnter(data) {
-                window.scrollTo(0, 0);
-                global.navBg("transparent");
+                if (data.current.namespace == "home" && global.checkNavScroll()) {
+                    window.scrollTo(0, 0);
+                    global.invertNav(0, 0.4);
+                    global.navBg("transparent");
+                    gsap.to("body", {
+                        backgroundColor: "black",
+                        duration: 0.4,
+                        ease: "none"
+                    });
+                } else {
+                    window.scrollTo(0, 0);
+                    global.navBg("transparent");
+                }
                 // global.navBg("transparent", 0.4);
                 // gsap.to(".nav", {
                 //     backgroundColor: "transparent",
