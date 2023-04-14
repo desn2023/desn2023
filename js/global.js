@@ -1,4 +1,4 @@
-console.log("v23");
+console.log("v24");
 
 let body = document.querySelector("body");
 let global;
@@ -218,8 +218,8 @@ global = {
             threshold: 0
         }
 
-        if (global.observer !== undefined && global.marker !== undefined) {
-            global.observer.unobserve(global.marker);
+        if (global.observer !== undefined && global.observer !== null) {
+            global.observer.disconnect();
         }
 
         let container = global.elementNext(document.querySelectorAll(".wrapper"));
@@ -320,7 +320,11 @@ barba.init ({
                 }
             },
             beforeLeave(data) {
+
                 window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
 
                 if (global.checkNavScroll()) {
                     if (data.current.namespace == "home") {
@@ -329,7 +333,7 @@ barba.init ({
                         body.style.backgroundColor = "black";
                     }
                 } else {
-                    global.invertNav(100, 0.4);
+                    global.invertNav(100, 0.4); // add easing?
                 }
                 return global.mobileMenuClose();
             },
