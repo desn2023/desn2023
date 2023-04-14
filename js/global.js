@@ -1,4 +1,4 @@
-console.log("v22");
+console.log("v23");
 
 let body = document.querySelector("body");
 let global;
@@ -185,6 +185,23 @@ global = {
         return element;
     },
 
+    checkNavScroll: function () {
+
+        let banner = document.querySelector(".banner");
+        let marker = document.querySelector(".marker");
+        let threshold = 93;
+
+        if (banner == null) {
+            threshold = 43;
+        }
+
+        if (marker.getBoundingClientRect().top <= threshold) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
     navScroll: function () {
 
         let margin;
@@ -304,9 +321,16 @@ barba.init ({
             },
             beforeLeave(data) {
                 window.onscroll = "";
-                global.invertNav(100, 0.4);
-                global.navBg("white", 0.4);
-                // global.blackBetween(data);
+
+                if (global.checkNavScroll()) {
+                    if (data.current.namespace == "home") {
+
+                    } else {
+                        body.style.backgroundColor = "black";
+                    }
+                } else {
+                    global.invertNav(100, 0.4);
+                }
                 return global.mobileMenuClose();
             },
             leave(data) { // SEAN
@@ -318,8 +342,19 @@ barba.init ({
                 });
             },
             beforeEnter(data) {
+                if (global.checkNavScroll() && data.current.namespace !== "home") {
+                    window.scrollTo(0, 0);
+                    global.navBg("transparent");
+                    global.invertNav(100, 0.4);
+                    return gsap.to("body", {
+                        backgroundColor: "white",
+                        duration: 0.4,
+                        ease: "none"
+                    });  
+                }
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
+
                 // gsap.to(".nav", {
                 //     backgroundColor: "transparent",
                 //     duration: 0.4
