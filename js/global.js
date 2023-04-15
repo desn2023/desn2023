@@ -1,4 +1,4 @@
-console.log("v37 more hovers");
+console.log("v38 cmsslider troubleshooting");
 
 let body = document.querySelector("body");
 let global;
@@ -30,6 +30,8 @@ global = { // global values and methods
     banner: document.querySelector(".banner"),
     mobileMenuBg: document.querySelector(".nav__background"),
     mobileMenuCloseBtn: document.querySelector(".menu__close"),
+
+    // TRANSITIONS
 
     transParams: {
         leave: {
@@ -584,7 +586,6 @@ barba.init ({
                 global.navBg("white");
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
-                cmsSlider();
             }
         },
         {   name: "white-casestudy transition",
@@ -619,7 +620,6 @@ barba.init ({
                 global.navBg("white");
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
-                cmsSlider();
             }
         },
         {   name: "casestudy-black transition",
@@ -702,6 +702,39 @@ barba.init ({
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
+        },
+        {   name: "casestudy-casestudy transition",
+
+        from: { namespace: "casestudy"},
+        to: { namespace: "casestudy" },
+
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
+            beforeLeave(data) {
+                global.preventScroll();
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
+                return global.mobileMenuClose();
+            },
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+            },
+            enter(data) {
+                return gsap.from(data.next.container, global.transParams.enter);
+            },
+            afterEnter(data) {
+                global.bannerIn();
+                global.navBg("white");
+                window.onscroll = "";
+                body.style.backgroundColor = "transparent";
+            }
         }
     ],
 
@@ -756,6 +789,7 @@ barba.init ({
         },
         {   namespace: 'casestudy',
             afterEnter() {
+                cmsSlider();
                 global.resizeAllSliders();
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -776,4 +810,3 @@ if (global.blackPages.indexOf(global.initNamespace) == -1) {
 
 global.navScroll();
 global.countdownInit();
-cmsSlider();
