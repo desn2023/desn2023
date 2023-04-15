@@ -31,6 +31,20 @@
     }
 }
 
+@media (hover: hover) {
+    
+    .project__link:hover ~ .container .link.hover--black,
+    .grad__link:hover ~ .grad__info .link.hover--black,
+    .project__thumbnail:hover ~ .container .link.hover--black,
+    .profile__card:hover ~ .link.hover--black {
+        border-bottom-color: black;
+    }
+
+    .project__link:hover ~ .container .link.hover--white {
+        border-bottom-color: white;
+    }
+}
+
 #penrose-svg {
     transform-origin: top left;
     pointer-events: all;
@@ -65,15 +79,4 @@
 .grad__discipline, .disciplines__wrapper, .is--ellipses {
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
     mask-image: linear-gradient(to right, black 85%, transparent);
-}
-
-.project__link:hover ~ .container .link.hover--black,
-.grad__link:hover ~ .grad__info .link.hover--black,
-.project__thumbnail:hover ~ .container .link.hover--black,
-.profile__card:hover ~ .link.hover--black {
-    border-bottom-color: black;
-}
-
-.project__link:hover ~ .container .link.hover--white {
-    border-bottom-color: white;
 }
