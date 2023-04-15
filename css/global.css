@@ -68,7 +68,9 @@
 }
 
 .project__link:hover ~ .container .link.hover--black,
-.grad__link:hover ~ .grad__info .link.hover--black {
+.grad__link:hover ~ .grad__info .link.hover--black,
+.project__thumbnail:hover ~ .container .link.hover--black,
+.profile__card:hover ~ .link.hover--black {
     border-bottom-color: black;
 }
 

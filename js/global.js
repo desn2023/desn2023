@@ -1,4 +1,4 @@
-console.log("v36 prevent scrolling");
+console.log("v37 more hovers");
 
 let body = document.querySelector("body");
 let global;
