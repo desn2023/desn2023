@@ -12,14 +12,26 @@ home = {
     }
 }
 
-global = {
+global = { // global values and methods
+
+    // IMPORTANT VARIABLES
+
     namespaces: ["home", "about", "profile", "events", "casestudy", "graduates", "work"],
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
     blackPages: ["home", "about", "profile", "events"],
     whitePages: ["graduates", "work", "casestudy"],
     countdownDeadline: "2023/04/20 16:00",
 
-    resizeSlider(slider) {
+
+    // GLOBAL ELEMENTS
+    nav: Array.from(document.querySelectorAll(".nav")),
+    banner: document.querySelector(".banner"),
+    mobileMenuBg: document.querySelector(".nav__background"),
+    mobileMenuCloseBtn: document.querySelector(".menu__close"),
+
+
+
+    resizeSlider: function (slider) { // doesn't work
         let firstImg = slider.querySelector(".cs__img");
         let firstImgHeight = firstImg.clientHeight;
 
@@ -27,7 +39,7 @@ global = {
         wSlider.style.height = firstImgHeight + "px";
     },
 
-    resizeAllSliders() {
+    resizeAllSliders: function () { // sets height of sliders to auto
         let sliders = Array.from(document.querySelectorAll(".slider"));
         sliders.forEach(function (slider) {
             // global.resizeSlider(slider);
@@ -35,29 +47,26 @@ global = {
         });
     },
 
-    mobileMenuClose: function () {
-        let menuBg = document.querySelector(".nav__background");
-
-        if (menuBg.style.display == "block") {
-            let menu = document.querySelector(".menu__close");
-            menu.click();
+    mobileMenuClose: function () { // simulates click of mobile menu close button
+        if (global.mobileMenuBg.style.display == "block") {
+            global.mobileMenuCloseBtn.click();
             setTimeout(function () { return null; }, 400);
         } else {
             return null;
         }
     },
 
-    bannerIn: function (after) {
+    bannerIn: function (after) { // banner transition
         let tl = gsap.timeline ({
             onComplete: after
         });
 
-        if (document.querySelector(".banner") !== null) {
-            tl.to(".banner", {
+        if (global.banner !== null) {
+            tl.to(global.banner, {
                 opacity: 1,
                 duration: 0
             });
-            tl.to(".banner", {
+            tl.to(global.banner, {
                 height: "50px",
                 duration: 0.4,
                 ease: "power1.inOut"
@@ -65,25 +74,25 @@ global = {
         }
     },
 
-    bannerOut: function (after) {
+    bannerOut: function (after) { // banner transition
         let tl = gsap.timeline({
             onComplete: after
         });
 
-        if (document.querySelector(".banner") !== null) {
-            tl.to(".banner", {
+        if (global.banner !== null) {
+            tl.to(global.banner, {
                 height: "0px",
                 duration: 0.4,
                 ease: "power1.inOut"
             });
-            tl.to(".banner", {
+            tl.to(global.banner, {
                 opacity: 0,
                 duration: 0
             });
         }
     },
 
-    invertNav: function (pct, dur = 0, eas = "none") {
+    invertNav: function (pct, dur = 0, eas = "none") { // sets invert filter on nav elements
         gsap.to(global.invertSelector, {
             filter: "invert(" + pct + ")",
             duration: dur,
@@ -91,14 +100,15 @@ global = {
         });
     },
 
-    navBg: function (colour, dur = 0) {
-        gsap.to(".nav", {
+    navBg: function (colour, dur = 0) { // sets nav bg
+        gsap.to(global.nav, {
             backgroundColor: colour,
             duration: dur,
             ease: "none"
         });
     },
-    replaceChar: function (input) { // delets domain, line breaks, slashes from string
+
+    replaceChar: function (input) { // deletes domain, line breaks, slashes from string
 
         // replace domain
         input = input.replace (
@@ -124,7 +134,7 @@ global = {
         return input instanceof Element;
     },
 
-    hrefToNamespace: function (href) {
+    hrefToNamespace: function (href) { // converts URL to namespace
 
         href = global.replaceChar(href);
 
@@ -147,41 +157,7 @@ global = {
 
     },
 
-    blackBetween: function (data) {
-
-        let path;
-
-        let child = data.trigger.querySelector("a");
-
-        if (global.isElement(data.trigger)) {
-            if (data.trigger.tagName == "A" && data.trigger.hasAttribute("href")) {
-                path = global.hrefToNamespace(data.trigger.getAttribute("href"));
-            }
-            else if (global.isElement(child) && child.hasAttribute("href")) {
-                path = global.hrefToNamespace(child.getAttribute("href"));
-            } else {
-                return null;
-            }
-        } else if (data.trigger == "back") {
-            return null;
-        } else if (data.trigger == "forward") {
-            return null;
-        } else {
-            return null;
-        }
-
-        if (
-            path !== null && path !== undefined &&
-            global.blackPages.indexOf(data.current.namespace) !== -1 &&
-            global.blackPages.indexOf(path) !== -1
-        ) {
-            body.style.backgroundColor = "black";
-        } else {
-
-        }
-    },
-
-    elementNext: function (nodelist) {
+    elementNext: function (nodelist) { // returns first-and-only, or second element of nodelist
 
         if (global.isElement(nodelist)) {
             return nodelist;
@@ -202,14 +178,14 @@ global = {
         return element;
     },
 
-    checkNavScroll: function () {
+    checkNavScroll: function () { // returns true if opaque nav is on
 
         let banner = document.querySelector(".banner");
         let marker = document.querySelector(".marker");
-        let threshold = 93;
+        let threshold = 93; // WITH BANNER
 
         if (banner == null) {
-            threshold = 43;
+            threshold = 43; // WITHOUT BANNER
         }
 
         if (marker.getBoundingClientRect().top <= threshold) {
@@ -219,54 +195,62 @@ global = {
         }
     },
 
-    navScroll: function () {
+    navScroll: function () { // creates intersection observer to watch marker
 
         let margin;
 
         if (document.querySelector(".banner") == null) {
-            margin = "-43px 0px 0px 500px";
+            margin = "-43px 0px 0px 500px"; // WITHOUT BANNER
         } else {
-            margin = "-93px 0px 0px 500px";
+            margin = "-93px 0px 0px 500px"; // WITH BANNER
         }
 
-        let options = {
+        let options = { // options for IntersectionObserver
             root: null,
             rootMargin: margin,
             threshold: 0
         }
 
+        // if global.observer exists, disconnect
         if (global.observer !== undefined && global.observer !== null) {
             global.observer.disconnect();
         }
 
+        // get target barba container
         let container = global.elementNext(document.querySelectorAll(".wrapper"));
 
         let callback = function (entries, observer) {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    let namespace = container.getAttribute("data-barba-namespace");
+                if (entry.isIntersecting) { // if marker is in viewport
 
                     global.navBg("transparent");
-
+                    
+                    let namespace = container.getAttribute("data-barba-namespace");
+                    
                     if (
                         global.blackPages.indexOf(namespace) == -1
                     ) {
-                        global.invertNav(100);
+                        global.invertNav(100); // if white page
                     } else {
-                        global.invertNav(0);
+                        global.invertNav(0); // if black page
                     }
-                } else {
+                } else { // if marker not in viewport
+
                     let namespace = container.getAttribute("data-barba-namespace");
-                    if (global.blackPages.indexOf(namespace) == -1 || namespace == "home"
-                    ) {
+
+                    if (global.blackPages.indexOf(namespace) == -1 || namespace == "home") {
+                        // if white page or home, opaque nav is white
                         global.navBg("white");
                         global.invertNav(100);
                     } else {
+                        // if black page, opaque nav is black
                         global.navBg("black");
                     }
                 }
             });
         }
+
+        // start observing
 
         global.observer = new IntersectionObserver(callback, options);
         global.marker = global.elementNext(document.querySelectorAll(".marker"));
@@ -326,6 +310,9 @@ global = {
     }
 }
 
+
+
+
 barba.init ({
     preventRunning: true,
     sync: true,
@@ -335,21 +322,19 @@ barba.init ({
             from: { namespace: global.whitePages },
             to: { namespace: global.whitePages },
 
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
                 window.onscroll = "";
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                // global.navBg("transparent", 0.4);
-                // global.blackBetween(data);
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
+            leave(data) {
                 return gsap.to(data.current.container, {
                     // delay: 0.5,
                     opacity: 0,
@@ -360,12 +345,8 @@ barba.init ({
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
-                // // gsap.to(".nav", {
-                // //     backgroundColor: "transparent",
-                // //     duration: 0.4
-                // // });
             },
-            enter(data) { // SEAN
+            enter(data) {
                 return gsap.from(data.next.container, {
                     opacity: 0,
                     duration: 0.4,
@@ -851,6 +832,11 @@ barba.init ({
         }
     ]
 });
+
+
+
+
+// on first load
 
 let initialNamespace = document.querySelector(".wrapper").getAttribute("data-barba-namespace");
 
