@@ -1,4 +1,4 @@
-console.log("v34 some variables");
+console.log("v36 prevent scrolling");
 
 let body = document.querySelector("body");
 let global;
@@ -285,6 +285,12 @@ global = { // global values and methods
         }
     },
 
+    preventScroll: function () {
+        window.onscroll = function () {
+            window.scrollTo(0,0);
+        }
+    },
+
     countdownInit: function () { // set and start countdown
 
         // moved deadline to splashParams
@@ -353,7 +359,7 @@ barba.init ({
             //     }
             // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -372,6 +378,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navScroll();
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -380,14 +387,13 @@ barba.init ({
             from: { namespace: global.blackPages },
             to: { namespace: global.whitePages },
 
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -427,6 +433,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navScroll();
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -435,13 +442,13 @@ barba.init ({
             from: { namespace: global.whitePages },
             to: { namespace: global.blackPages },
 
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -472,6 +479,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navScroll();
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -480,13 +488,13 @@ barba.init ({
             from: { namespace: global.blackPages },
             to: { namespace: global.blackPages },
 
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -522,6 +530,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navScroll();
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
         },
@@ -529,13 +538,14 @@ barba.init ({
 
             from: { namespace: global.blackPages },
             to: { namespace: "casestudy"},
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -572,6 +582,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
                 cmsSlider();
             }
@@ -580,13 +591,14 @@ barba.init ({
 
             from: { namespace: global.whitePages },
             to: { namespace: "casestudy"},
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -605,6 +617,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
                 cmsSlider();
             }
@@ -613,13 +626,14 @@ barba.init ({
 
             from: { namespace: "casestudy"},
             to: { namespace: global.blackPages },
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -650,6 +664,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navScroll();
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
             
@@ -658,13 +673,14 @@ barba.init ({
 
             from: { namespace: "casestudy"},
             to: { namespace: global.whitePages },
-            afterOnce(data) {
-                if (global.blackPages.indexOf(data.current.namespace) == -1) {
-                    global.invertNav(100);
-                }
-            },
+
+            // afterOnce(data) {
+            //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
+            //         global.invertNav(100);
+            //     }
+            // },
             beforeLeave(data) {
-                window.onscroll = "";
+                global.preventScroll();
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
@@ -683,6 +699,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navScroll();
+                window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
         }
