@@ -1,4 +1,4 @@
-console.log("v27");
+console.log("v28");
 
 let body = document.querySelector("body");
 let global;
@@ -488,6 +488,198 @@ barba.init ({
                 //     backgroundColor: "transparent",
                 //     duration: 0.4
                 // });
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.bannerIn();
+                global.navScroll();
+                body.style.backgroundColor = "transparent";
+            }
+        },
+        {   name: "black-casestudy transition",
+
+            from: { namespace: global.blackPages },
+            to: { namespace: "casestudy"},
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
+
+                if (global.checkNavScroll()) {
+                    if (data.current.namespace == "home") {
+
+                    } else {
+                        body.style.backgroundColor = "black";
+                    }
+                } else {
+                    global.invertNav(100, 0.4, "power2.in"); // add easing?
+                }
+                return global.mobileMenuClose();
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                if (global.checkNavScroll() && data.current.namespace !== "home") {
+                    window.scrollTo(0, 0);
+                    global.navBg("transparent");
+                    global.invertNav(100, 0.4);
+                    gsap.to("body", {
+                        backgroundColor: "white",
+                        duration: 0.4,
+                        ease: "none"
+                    });  
+                }
+                window.scrollTo(0, 0);
+                global.navBg("transparent");
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.bannerIn();
+                global.navBg("white");
+                body.style.backgroundColor = "transparent";
+            }
+        },
+        {   name: "white-casestudy transition",
+
+            from: { namespace: global.whitePages },
+            to: { namespace: "casestudy"},
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
+                return global.mobileMenuClose();
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                global.navBg("transparent");
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.bannerIn();
+                global.navBg("white");
+                body.style.backgroundColor = "transparent";
+            }
+        },
+        {   name: "casestudy-black transition",
+
+            from: { namespace: "casestudy"},
+            to: { namespace: global.blackPages },
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
+                return global.mobileMenuClose();
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                global.invertNav(0, 0.4);
+                global.navBg("transparent");
+                gsap.to("body", {
+                    backgroundColor: "black",
+                    duration: 0.4,
+                    ease: "none"
+                });
+            },
+            enter(data) { // SEAN
+                return gsap.from(data.next.container, {
+                    opacity: 0,
+                    delay: 0.2,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            afterEnter(data) {
+                global.bannerIn();
+                global.navScroll();
+                body.style.backgroundColor = "transparent";
+            }
+            
+        },
+        {   name: "casestudy-white transition",
+
+            from: { namespace: "casestudy"},
+            to: { namespace: global.whitePages },
+            afterOnce(data) {
+                if (global.blackPages.indexOf(data.current.namespace) == -1) {
+                    global.invertNav(100);
+                }
+            },
+            beforeLeave(data) {
+                window.onscroll = "";
+                if (global.observer !== undefined && global.observer !== null) {
+                    global.observer.disconnect();
+                }
+                return global.mobileMenuClose();
+            },
+            leave(data) { // SEAN
+                return gsap.to(data.current.container, {
+                    // delay: 0.5,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            },
+            beforeEnter(data) {
+                window.scrollTo(0, 0);
+                global.navBg("transparent");
             },
             enter(data) { // SEAN
                 return gsap.from(data.next.container, {
