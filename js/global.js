@@ -1,4 +1,4 @@
-console.log("v38 cmsslider troubleshooting");
+console.log("v39 cmsslider troubleshooting 2");
 
 let body = document.querySelector("body");
 let global;
@@ -584,6 +584,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
+                cmsSlider();
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
@@ -618,6 +619,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
+                cmsSlider();
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
@@ -732,6 +734,7 @@ barba.init ({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
+                cmsSlider();
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
@@ -789,7 +792,7 @@ barba.init ({
         },
         {   namespace: 'casestudy',
             afterEnter() {
-                cmsSlider();
+                // cmsSlider();
                 global.resizeAllSliders();
                 window.onresize = function () {
                     global.mobileMenuClose();
