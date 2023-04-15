@@ -1,4 +1,4 @@
-console.log("v31 mobile Intersection Observer fix 2");
+console.log("v32 slider height");
 
 let body = document.querySelector("body");
 let global;
@@ -20,7 +20,6 @@ global = {
     countdownDeadline: "2023/04/20 16:00",
 
     resizeSlider(slider) {
-        // get webflow slider
         let firstImg = slider.querySelector(".cs__img");
         let firstImgHeight = firstImg.clientHeight;
 
@@ -29,9 +28,10 @@ global = {
     },
 
     resizeAllSliders() {
-        let sliders = Array.from(document.querySelectorAll(".cs__slider"));
+        let sliders = Array.from(document.querySelectorAll(".slider"));
         sliders.forEach(function (slider) {
-            global.resizeSlider(slider);
+            // global.resizeSlider(slider);
+            slider.style.height = "auto";
         });
     },
 
@@ -763,8 +763,7 @@ barba.init ({
     ],
 
     views: [
-        {
-            namespace: 'home',
+        {   namespace: 'home',
             beforeEnter() {
                 // global.invertNav(0, 0.4);
             },
@@ -783,8 +782,7 @@ barba.init ({
                 // global.navBg("transparent", 0.4);
             }
         },
-        {
-            namespace: 'graduates',
+        {   namespace: 'graduates',
             beforeEnter() {
             },
             afterEnter() {
@@ -794,16 +792,14 @@ barba.init ({
                 grads.init();
             }
         },
-        {
-            namespace: 'work',
+        {   namespace: 'work',
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
             }
         },
-        {
-            namespace: 'events',
+        {   namespace: 'events',
             beforeEnter() {
                 // global.invertNav(0, 0.4);     
             },
@@ -817,8 +813,7 @@ barba.init ({
                 }
             }
         },
-        {
-            namespace: 'about',
+        {   namespace: 'about',
             beforeEnter() {
                 // global.invertNav(0, 0.4); 
             },
@@ -832,8 +827,7 @@ barba.init ({
                 }
             }
         },
-        {
-            namespace: 'profile',
+        {   namespace: 'profile',
             beforeEnter() {
                 // global.invertNav(0, 0.4);    
             },
@@ -847,9 +841,9 @@ barba.init ({
                 }
             }
         },
-        {
-            namespace: 'casestudy',
+        {   namespace: 'casestudy',
             afterEnter() {
+                global.resizeAllSliders();
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
