@@ -208,9 +208,9 @@ global = {
         let margin;
 
         if (document.querySelector(".banner") == null) {
-            margin = "-43px 0px 0px 0px";
+            margin = "-43px 0px 0px 500px";
         } else {
-            margin = "-93px 0px 0px 0px";
+            margin = "-93px 0px 0px 500px";
         }
 
         let options = {
