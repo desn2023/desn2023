@@ -1,11 +1,11 @@
-console.log("v32 slider height");
+console.log("v34 some variables");
 
 let body = document.querySelector("body");
 let global;
 let home;
 
 home = {
-    init: function () { // SEAN
+    init: function () {
         // query elements
         // global.elementNext(document.querySelectorAll(selector));
 
@@ -21,39 +21,31 @@ global = { // global values and methods
     blackPages: ["home", "about", "profile", "events"],
     whitePages: ["graduates", "work", "casestudy"],
     countdownDeadline: "2023/04/20 16:00",
+    initNamespace: document.querySelector(".wrapper").getAttribute("data-barba-namespace"),
 
 
     // GLOBAL ELEMENTS
+
     nav: Array.from(document.querySelectorAll(".nav")),
     banner: document.querySelector(".banner"),
     mobileMenuBg: document.querySelector(".nav__background"),
     mobileMenuCloseBtn: document.querySelector(".menu__close"),
 
+    transParams: {
+        leave: {
+            opacity: 0,
+            duration: 0.4,
+            delay: 0,
+            ease: "power2.inOut"
+        },
+        enter: {
+            opacity: 0,
+            duration: 0.4,
+            delay: 0,
+            ease: "power2.inOut"
+        },
 
-
-    resizeSlider: function (slider) { // doesn't work
-        let firstImg = slider.querySelector(".cs__img");
-        let firstImgHeight = firstImg.clientHeight;
-
-        let wSlider = slider.querySelector(".slider");
-        wSlider.style.height = firstImgHeight + "px";
-    },
-
-    resizeAllSliders: function () { // sets height of sliders to auto
-        let sliders = Array.from(document.querySelectorAll(".slider"));
-        sliders.forEach(function (slider) {
-            // global.resizeSlider(slider);
-            slider.style.height = "auto";
-        });
-    },
-
-    mobileMenuClose: function () { // simulates click of mobile menu close button
-        if (global.mobileMenuBg.style.display == "block") {
-            global.mobileMenuCloseBtn.click();
-            setTimeout(function () { return null; }, 400);
-        } else {
-            return null;
-        }
+        delayToBlack: 0.2
     },
 
     bannerIn: function (after) { // banner transition
@@ -100,11 +92,44 @@ global = { // global values and methods
         });
     },
 
-    navBg: function (colour, dur = 0) { // sets nav bg
+    navBg: function (colour, dur = 0, eas = "none") { // sets nav bg
         gsap.to(global.nav, {
             backgroundColor: colour,
             duration: dur,
-            ease: "none"
+            ease: eas
+        });
+    },
+
+    bodyBg: function (colour, dur = 0, eas = "none") { // sets body bg
+        gsap.to(body, {
+            backgroundColor: colour,
+            duration: dur,
+            ease: eas
+        })
+    },
+
+    mobileMenuClose: function () { // simulates click of mobile menu close button
+        if (global.mobileMenuBg.style.display == "block") {
+            global.mobileMenuCloseBtn.click();
+            setTimeout(function () { return null; }, 400);
+        } else {
+            return null;
+        }
+    },
+
+    resizeSlider: function (slider) { // doesn't work
+        let firstImg = slider.querySelector(".cs__img");
+        let firstImgHeight = firstImg.clientHeight;
+
+        let wSlider = slider.querySelector(".slider");
+        wSlider.style.height = firstImgHeight + "px";
+    },
+
+    resizeAllSliders: function () { // sets height of sliders to auto
+        let sliders = Array.from(document.querySelectorAll(".slider"));
+        sliders.forEach(function (slider) {
+            // global.resizeSlider(slider);
+            slider.style.height = "auto";
         });
     },
 
@@ -335,23 +360,14 @@ barba.init ({
                 return global.mobileMenuClose();
             },
             leave(data) {
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
             },
             enter(data) {
-                return gsap.from(data.next.container, {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+                return gsap.from(data.next.container, global.transParams.enter);
             },
             afterEnter(data) {
                 global.bannerIn();
@@ -383,43 +399,30 @@ barba.init ({
                         body.style.backgroundColor = "black";
                     }
                 } else {
-                    global.invertNav(100, 0.4, "power2.in"); // add easing?
+                    global.invertNav(100, global.transParams.leave.duration, "power2.in");
                 }
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 if (global.checkNavScroll() && data.current.namespace !== "home") {
                     window.scrollTo(0, 0);
                     global.navBg("transparent");
-                    global.invertNav(100, 0.4);
-                    gsap.to("body", {
-                        backgroundColor: "white",
-                        duration: 0.4,
-                        ease: "none"
-                    });  
+                    global.invertNav(100, global.transParams.enter.duration);
+                    global.bodyBg("white", global.transParams.enter.duration);
+                    // gsap.to("body", {
+                    //     backgroundColor: "white",
+                    //     duration: global.transParams.enter.duration,
+                    //     ease: "none"
+                    // });
                 }
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
-
-                // gsap.to(".nav", {
-                //     backgroundColor: "transparent",
-                //     duration: 0.4
-                // });
             },
-            enter(data) { // SEAN
-                return gsap.from(data.next.container, {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            enter(data) {
+                return gsap.from(data.next.container, global.transParams.enter);
             },
             afterEnter(data) {
                 global.bannerIn();
@@ -442,39 +445,28 @@ barba.init ({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                // global.navBg("transparent", 0.4);
-                // global.blackBetween(data);
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
-                global.invertNav(0, 0.4);
+                global.invertNav(0, global.transParams.enter.duration);
                 global.navBg("transparent");
-                gsap.to("body", {
-                    backgroundColor: "black",
-                    duration: 0.4,
-                    ease: "none"
-                });
-                // global.navBg("transparent", 0.4);
-                // gsap.to(".nav", {
-                //     backgroundColor: "transparent",
-                //     duration: 0.4
+                global.bodyBg("black", global.transParams.enter.duration);
+                // gsap.to("body", {
+                //     backgroundColor: "black",
+                //     duration: global.transParams.enter.duration,
+                //     ease: "none"
                 // });
             },
-            enter(data) { // SEAN
+            enter(data) {
                 return gsap.from(data.next.container, {
-                    opacity: 0,
-                    delay: 0.2,
-                    duration: 0.4,
-                    ease: "power2.inOut"
+                    opacity: global.transParams.enter.opacity,
+                    delay: global.transParams.delayToBlack,
+                    duration: global.transParams.enter.duration,
+                    ease: global.transParams.enter.ease
                 });
             },
             afterEnter(data) {
@@ -498,7 +490,6 @@ barba.init ({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-
                 if (global.checkNavScroll() && data.current.namespace == "home") {
 
                 } else {
@@ -506,40 +497,27 @@ barba.init ({
                 }
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 if (data.current.namespace == "home" && global.checkNavScroll()) {
                     window.scrollTo(0, 0);
-                    global.invertNav(0, 0.4);
+                    global.invertNav(0, global.transParams.enter.duration);
                     global.navBg("transparent");
-                    gsap.to("body", {
-                        backgroundColor: "black",
-                        duration: 0.4,
-                        ease: "none"
-                    });
+                    global.bodyBg("black", global.transParams.enter.duration);
+                    // gsap.to("body", {
+                    //     backgroundColor: "black",
+                    //     duration: global.transParams.enter.duration,
+                    //     ease: "none"
+                    // });
                 } else {
                     window.scrollTo(0, 0);
                     global.navBg("transparent");
                 }
-                // global.navBg("transparent", 0.4);
-                // gsap.to(".nav", {
-                //     backgroundColor: "transparent",
-                //     duration: 0.4
-                // });
             },
-            enter(data) { // SEAN
-                return gsap.from(data.next.container, {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            enter(data) {
+                return gsap.from(data.next.container, global.transParams.enter);
             },
             afterEnter(data) {
                 global.bannerIn();
@@ -561,46 +539,35 @@ barba.init ({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-
                 if (global.checkNavScroll()) {
-                    if (data.current.namespace == "home") {
-
-                    } else {
+                    if (data.current.namespace !== "home") {
                         body.style.backgroundColor = "black";
                     }
                 } else {
-                    global.invertNav(100, 0.4, "power2.in"); // add easing?
+                    global.invertNav(100, global.transParams.leave.duration, "power2.in");
                 }
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 if (global.checkNavScroll() && data.current.namespace !== "home") {
                     window.scrollTo(0, 0);
                     global.navBg("transparent");
-                    global.invertNav(100, 0.4);
-                    gsap.to("body", {
-                        backgroundColor: "white",
-                        duration: 0.4,
-                        ease: "none"
-                    });  
+                    global.invertNav(100, global.transParams.enter.duration);
+                    global.bodyBg("white", global.transParams.enter.duration);
+                    // gsap.to("body", {
+                    //     backgroundColor: "white",
+                    //     duration: global.transParams.enter.duration,
+                    //     ease: "none"
+                    // });  
                 }
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
             },
-            enter(data) { // SEAN
-                return gsap.from(data.next.container, {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            enter(data) {
+                return gsap.from(data.next.container, global.transParams.enter);
             },
             afterEnter(data) {
                 global.bannerIn();
@@ -625,24 +592,15 @@ barba.init ({
                 }
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
             },
-            enter(data) { // SEAN
-                return gsap.from(data.next.container, {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            enter(data) {
+                return gsap.from(data.next.container, global.transParams.enter);
             },
             afterEnter(data) {
                 global.bannerIn();
@@ -667,30 +625,26 @@ barba.init ({
                 }
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
-                global.invertNav(0, 0.4);
+                global.invertNav(0, global.transParams.enter.duration);
                 global.navBg("transparent");
-                gsap.to("body", {
-                    backgroundColor: "black",
-                    duration: 0.4,
-                    ease: "none"
-                });
+                global.bodyBg("black", global.transParams.enter.duration);
+                // gsap.to("body", {
+                //     backgroundColor: "black",
+                //     duration: global.transParams.enter.duration,
+                //     ease: "none"
+                // });
             },
-            enter(data) { // SEAN
+            enter(data) {
                 return gsap.from(data.next.container, {
-                    opacity: 0,
-                    delay: 0.2,
-                    duration: 0.4,
-                    ease: "power2.inOut"
+                    opacity: global.transParams.enter.opacity,
+                    delay: global.transParams.delayToBlack,
+                    duration: global.transParams.enter.duration,
+                    ease: global.transParams.enter.ease
                 });
             },
             afterEnter(data) {
@@ -716,24 +670,15 @@ barba.init ({
                 }
                 return global.mobileMenuClose();
             },
-            leave(data) { // SEAN
-                return gsap.to(data.current.container, {
-                    // delay: 0.5,
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            leave(data) {
+                return gsap.to(data.current.container, global.transParams.leave);
             },
             beforeEnter(data) {
                 window.scrollTo(0, 0);
                 global.navBg("transparent");
             },
-            enter(data) { // SEAN
-                return gsap.from(data.next.container, {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                });
+            enter(data) {
+                return gsap.from(data.next.container, global.transParams.enter);
             },
             afterEnter(data) {
                 global.bannerIn();
@@ -745,9 +690,6 @@ barba.init ({
 
     views: [
         {   namespace: 'home',
-            beforeEnter() {
-                // global.invertNav(0, 0.4);
-            },
             afterEnter() {
                 home.init();
                 // reset penrose
@@ -757,15 +699,9 @@ barba.init ({
                     global.mobileMenuClose();
                     penrose.setSize();
                 }
-            },
-            beforeLeave() {
-                // global.invertNav(100, 0.4);
-                // global.navBg("transparent", 0.4);
             }
         },
         {   namespace: 'graduates',
-            beforeEnter() {
-            },
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -781,13 +717,6 @@ barba.init ({
             }
         },
         {   namespace: 'events',
-            beforeEnter() {
-                // global.invertNav(0, 0.4);     
-            },
-            beforeLeave() {
-                // global.invertNav(100, 0.4);
-                // global.navBg("transparent", 0.4);
-            },
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -795,13 +724,6 @@ barba.init ({
             }
         },
         {   namespace: 'about',
-            beforeEnter() {
-                // global.invertNav(0, 0.4); 
-            },
-            beforeLeave() {
-                // global.invertNav(100, 0.4);
-                // global.navBg("transparent", 0.4);
-            },
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -809,13 +731,6 @@ barba.init ({
             }
         },
         {   namespace: 'profile',
-            beforeEnter() {
-                // global.invertNav(0, 0.4);    
-            },
-            beforeLeave() {
-                // global.invertNav(100, 0.4);
-                // global.navBg("transparent", 0.4);
-            },
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -838,9 +753,7 @@ barba.init ({
 
 // on first load
 
-let initialNamespace = document.querySelector(".wrapper").getAttribute("data-barba-namespace");
-
-if (global.blackPages.indexOf(initialNamespace) == -1) {
+if (global.blackPages.indexOf(global.initNamespace) == -1) {
     global.invertNav(100);
 }
 
