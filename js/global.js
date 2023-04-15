@@ -1,4 +1,4 @@
-console.log("v30 finsweet");
+console.log("v31 mobile Intersection Observer fix 2");
 
 let body = document.querySelector("body");
 let global;
@@ -18,6 +18,22 @@ global = {
     blackPages: ["home", "about", "profile", "events"],
     whitePages: ["graduates", "work", "casestudy"],
     countdownDeadline: "2023/04/20 16:00",
+
+    resizeSlider(slider) {
+        // get webflow slider
+        let firstImg = slider.querySelector(".cs__img");
+        let firstImgHeight = firstImg.clientHeight;
+
+        let wSlider = slider.querySelector(".slider");
+        wSlider.style.height = firstImgHeight + "px";
+    },
+
+    resizeAllSliders() {
+        let sliders = Array.from(document.querySelectorAll(".cs__slider"));
+        sliders.forEach(function (slider) {
+            global.resizeSlider(slider);
+        });
+    },
 
     mobileMenuClose: function () {
         let menuBg = document.querySelector(".nav__background");
