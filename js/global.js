@@ -188,15 +188,15 @@ global = {
 
     checkNavScroll: function () {
 
-        // let banner = document.querySelector(".banner");
-        // let marker = document.querySelector(".marker");
-        // let threshold = 93;
+        let banner = document.querySelector(".banner");
+        let marker = document.querySelector(".marker");
+        let threshold = 93;
 
-        // if (banner == null) {
-        //     threshold = 43;
-        // }
+        if (banner == null) {
+            threshold = 43;
+        }
 
-        if (marker.getBoundingClientRect().top <= global.scrollThreshold) {
+        if (marker.getBoundingClientRect().top <= threshold) {
             return true;
         } else {
             return false;
@@ -208,12 +208,10 @@ global = {
         let margin;
 
         if (document.querySelector(".banner") == null) {
-            global.scrollThreshold = 43;
+            margin = "-43px 0px 0px 0px";
         } else {
-            global.scrollThreshold = 93;
+            margin = "-93px 0px 0px 0px";
         }
-
-        margin = "-" + global.scrollThreshold + "px 0px 0px 0px";
 
         let options = {
             root: null,
@@ -241,7 +239,7 @@ global = {
                     } else {
                         global.invertNav(0);
                     }
-                } else if (entry.boundingClientRect.top <= global.scrollThreshold) {
+                } else {
                     let namespace = container.getAttribute("data-barba-namespace");
                     if (global.blackPages.indexOf(namespace) == -1 || namespace == "home"
                     ) {
