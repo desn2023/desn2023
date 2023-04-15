@@ -1,4 +1,4 @@
-console.log("v28");
+console.log("v30 finsweet");
 
 let body = document.querySelector("body");
 let global;
@@ -17,6 +17,7 @@ global = {
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
     blackPages: ["home", "about", "profile", "events"],
     whitePages: ["graduates", "work", "casestudy"],
+    countdownDeadline: "2023/04/20 16:00",
 
     mobileMenuClose: function () {
         let menuBg = document.querySelector(".nav__background");
@@ -259,6 +260,55 @@ global = {
         if (global.marker !== undefined) {
             global.observer.observe(global.marker);
         }
+    },
+
+    countdownInit: function () { // set and start countdown
+
+        // moved deadline to splashParams
+    
+        function pad(num, size) {
+            var s = "0" + num;
+            return s.substring(s.length - size);
+        }
+    
+        // fixes "Date.parse(date)" on safari
+        function parseDate(date) {
+            const parsed = Date.parse(date);
+            if (!isNaN(parsed)) return parsed
+            return Date.parse(date.replace(/-/g, '/').replace(/[a-z]+/gi, ' '));
+        }
+    
+        function getTimeRemaining(endtime) {
+            let total = parseDate(endtime) - Date.parse(new Date())
+            let seconds = Math.floor((total / 1000) % 60)
+            let minutes = Math.floor((total / 1000 / 60) % 60)
+            let hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+            let days = Math.floor(total / (1000 * 60 * 60 * 24))
+    
+            return { total, days, hours, minutes, seconds };
+        }
+    
+        function clock(id, endtime) {
+            let days = document.getElementById(id + '-days')
+            let hours = document.getElementById(id + '-hours')
+            let minutes = document.getElementById(id + '-minutes')
+            let seconds = document.getElementById(id + '-seconds')
+    
+            var timeinterval = setInterval(function () {
+                var time = getTimeRemaining(endtime);
+    
+                if (time.total <= 0) {
+                    clearInterval(timeinterval);
+                } else {
+                    days.innerHTML = pad(time.days, 2);
+                    hours.innerHTML = pad(time.hours, 2);
+                    minutes.innerHTML = pad(time.minutes, 2);
+                    seconds.innerHTML = pad(time.seconds, 2);
+                }
+            }, 1000);
+        }
+    
+        clock('js-clock', global.countdownDeadline);
     }
 }
 
@@ -561,6 +611,7 @@ barba.init ({
                 global.bannerIn();
                 global.navBg("white");
                 body.style.backgroundColor = "transparent";
+                cmsSlider();
             }
         },
         {   name: "white-casestudy transition",
@@ -602,6 +653,7 @@ barba.init ({
                 global.bannerIn();
                 global.navBg("white");
                 body.style.backgroundColor = "transparent";
+                cmsSlider();
             }
         },
         {   name: "casestudy-black transition",
@@ -799,61 +851,5 @@ if (global.blackPages.indexOf(initialNamespace) == -1) {
 }
 
 global.navScroll();
-
-
-
-
-// COUNTDOWN CLOCK
-
-global.countdownDeadline = "2023/04/20 16:00";
-
-global.countdownInit = function () { // set and start countdown
-
-    // moved deadline to splashParams
-
-    function pad(num, size) {
-        var s = "0" + num;
-        return s.substring(s.length - size);
-    }
-
-    // fixes "Date.parse(date)" on safari
-    function parseDate(date) {
-        const parsed = Date.parse(date);
-        if (!isNaN(parsed)) return parsed
-        return Date.parse(date.replace(/-/g, '/').replace(/[a-z]+/gi, ' '));
-    }
-
-    function getTimeRemaining(endtime) {
-        let total = parseDate(endtime) - Date.parse(new Date())
-        let seconds = Math.floor((total / 1000) % 60)
-        let minutes = Math.floor((total / 1000 / 60) % 60)
-        let hours = Math.floor((total / (1000 * 60 * 60)) % 24)
-        let days = Math.floor(total / (1000 * 60 * 60 * 24))
-
-        return { total, days, hours, minutes, seconds };
-    }
-
-    function clock(id, endtime) {
-        let days = document.getElementById(id + '-days')
-        let hours = document.getElementById(id + '-hours')
-        let minutes = document.getElementById(id + '-minutes')
-        let seconds = document.getElementById(id + '-seconds')
-
-        var timeinterval = setInterval(function () {
-            var time = getTimeRemaining(endtime);
-
-            if (time.total <= 0) {
-                clearInterval(timeinterval);
-            } else {
-                days.innerHTML = pad(time.days, 2);
-                hours.innerHTML = pad(time.hours, 2);
-                minutes.innerHTML = pad(time.minutes, 2);
-                seconds.innerHTML = pad(time.seconds, 2);
-            }
-        }, 1000);
-    }
-
-    clock('js-clock', global.countdownDeadline);
-}
-
 global.countdownInit();
+cmsSlider();
