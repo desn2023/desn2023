@@ -46,15 +46,21 @@ dyncontent.sortDisciplines = function (item, topSelect) {
     // select top item
 
     let disciplineTop = item.querySelector(topSelect);
-    let disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
+    let disciplineH1s;
+
+    if (disciplinesList !== null) {
+        disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
+    }
 
     let topItem;
 
-    disciplineH1s.forEach(function (h1, index) {
-        if (h1.innerText == disciplineTop.innerText && index !== 0) {
-            topItem = h1.parentElement.parentElement;
-        }
-    });
+    if (disciplineH1s !== null && disciplineH1s.length > 0) {
+        disciplineH1s.forEach(function (h1, index) {
+            if (h1.innerText == disciplineTop.innerText && index !== 0) {
+                topItem = h1.parentElement.parentElement;
+            }
+        });
+    }
 
     // reorder
 
@@ -87,6 +93,8 @@ dyncontent.filter = function (
         obj.items = global.shuffleArray(obj.items);
     }
 
+    // populate global object
+
     if (wrapper.getAttribute("data-barba-namespace").indexOf("graduates") !== -1) {
         grads.list = obj.list;
         grads.items = [...obj.items];
@@ -97,7 +105,7 @@ dyncontent.filter = function (
 
     let tl = gsap.timeline();
 
-    if (obj.animFirst) {
+    if (obj.animFirst) { // animate to opacity: 0 instantly if first time
 
         obj.items.forEach(function (item) {
             item.style.opacity = 0;
@@ -110,60 +118,63 @@ dyncontent.filter = function (
 
         obj.animFirst = false;
 
-    } else {
-        tl.to(obj.items, obj.animOut);
+    } else { // animate to opacity: 0 smoothly
+        tl.to(obj.items, obj.animOut); 
     }
 
-    let categoryElems = new Array();
+    let categoryElems = new Array(); // selected disciplines
     categoryElems = Array.from(wrapper.querySelectorAll(catSelect));
 
-    let categoryTxts = new Array();
+    let categoryTxts = new Array(); // selected discplines as text
 
-    if (categoryElems !== null) {
-        if (categoryElems.length > 0) {
-            categoryElems.forEach(function (elem) {
-                categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
-            });
-        } else {
-            categoryTxts.push("All Disciplines");
-        }
+    if (categoryElems.length > 0) {
+        categoryElems.forEach(function (elem) {
+            categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
+        });
+    } else {
+        categoryTxts.push("All Disciplines");
     }
 
     // filtered items
     let filteredItems = new Array();
 
-    obj.items.forEach(function (item) {
+    if (categoryTxts.toString().indexOf("All Disciplines") !== -1) { // skip logic if "All Disciplines"
+        filteredItems = obj.items;
+    } else {
+        obj.items.forEach(function (item) {
 
-        // sort disciplines
-
-        dyncontent.sortDisciplines(item, topSelect);
-
-        // remove items that don't match filter
-
-        let disciplinesList = item.querySelector(".disciplines__list");
-        let matchFilter = true;
-
-        if (disciplinesList !== null) {
-            categoryTxts.forEach(function (cat) {
-                if (cat.indexOf("All Disciplines") == -1) {
-                    if (disciplinesList.innerHTML.indexOf(cat) == -1) {
-                        matchFilter = false;
+            // sort disciplines
+    
+            dyncontent.sortDisciplines(item, topSelect);
+    
+            // remove items that don't match filter
+    
+            let disciplinesList = item.querySelector(".disciplines__list");
+            let matchFilter = true;
+    
+            if (disciplinesList !== null) {
+                categoryTxts.forEach(function (cat) {
+                    if (cat.indexOf("All Disciplines") == -1) {
+                        if (disciplinesList.innerHTML.indexOf(cat) == -1) {
+                            matchFilter = false;
+                        }
                     }
-                }
-            });
-        } else {
-            matchFilter = false;
-        }
-
-        // visible or invisible
-
-        if (matchFilter) {
-            filteredItems.push(item);
-        } else {
-            item.style.display = "none";
-        }
-
-    });
+                });
+            } else {
+                matchFilter = false;
+            }
+    
+            // visible or invisible
+    
+            if (matchFilter) {
+                item.style.display = "block";
+                filteredItems.push(item);
+            } else {
+                item.style.display = "none";
+            }
+    
+        });
+    }
 
     // in
 

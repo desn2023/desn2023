@@ -1,4 +1,4 @@
-console.log("v49 projects fix");
+console.log("v50 projects fix");
 
 let body = document.querySelector("body");
 let global;
@@ -43,7 +43,7 @@ global = { // global values and methods
     },
 
     bannerIn: function (after) { // banner transition
-        let tl = gsap.timeline ({
+        let tl = gsap.timeline({
             onComplete: after
         });
 
@@ -133,20 +133,20 @@ global = { // global values and methods
 
         // get all of the little ones
         let featSmall = Array.from(wrapper.querySelectorAll(".project__list .project__item"));
-    
+
         // randomize the order
         let randSmall = global.shuffleArray(featSmall);
-    
+
         //turn off all but 4
-        for (let i = 0; i < randSmall.length - 3; i++){
+        for (let i = 0; i < randSmall.length - 3; i++) {
             // remove from html
             randSmall[i].remove();
         }
-    
+
         // turn off another and move it to the big feature
         // get info and add it to the big one
         let featBig = global.elementNext(document.querySelector(".is--hero"));
-        
+
         featBig.querySelector(".title.is--small:not(.is--grey)").innerHTML = randSmall[0].querySelector(".title:not(.is--small)").innerHTML;
         featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
         featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
@@ -154,23 +154,37 @@ global = { // global values and methods
         featBig.querySelector(".link:not(.is--udl)").href = randSmall[0].querySelector(".link").getAttribute("href");
 
         // remove from small
-        randSmall[0].remove();    
+        randSmall[0].remove();
     },
 
     shuffleArray: function (array) { // shuffle items in array
-    
+
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
-    
-        return array; 
+
+        return array;
     },
 
+    alphaArray: function (arr, selector) { // sorts array of HTML elements alphabetically by child innerText
+        return Array.from(arr).sort((a, b) => {
+            const aText = a.querySelector(selector).innerText;
+            const bText = b.querySelector(selector).innerText;
+            if (aText < bText) {
+                return -1;
+            }
+            if (aText > bText) {
+                return 1;
+            }
+            return 0;
+        });
+    },
+      
     replaceChar: function (input) { // deletes domain, line breaks, slashes from string
 
         // replace domain
-        input = input.replace (
+        input = input.replace(
             window.location.protocol + "/" + window.location.hostname, ""
         );
 
@@ -283,9 +297,9 @@ global = { // global values and methods
                 if (entry.isIntersecting) { // if marker is in viewport
 
                     global.navBg("transparent");
-                    
+
                     let namespace = container.getAttribute("data-barba-namespace");
-                    
+
                     if (
                         global.blackPages.indexOf(namespace) == -1
                     ) {
@@ -321,45 +335,45 @@ global = { // global values and methods
 
     preventScroll: function () {
         window.onscroll = function () {
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }
     },
 
     countdownInit: function () { // set and start countdown
 
         // moved deadline to splashParams
-    
+
         function pad(num, size) {
             var s = "0" + num;
             return s.substring(s.length - size);
         }
-    
+
         // fixes "Date.parse(date)" on safari
         function parseDate(date) {
             const parsed = Date.parse(date);
             if (!isNaN(parsed)) return parsed
             return Date.parse(date.replace(/-/g, '/').replace(/[a-z]+/gi, ' '));
         }
-    
+
         function getTimeRemaining(endtime) {
             let total = parseDate(endtime) - Date.parse(new Date())
             let seconds = Math.floor((total / 1000) % 60)
             let minutes = Math.floor((total / 1000 / 60) % 60)
             let hours = Math.floor((total / (1000 * 60 * 60)) % 24)
             let days = Math.floor(total / (1000 * 60 * 60 * 24))
-    
+
             return { total, days, hours, minutes, seconds };
         }
-    
+
         function clock(id, endtime) {
             let days = document.getElementById(id + '-days')
             let hours = document.getElementById(id + '-hours')
             let minutes = document.getElementById(id + '-minutes')
             let seconds = document.getElementById(id + '-seconds')
-    
+
             var timeinterval = setInterval(function () {
                 var time = getTimeRemaining(endtime);
-    
+
                 if (time.total <= 0) {
                     clearInterval(timeinterval);
                 } else {
@@ -370,7 +384,7 @@ global = { // global values and methods
                 }
             }, 1000);
         }
-    
+
         clock('js-clock', global.countdownDeadline);
     }
 }
@@ -378,11 +392,12 @@ global = { // global values and methods
 
 
 
-barba.init ({
+barba.init({
     preventRunning: true,
     sync: true,
     transitions: [
-        {   name: 'white-white-transition',
+        {
+            name: 'white-white-transition',
 
             from: { namespace: global.whitePages },
             to: { namespace: global.whitePages },
@@ -416,7 +431,8 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: 'black-white-transition',
+        {
+            name: 'black-white-transition',
 
             from: { namespace: global.blackPages },
             to: { namespace: global.whitePages },
@@ -471,7 +487,8 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: 'white-black-transition',
+        {
+            name: 'white-black-transition',
 
             from: { namespace: global.whitePages },
             to: { namespace: global.blackPages },
@@ -517,7 +534,8 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: 'black-black transition',
+        {
+            name: 'black-black transition',
 
             from: { namespace: global.blackPages },
             to: { namespace: global.blackPages },
@@ -568,10 +586,11 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: "black-casestudy transition",
+        {
+            name: "black-casestudy transition",
 
             from: { namespace: global.blackPages },
-            to: { namespace: "casestudy"},
+            to: { namespace: "casestudy" },
 
             // afterOnce(data) {
             //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
@@ -621,10 +640,11 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: "white-casestudy transition",
+        {
+            name: "white-casestudy transition",
 
             from: { namespace: global.whitePages },
-            to: { namespace: "casestudy"},
+            to: { namespace: "casestudy" },
 
             // afterOnce(data) {
             //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
@@ -656,9 +676,10 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: "casestudy-black transition",
+        {
+            name: "casestudy-black transition",
 
-            from: { namespace: "casestudy"},
+            from: { namespace: "casestudy" },
             to: { namespace: global.blackPages },
 
             // afterOnce(data) {
@@ -701,11 +722,12 @@ barba.init ({
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
-            
-        },
-        {   name: "casestudy-white transition",
 
-            from: { namespace: "casestudy"},
+        },
+        {
+            name: "casestudy-white transition",
+
+            from: { namespace: "casestudy" },
             to: { namespace: global.whitePages },
 
             // afterOnce(data) {
@@ -737,10 +759,11 @@ barba.init ({
                 body.style.backgroundColor = "transparent";
             }
         },
-        {   name: "casestudy-casestudy transition",
+        {
+            name: "casestudy-casestudy transition",
 
-        from: { namespace: "casestudy"},
-        to: { namespace: "casestudy" },
+            from: { namespace: "casestudy" },
+            to: { namespace: "casestudy" },
 
             // afterOnce(data) {
             //     if (global.blackPages.indexOf(data.current.namespace) == -1) {
@@ -774,7 +797,8 @@ barba.init ({
     ],
 
     views: [
-        {   namespace: 'home',
+        {
+            namespace: 'home',
             afterEnter() {
                 // reset penrose
                 penrose.counter = 0;
@@ -786,7 +810,8 @@ barba.init ({
                 }
             }
         },
-        {   namespace: 'graduates',
+        {
+            namespace: 'graduates',
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -794,7 +819,8 @@ barba.init ({
                 grads.init();
             }
         },
-        {   namespace: 'work',
+        {
+            namespace: 'work',
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
@@ -802,28 +828,32 @@ barba.init ({
                 projects.init();
             }
         },
-        {   namespace: 'events',
+        {
+            namespace: 'events',
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
             }
         },
-        {   namespace: 'about',
+        {
+            namespace: 'about',
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
             }
         },
-        {   namespace: 'profile',
+        {
+            namespace: 'profile',
             afterEnter() {
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
             }
         },
-        {   namespace: 'casestudy',
+        {
+            namespace: 'casestudy',
             afterEnter() {
                 // cmsSlider();
                 global.resizeAllSliders();
