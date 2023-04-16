@@ -48,18 +48,20 @@ dyncontent.sortDisciplines = function (item, topSelect) {
     let disciplineTop = item.querySelector(topSelect);
     let disciplineH1s;
 
-    if (disciplinesList !== null) {
+    if (disciplinesList !== null && disciplineH1s !== undefined) {
         disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
     }
 
     let topItem;
 
-    if (disciplineH1s !== null && disciplineH1s.length > 0) {
-        disciplineH1s.forEach(function (h1, index) {
-            if (h1.innerText == disciplineTop.innerText && index !== 0) {
-                topItem = h1.parentElement.parentElement;
-            }
-        });
+    if (disciplineH1s !== null && disciplineH1s !== undefined) {
+        if (disciplineH1s.length > 0) {
+            disciplineH1s.forEach(function (h1, index) {
+                if (h1.innerText == disciplineTop.innerText && index !== 0) {
+                    topItem = h1.parentElement.parentElement;
+                }
+            });
+        }
     }
 
     // reorder

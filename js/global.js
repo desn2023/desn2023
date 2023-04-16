@@ -1,4 +1,4 @@
-console.log("v53 home page extra link");
+console.log("v55 projects fix 10");
 
 let body = document.querySelector("body");
 let global;
