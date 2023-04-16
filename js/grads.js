@@ -1,6 +1,9 @@
 // declare functions
 
+let dyncontent = {}
+
 let grads = {
+    filterParams: [],
     animFirst: true,
     animIn: {
         opacity: 1,
@@ -13,7 +16,126 @@ let grads = {
         duration: 0.5,
         ease: "power2.out"
     }
-};
+}
+
+let projects = {
+    filterParams: [],
+    animFirst: true,
+    animIn: {
+        opacity: 1,
+        duration: 0.25,
+        stagger: 0.1,
+        ease: "power2.out"
+    },
+    animOut: {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out"
+    }
+}
+
+dyncontent.sortDisciplines = function (item, topSelect) {
+
+    let disciplinesList = item.querySelector(".disciplines__list"); // get disciplines list
+
+    // select top item
+
+    let disciplineTop = item.querySelector(topSelect);
+    let disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
+
+    let topItem;
+
+    disciplineH1s.forEach(function (h1, index) {
+        if (h1.innerText == disciplineTop.innerText && index !== 0) {
+            topItem = h1.parentElement.parentElement;
+        }
+    });
+
+    // reorder
+
+    if (topItem !== undefined) {
+        topItem.remove();
+        disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
+    }
+}
+
+dyncontent.filter = function (
+    listSelect = ".grads__list", 
+    itemSelect = ".grads__item", 
+    catSelect = ".grads__option.is--selected",
+    topSelect = ".grads__td",
+    obj = grads // or projects
+) {
+
+    let wrapper = global.elementNext(".wrapper");
+
+    // get the list element
+    obj.list = wrapper.querySelectorAll(listSelect);
+
+    // get all items in array/nodelist
+    obj.items = Array.from(obj.list.querySelectorAll(itemSelect));
+
+    let tl = gsap.timeline();
+
+    if (obj.animFirst) {
+        obj.items.forEach(function (item) {
+            item.style.opacity = 0;
+        });
+        obj.animFirst = false;
+    } else {
+        tl.to(obj.items, obj.animOut);
+    }
+
+    let categoryElems = Array.from(wrapper.querySelectorAll(catSelect));
+    let categoryTxts = new Array();
+
+    categoryElems.forEach(function (elem) {
+        categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
+    });
+
+    // convert to array
+    obj.items = Array.from(obj.items);
+
+    // filtered items
+    let filteredItems = new Array();
+
+    obj.items.forEach(function (item) {
+
+        // sort disciplines
+
+        dyncontent.sortDisciplines(item, topSelect);
+
+        // remove items that don't match filter
+
+        let disciplinesList = item.querySelector(".disciplines__list");
+        let matchFilter = true;
+
+        categoryTxts.forEach(function (cat) {
+            if (cat.indexOf("All Disciplines") == -1) {
+                if (disciplinesList.innerHTML.indexOf(cat) == -1) {
+                    matchFilter = false;
+                }
+            }
+        });
+
+        // visible or invisible
+
+        if (matchFilter) {
+            filteredItems.push(item);
+        } else {
+            item.style.display = "none";
+        }
+
+    });
+
+    // randomize
+
+    filteredItems = global.shuffleArray(filteredItems);
+
+    // in
+
+    tl.to(filteredItems, grads.animIn);
+}
 
 grads.toggleAllAnim = function (instant = false) {
 
@@ -26,7 +148,7 @@ grads.toggleAllAnim = function (instant = false) {
     }
 
     let tl = gsap.timeline();
-    
+
     tl.to(".container.is--filter", {
         duration: Math.min(0.2, n),
         ease: "none",
@@ -90,7 +212,7 @@ grads.filter = function () { // fire this function on page load
     let filteredItems = [];
 
     grads.items.forEach(function (item) {
-        
+
         // sort disciplines
 
         let disciplinesList = item.querySelector(".disciplines__list");
@@ -99,7 +221,7 @@ grads.filter = function () { // fire this function on page load
         let disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
 
         let topItem;
-        disciplineH1s.forEach(function(h1, index) {
+        disciplineH1s.forEach(function (h1, index) {
             if (h1.innerText == disciplineTop.innerText && index !== 0) {
                 topItem = h1.parentElement.parentElement;
             }
@@ -128,7 +250,7 @@ grads.filter = function () { // fire this function on page load
     });
 
     animInTl.to(filteredItems, grads.animIn);
-    
+
 }
 
 grads.optionClick = function (e) {
@@ -160,12 +282,12 @@ grads.optionClick = function (e) {
             // toggleFilter.style.opacity = 0.5;
             // selectorMobile.style.transform = "translate3d(100%, 0px, 0px)";
             // filtersContainer.style.height = "";
-        }        
+        }
 
         grads.filters.forEach(function (filter) {
             if (filter.innerText.indexOf(categoryTxt) !== -1) {
                 filter.classList.add("is--selected");
-            
+
             } else {
                 filter.classList.remove("is--selected");
             }
@@ -201,7 +323,7 @@ grads.filterClick = function (e) {
 grads.toggleAllClick = function (e) {
 
     let tl = gsap.timeline();
-    
+
     grads.toggleAllAnim();
 
     grads.filters.forEach(function (select) {
@@ -221,7 +343,7 @@ grads.toggleAllClick = function (e) {
 
 grads.toggleFilterClick = function (e) {
     let tl = gsap.timeline();
-    
+
     tl.to(e.currentTarget, {
         duration: 0.2,
         ease: "none",
@@ -277,3 +399,8 @@ grads.init = function () {
 
     grads.toggleAllAnim(true);
 }
+
+projects.init = function () {
+    dyncontent.filter(".project__list", ".project__item", ".filter__item.is--selected", "");
+}
+

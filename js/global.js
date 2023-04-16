@@ -1,4 +1,4 @@
-console.log("v41 partial hover fix");
+console.log("v42 hero randomization fix");
 
 let body = document.querySelector("body");
 let global;
@@ -137,8 +137,10 @@ global = { // global values and methods
 
     randFeatWork: function () {
 
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
         // get all of the little ones
-        let featSmall = Array.from(document.querySelectorAll(".project__list .project__item"));
+        let featSmall = Array.from(wrapper.querySelectorAll(".project__list .project__item"));
     
         // randomize the order
         let randSmall = global.shuffleArray(featSmall);
