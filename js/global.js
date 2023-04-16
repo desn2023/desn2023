@@ -1,4 +1,4 @@
-console.log("v59 projects fix 12");
+console.log("v60 scroll top click search");
 
 let body = document.querySelector("body");
 let global;
@@ -22,6 +22,9 @@ global = { // global values and methods
     banner: document.querySelector(".banner"),
     mobileMenuBg: document.querySelector(".nav__background"),
     mobileMenuCloseBtn: document.querySelector(".menu__close"),
+    searchBtn: document.querySelector(".nav__links.is--search"),
+    searchTrigger: document.querySelector(".search__trigger"),
+    searchInput: document.querySelector(".search__input"),
 
     // TRANSITIONS
 
@@ -40,6 +43,27 @@ global = { // global values and methods
         },
 
         delayToBlack: 0.2
+    },
+
+    scrollClickSearch: function () {
+        // Check if the page is already at the top
+        if (window.pageYOffset == 0) {
+            // If the page is already at the top, simulate a click on the search button immediately
+            global.searchTrigger.click();
+            global.searchInput.focus();
+        } else {
+            // If the page is not at the top, scroll to top using gsap ease transition
+            gsap.to(window, {
+                duration: 0.5,
+                scrollTo: 0,
+                ease: "power2.inOut",
+                onComplete: function () {
+                    // Once scrolling is complete, simulate a click on the search button
+                    global.searchTrigger.click();
+                    global.searchInput.focus();
+                }
+            });
+        }
     },
 
     homeInit: function () { // randomize featured work and reveal home content
@@ -883,3 +907,5 @@ if (global.blackPages.indexOf(global.initNamespace) == -1) {
 
 global.navScroll();
 global.countdownInit();
+
+global.searchBtn.onclick = global.scrollClickSearch;
