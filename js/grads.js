@@ -564,7 +564,7 @@ grads.init = function () {
 
 projects.filterClick = function (e) {
 
-    e.currentTarget.toggle("is--selected");
+    e.currentTarget.classList.toggle("is--selected");
     dyncontent.filter(...projects.filterParams, projects);
 }
 

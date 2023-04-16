@@ -1,4 +1,4 @@
-console.log("v52 about barba");
+console.log("v53 home page extra link");
 
 let body = document.querySelector("body");
 let global;
