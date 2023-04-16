@@ -69,23 +69,30 @@ dyncontent.filter = function (
     itemSelect = ".grads__item", 
     catSelect = ".grads__option.is--selected",
     topSelect = ".grads__td",
-    obj = grads, // or projects
+    obj = grads, // or projects,
     randomize = false
 ) {
 
     let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
     // get the list element
-    obj.list = wrapper.querySelectorAll(listSelect);
+    obj.list = wrapper.querySelector(listSelect);
 
     // get all items in array/nodelist
-
     obj.items = Array.from(obj.list.querySelectorAll(itemSelect));
 
     // randomize
 
     if (randomize && obj.animFirst) {
         obj.items = global.shuffleArray(obj.items);
+    }
+
+    if (wrapper.getAttribute("data-barba-namespace").indexOf("graduates") !== -1) {
+        grads.list = obj.list;
+        grads.items = obj.items;
+    } else {
+        projects.list = obj.list;
+        projects.list = obj.items;
     }
 
     let tl = gsap.timeline();
@@ -113,9 +120,6 @@ dyncontent.filter = function (
     categoryElems.forEach(function (elem) {
         categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
     });
-
-    // convert to array
-    obj.items = Array.from(obj.items);
 
     // filtered items
     let filteredItems = new Array();
@@ -224,7 +228,7 @@ dyncontent.toggleAllClick = function (e) {
         select.classList.remove("is--selected");
     });
 
-    obj.filter(...obj.filterParams, obj);
+    dyncontent.filter(...obj.filterParams, obj);
 }
 
 dyncontent.toggleFilterClick = function (e) {

@@ -4,14 +4,6 @@ let body = document.querySelector("body");
 let global;
 let home;
 
-home = {
-    init: function () {
-        // query elements
-        // global.elementNext(document.querySelectorAll(selector));
-
-    }
-}
-
 global = { // global values and methods
 
     // IMPORTANT VARIABLES
@@ -784,7 +776,6 @@ barba.init ({
     views: [
         {   namespace: 'home',
             afterEnter() {
-                home.init();
                 // reset penrose
                 penrose.counter = 0;
                 penrose.init();
