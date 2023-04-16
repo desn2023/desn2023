@@ -141,7 +141,12 @@ dyncontent.filter = function (
     let filteredItems = new Array();
 
     if (categoryTxts.toString().indexOf("All Disciplines") !== -1) { // skip logic if "All Disciplines"
-        filteredItems = obj.items;
+        filteredItems = [...obj.items];
+
+        filteredItems.forEach(function (item) {
+            item.style.display = "block";
+        });
+
     } else {
         obj.items.forEach(function (item) {
 
