@@ -114,7 +114,9 @@ dyncontent.filter = function (
         tl.to(obj.items, obj.animOut);
     }
 
-    let categoryElems = Array.from(wrapper.querySelectorAll(catSelect));
+    let categoryElems = new Array();
+    categoryElems = Array.from(wrapper.querySelectorAll(catSelect));
+
     let categoryTxts = new Array();
 
     if (categoryElems.length > 0) {
