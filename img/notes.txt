@@ -19,3 +19,8 @@ https://cloud.google.com/billing/docs/how-to/modify-project?hl=en&visit_id=63816
 https://github.com/verlok/vanilla-lazyload
 http://www.javascriptkit.com/dhtmltutors/domready.shtml
 
+class for ALL lazy loading images: "lazy"
+combo class for lazy loading <img> elements: "ll--img"
+combo class for lazy loading elements with background-image: "ll--bg"
+combo class for lazy loading search imgs/background-images: "ll--search"
+combo class for maximum width the image will appear at: "mw--500", "mw--1000" etc.

@@ -193,7 +193,7 @@ dyncontent.toggleAllAnim = function (instant = false) {
 
     let tl = gsap.timeline();
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: Math.min(0.2, n),
         ease: "none",
         opacity: 0
@@ -217,7 +217,7 @@ dyncontent.toggleAllAnim = function (instant = false) {
         translateX: "0%"
     }, "<");
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: Math.min(0.4, n),
         ease: "power2.inOut",
         height: 0
@@ -276,13 +276,13 @@ dyncontent.toggleFilterClick = function (e) {
         translateX: "100%"
     }, "<");
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: 0.4,
         ease: "power2.inOut",
         height: "auto"
     }, "<");
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: 0.2,
         ease: "none",
         opacity: 1
@@ -306,7 +306,7 @@ grads.toggleAllAnim = function (instant = false) {
 
     let tl = gsap.timeline();
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: Math.min(0.2, n),
         ease: "none",
         opacity: 0
@@ -330,7 +330,7 @@ grads.toggleAllAnim = function (instant = false) {
         translateX: "0%"
     }, "<");
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: Math.min(0.4, n),
         ease: "power2.inOut",
         height: 0
@@ -517,13 +517,13 @@ grads.toggleFilterClick = function (e) {
         translateX: "100%"
     }, "<");
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: 0.4,
         ease: "power2.inOut",
         height: "auto"
     }, "<");
 
-    tl.to(".container.is--filter", {
+    tl.to(".filter__wrapper___wrapper", {
         duration: 0.2,
         ease: "none",
         opacity: 1
