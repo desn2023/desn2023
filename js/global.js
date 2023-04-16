@@ -1,4 +1,4 @@
-console.log("v60 scroll top click search");
+console.log("v60 scroll top click search 2");
 
 let body = document.querySelector("body");
 let global;
@@ -45,12 +45,19 @@ global = { // global values and methods
         delayToBlack: 0.2
     },
 
+    openSearch: function () {
+        // Once scrolling is complete, simulate a click on the search button
+        global.searchTrigger.click();
+        setTimeout(function () {
+            global.searchInput.focus();
+        }, 300);
+    },
+
     scrollClickSearch: function () {
         // Check if the page is already at the top
         if (window.pageYOffset == 0) {
             // If the page is already at the top, simulate a click on the search button immediately
-            global.searchTrigger.click();
-            global.searchInput.focus();
+            global.openSearch();
         } else {
             // If the page is not at the top, scroll to top using gsap ease transition
             gsap.to(window, {
@@ -58,9 +65,7 @@ global = { // global values and methods
                 scrollTo: 0,
                 ease: "power2.inOut",
                 onComplete: function () {
-                    // Once scrolling is complete, simulate a click on the search button
-                    global.searchTrigger.click();
-                    global.searchInput.focus();
+                    global.openSearch();
                 }
             });
         }
