@@ -1,4 +1,4 @@
-console.log("v55 projects fix 10");
+console.log("v56 featbig fix 2");
 
 let body = document.querySelector("body");
 let global;
@@ -40,6 +40,42 @@ global = { // global values and methods
         },
 
         delayToBlack: 0.2
+    },
+
+    homeInit: function () { // randomize featured work and reveal home content
+
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        // get all of the little ones
+        let featSmall = Array.from(wrapper.querySelectorAll(".project__list .project__item"));
+
+        // randomize the order
+        let randSmall = global.shuffleArray(featSmall);
+
+        //turn off all but 4
+        for (let i = 0; i < randSmall.length - 3; i++) {
+            // remove from html
+            randSmall[i].remove();
+        }
+
+        // turn off another and move it to the big feature
+        // get info and add it to the big one
+        let featBig = global.elementNext(document.querySelector(".is--hero"));
+
+        featBig.querySelector(".title.is--small:not(.is--grey)").innerHTML = randSmall[0].querySelector(".title:not(.is--small)").innerHTML;
+        featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
+        featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
+        featBig.querySelector(".project__thumbnail").href = randSmall[0].querySelector(".project__link").getAttribute("href");
+        featBig.querySelector(".link.hover--black").href = randSmall[0].querySelector(".project__link").getAttribute("href");
+
+        // remove from small
+        randSmall[0].remove();
+
+        gsap.to(".home__content > .container", {
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.inOut"
+        });
     },
 
     bannerIn: function (after) { // banner transition
@@ -125,36 +161,6 @@ global = { // global values and methods
             // global.resizeSlider(slider);
             slider.style.height = "auto";
         });
-    },
-
-    randFeatWork: function () {
-
-        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
-
-        // get all of the little ones
-        let featSmall = Array.from(wrapper.querySelectorAll(".project__list .project__item"));
-
-        // randomize the order
-        let randSmall = global.shuffleArray(featSmall);
-
-        //turn off all but 4
-        for (let i = 0; i < randSmall.length - 3; i++) {
-            // remove from html
-            randSmall[i].remove();
-        }
-
-        // turn off another and move it to the big feature
-        // get info and add it to the big one
-        let featBig = global.elementNext(document.querySelector(".is--hero"));
-
-        featBig.querySelector(".title.is--small:not(.is--grey)").innerHTML = randSmall[0].querySelector(".title:not(.is--small)").innerHTML;
-        featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
-        featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
-        featBig.querySelector(".project__thumbnail").href = randSmall[0].querySelector(".project__link").getAttribute("href");
-        featBig.querySelector(".link.hover--black").href = randSmall[0].querySelector(".project__link").getAttribute("href");
-
-        // remove from small
-        randSmall[0].remove();
     },
 
     shuffleArray: function (array) { // shuffle items in array
@@ -803,7 +809,7 @@ barba.init({
                 // reset penrose
                 penrose.counter = 0;
                 penrose.init();
-                global.randFeatWork();
+                global.homeInit();
                 window.onresize = function () {
                     global.mobileMenuClose();
                     penrose.setSize();

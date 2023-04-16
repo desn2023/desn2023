@@ -525,7 +525,7 @@ grads.toggleFilterClick = function (e) {
         height: "auto"
     }, "<");
 
-    tl.to(".filter__wrapper___wrapper", {
+    tl.to(".filter__wrapper__wrapper", {
         duration: 0.2,
         ease: "none",
         opacity: 1
