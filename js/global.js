@@ -1,4 +1,4 @@
-console.log("v43 projects init");
+console.log("v44 projects fix");
 
 let body = document.querySelector("body");
 let global;

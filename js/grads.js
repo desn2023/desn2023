@@ -92,7 +92,7 @@ dyncontent.filter = function (
         grads.items = obj.items;
     } else {
         projects.list = obj.list;
-        projects.list = obj.items;
+        projects.items = obj.items;
     }
 
     let tl = gsap.timeline();
