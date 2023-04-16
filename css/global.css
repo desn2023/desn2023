@@ -50,6 +50,10 @@
     pointer-events: all;
 }
 
+.home__content > .container {
+    opacity: 0;
+}
+
 .sect {
     stroke: hsl(0, 0%, 30%);
     stroke-width: 1px;

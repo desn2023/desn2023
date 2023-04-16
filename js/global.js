@@ -66,6 +66,7 @@ global = { // global values and methods
         featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
         featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
         featBig.querySelector(".project__thumbnail").href = randSmall[0].querySelector(".project__link").getAttribute("href");
+        featBig.querySelector(".link:not(.is--udl)").href = randSmall[0].querySelector(".link").getAttribute("href");
         featBig.querySelector(".link.hover--black").href = randSmall[0].querySelector(".project__link").getAttribute("href");
 
         // remove from small
