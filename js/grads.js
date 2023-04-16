@@ -119,12 +119,14 @@ dyncontent.filter = function (
 
     let categoryTxts = new Array();
 
-    if (categoryElems.length > 0) {
-        categoryElems.forEach(function (elem) {
-            categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
-        });
-    } else {
-        categoryTxts.push("All Disciplines");
+    if (categoryElems !== null) {
+        if (categoryElems.length > 0) {
+            categoryElems.forEach(function (elem) {
+                categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
+            });
+        } else {
+            categoryTxts.push("All Disciplines");
+        }
     }
 
     // filtered items
@@ -141,13 +143,17 @@ dyncontent.filter = function (
         let disciplinesList = item.querySelector(".disciplines__list");
         let matchFilter = true;
 
-        categoryTxts.forEach(function (cat) {
-            if (cat.indexOf("All Disciplines") == -1) {
-                if (disciplinesList.innerHTML.indexOf(cat) == -1) {
-                    matchFilter = false;
+        if (disciplinesList !== null) {
+            categoryTxts.forEach(function (cat) {
+                if (cat.indexOf("All Disciplines") == -1) {
+                    if (disciplinesList.innerHTML.indexOf(cat) == -1) {
+                        matchFilter = false;
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            matchFilter = false;
+        }
 
         // visible or invisible
 
