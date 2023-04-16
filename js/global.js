@@ -1,4 +1,4 @@
-console.log("v39 cmsslider troubleshooting 2");
+console.log("v41 partial hover fix");
 
 let body = document.querySelector("body");
 let global;
@@ -133,6 +133,44 @@ global = { // global values and methods
             // global.resizeSlider(slider);
             slider.style.height = "auto";
         });
+    },
+
+    randFeatWork: function () {
+
+        // get all of the little ones
+        let featSmall = Array.from(document.querySelectorAll(".project__list .project__item"));
+    
+        // randomize the order
+        let randSmall = global.shuffleArray(featSmall);
+    
+        //turn off all but 4
+        for (let i = 0; i < randSmall.length - 3; i++){
+            // remove from html
+            randSmall[i].remove();
+        }
+    
+        // turn off another and move it to the big feature
+        // get info and add it to the big one
+        let featBig = global.elementNext(document.querySelector(".is--hero"));
+        
+        featBig.querySelector(".title.is--small:not(.is--grey)").innerHTML = randSmall[0].querySelector(".title:not(.is--small)").innerHTML;
+        featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
+        featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
+        featBig.querySelector(".project__thumbnail").href = randSmall[0].querySelector(".project__link").getAttribute("href");
+        featBig.querySelector(".link:not(.is--udl)").href = randSmall[0].querySelector(".link").getAttribute("href");
+
+        // remove from small
+        randSmall[0].remove();    
+    },
+
+    shuffleArray: function (array) { // shuffle items in array
+    
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    
+        return array; 
     },
 
     replaceChar: function (input) { // deletes domain, line breaks, slashes from string
@@ -748,6 +786,7 @@ barba.init ({
                 // reset penrose
                 penrose.counter = 0;
                 penrose.init();
+                global.randFeatWork();
                 window.onresize = function () {
                     global.mobileMenuClose();
                     penrose.setSize();
