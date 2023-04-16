@@ -117,9 +117,13 @@ dyncontent.filter = function (
     let categoryElems = Array.from(wrapper.querySelectorAll(catSelect));
     let categoryTxts = new Array();
 
-    categoryElems.forEach(function (elem) {
-        categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
-    });
+    if (categoryElems.length > 0) {
+        categoryElems.forEach(function (elem) {
+            categoryTxts.push(elem.innerText.replace(/(\r\n|\n|\r)/gm, "")); // e.g. branding
+        });
+    } else {
+        categoryTxts.push("All Disciplines");
+    }
 
     // filtered items
     let filteredItems = new Array();
