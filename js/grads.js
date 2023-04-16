@@ -179,8 +179,10 @@ dyncontent.filter = function (
     }
 
     // in
-
-    tl.to(filteredItems, obj.animIn);
+    setTimeout(function () {
+        gsap.killTweensOf(itemSelect);
+        tl.to(filteredItems, obj.animIn);
+    }, obj.animIn.duration * 1000 + 50);
 }
 
 dyncontent.toggleAllAnim = function (instant = false) {
@@ -408,7 +410,10 @@ grads.filter = function () { // fire this function on page load
         }
     });
 
-    animInTl.to(filteredItems, grads.animIn);
+    setTimeout(function () {
+        gsap.killTweensOf(".grads__item");
+        animInTl.to(filteredItems, grads.animIn);
+    }, grads.animIn.duration * 1000 + 50);
 
 }
 

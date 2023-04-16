@@ -1,4 +1,4 @@
-console.log("v56 featbig fix 2");
+console.log("v58 projects fix");
 
 let body = document.querySelector("body");
 let global;
