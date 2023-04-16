@@ -1,4 +1,4 @@
-console.log("v50 projects fix");
+console.log("v52 about barba");
 
 let body = document.querySelector("body");
 let global;
@@ -10,8 +10,8 @@ global = { // global values and methods
 
     namespaces: ["home", "about", "profile", "events", "casestudy", "graduates", "work"],
     invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
-    blackPages: ["home", "about", "profile", "events"],
-    whitePages: ["graduates", "work", "casestudy"],
+    blackPages: ["home", "profile", "events"],
+    whitePages: ["graduates", "work", "about", "casestudy"],
     countdownDeadline: "2023/04/20 16:00",
     initNamespace: document.querySelector(".wrapper").getAttribute("data-barba-namespace"),
 
