@@ -1,4 +1,4 @@
-console.log("v60 scroll top click search 2");
+console.log("v62 css extra code");
 
 let body = document.querySelector("body");
 let global;
@@ -892,7 +892,7 @@ barba.init({
             namespace: 'casestudy',
             afterEnter() {
                 // cmsSlider();
-                global.resizeAllSliders();
+                // global.resizeAllSliders();
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }

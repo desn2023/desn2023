@@ -78,7 +78,8 @@ dyncontent.filter = function (
     catSelect = ".grads__option.is--selected",
     topSelect = ".grads__td",
     obj = grads, // or projects,
-    randomize = false
+    randomize = false,
+    alpha = false
 ) {
 
     let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
@@ -89,6 +90,14 @@ dyncontent.filter = function (
     // get all items in array/nodelist
     obj.items = Array.from(obj.list.querySelectorAll(itemSelect));
 
+    let namespace = wrapper.getAttribute("data-barba-namespace");
+
+    // alphabetize
+
+    if (alpha && obj.animFirst && namespace.indexOf("graduates") !== -1) {
+        obj.items = global.alphaArray(obj.items, ".is--itemname");
+    }
+
     // randomize
 
     if (randomize && obj.animFirst) {
@@ -97,7 +106,7 @@ dyncontent.filter = function (
 
     // populate global object
 
-    if (wrapper.getAttribute("data-barba-namespace").indexOf("graduates") !== -1) {
+    if (namespace.indexOf("graduates") !== -1) {
         grads.list = obj.list;
         grads.items = [...obj.items];
     } else {
@@ -580,6 +589,16 @@ projects.filterClick = function (e) {
     dyncontent.filter(...projects.filterParams, projects);
 }
 
+projects.alphaClick = function (e) {
+    if (e.currentTarget.classList.contains("is--selected")) {
+        dyncontent.filter(...projects.filterParams, projects, true);
+    } else {
+        dyncontent.filter(...projects.filterParams, projects, false, true);
+    }
+
+    e.currentTarget.classList.toggle("is--selected");
+}
+
 projects.init = function () {
 
     dyncontent.filter(...projects.filterParams, projects, true);
@@ -597,6 +616,9 @@ projects.init = function () {
 
     const toggleFilter = wrapper.querySelector(".toggle.is--filter");
     toggleFilter.onclick = dyncontent.toggleFilterClick;
+
+    const alphaToggle = wrapper.querySelector(".sort__item");
+    alphaToggle.onclick = projects.alphaClick;
 
     dyncontent.toggleAllAnim(true);
 

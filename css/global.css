@@ -43,6 +43,11 @@
     .project__link:hover ~ .container .link.hover--white {
         border-bottom-color: white;
     }
+
+    .filter__item:hover, .toggle:hover {
+        opacity: 1;
+    }
+
 }
 
 #penrose-svg {
@@ -51,6 +56,15 @@
 }
 
 .home__content > .container {
+    opacity: 0;
+}
+
+.slider {
+    height: auto;
+}
+
+.hide {
+    display: none;
     opacity: 0;
 }
 
@@ -67,7 +81,7 @@
     display: none;
 }
 
-.filter__item.is--selected .filter__dot {
+.filter__item.is--selected .filter__dot, .sort__item.is--selected .filter__dot {
     background-color: black;
 }
 
