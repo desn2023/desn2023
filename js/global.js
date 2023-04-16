@@ -1,4 +1,4 @@
-console.log("v42 hero randomization fix");
+console.log("v43 projects init");
 
 let body = document.querySelector("body");
 let global;
@@ -808,6 +808,7 @@ barba.init ({
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
+                projects.init();
             }
         },
         {   namespace: 'events',

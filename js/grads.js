@@ -3,7 +3,7 @@
 let dyncontent = {}
 
 let grads = {
-    filterParams: [],
+    filterParams: [".grads__list", ".grads__item", ".grads__option.is--selected", ".grads__td"],
     animFirst: true,
     animIn: {
         opacity: 1,
@@ -19,7 +19,7 @@ let grads = {
 }
 
 let projects = {
-    filterParams: [],
+    filterParams: [".project__list", ".project__item", ".filter__item.is--selected", ".project__td"],
     animFirst: true,
     animIn: {
         opacity: 1,
@@ -33,6 +33,11 @@ let projects = {
         ease: "power2.out"
     }
 }
+
+
+
+
+// GRADS AND PROJECTS
 
 dyncontent.sortDisciplines = function (item, topSelect) {
 
@@ -64,24 +69,40 @@ dyncontent.filter = function (
     itemSelect = ".grads__item", 
     catSelect = ".grads__option.is--selected",
     topSelect = ".grads__td",
-    obj = grads // or projects
+    obj = grads, // or projects
+    randomize = false
 ) {
 
-    let wrapper = global.elementNext(".wrapper");
+    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
     // get the list element
     obj.list = wrapper.querySelectorAll(listSelect);
 
     // get all items in array/nodelist
+
     obj.items = Array.from(obj.list.querySelectorAll(itemSelect));
+
+    // randomize
+
+    if (randomize && obj.animFirst) {
+        obj.items = global.shuffleArray(obj.items);
+    }
 
     let tl = gsap.timeline();
 
     if (obj.animFirst) {
+
         obj.items.forEach(function (item) {
             item.style.opacity = 0;
+            item.remove();
         });
+
+        obj.items.forEach(function (item) {
+            obj.list.appendChild(item);
+        });
+
         obj.animFirst = false;
+
     } else {
         tl.to(obj.items, obj.animOut);
     }
@@ -128,14 +149,123 @@ dyncontent.filter = function (
 
     });
 
-    // randomize
-
-    filteredItems = global.shuffleArray(filteredItems);
-
     // in
 
-    tl.to(filteredItems, grads.animIn);
+    tl.to(filteredItems, obj.animIn);
 }
+
+dyncontent.toggleAllAnim = function (instant = false) {
+
+    let n;
+
+    if (instant) {
+        n = 0;
+    } else {
+        n = 1000;
+    }
+
+    let tl = gsap.timeline();
+
+    tl.to(".container.is--filter", {
+        duration: Math.min(0.2, n),
+        ease: "none",
+        opacity: 0
+    });
+
+    tl.to(".toggle.is--all", {
+        duration: Math.min(0.2, n),
+        ease: "none",
+        opacity: 1
+    }, "<");
+
+    tl.to(".toggle.is--filter", {
+        duration: Math.min(0.2, n),
+        ease: "none",
+        opacity: 0.5
+    }, "<0.1");
+
+    tl.to(".selector", {
+        duration: Math.min(0.4, n),
+        ease: "power2.inOut",
+        translateX: "0%"
+    }, "<");
+
+    tl.to(".container.is--filter", {
+        duration: Math.min(0.4, n),
+        ease: "power2.inOut",
+        height: 0
+    }, "<");
+}
+
+dyncontent.toggleAllClick = function (e) {
+
+    dyncontent.toggleAllAnim();
+
+    let namespace = global.replaceChar(document.querySelector(".wrapper").getAttribute("data-barba-namespace"));
+
+    let obj;
+
+    if (namespace.indexOf("graduates") !== -1) {
+
+        obj = grads;
+        obj.options.forEach(function (option) {
+            if (option.innerText.indexOf("All Disciplines") !== -1) {
+                option.classList.add("is--selected");
+            } else {
+                option.classList.remove("is--selected");
+            }
+        });
+
+    } else {
+        obj = projects;
+    }
+
+    obj.filters.forEach(function (select) {
+        select.classList.remove("is--selected");
+    });
+
+    obj.filter(...obj.filterParams, obj);
+}
+
+dyncontent.toggleFilterClick = function (e) {
+
+    let tl = gsap.timeline();
+
+    tl.to(e.currentTarget, {
+        duration: 0.2,
+        ease: "none",
+        opacity: 1
+    });
+
+    tl.to(".toggle.is--all", {
+        duration: 0.2,
+        ease: "none",
+        opacity: 0.5
+    }, "<0.1");
+
+    tl.to(".selector", {
+        duration: 0.4,
+        ease: "power2.inOut",
+        translateX: "100%"
+    }, "<");
+
+    tl.to(".container.is--filter", {
+        duration: 0.4,
+        ease: "power2.inOut",
+        height: "auto"
+    }, "<");
+
+    tl.to(".container.is--filter", {
+        duration: 0.2,
+        ease: "none",
+        opacity: 1
+    }, "<0.1");
+}
+
+
+
+
+// GRADS ONLY
 
 grads.toggleAllAnim = function (instant = false) {
 
@@ -322,8 +452,6 @@ grads.filterClick = function (e) {
 
 grads.toggleAllClick = function (e) {
 
-    let tl = gsap.timeline();
-
     grads.toggleAllAnim();
 
     grads.filters.forEach(function (select) {
@@ -379,28 +507,58 @@ grads.init = function () {
 
     grads.filter();
 
-    grads.options = Array.from(document.querySelectorAll(".grads__option"));
+    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+    grads.options = Array.from(wrapper.querySelectorAll(".grads__option"));
 
     grads.options.forEach(function (option) {
         option.onclick = grads.optionClick;
     });
 
-    grads.filters = Array.from(document.querySelectorAll(".filter__item"));
+    grads.filters = Array.from(wrapper.querySelectorAll(".filter__item"));
 
     grads.filters.forEach(function (option) {
         option.onclick = grads.filterClick;
     });
 
-    const toggleAll = global.elementNext(document.querySelectorAll(".toggle.is--all"));
+    const toggleAll = wrapper.querySelector(".toggle.is--all");
     toggleAll.onclick = grads.toggleAllClick;
 
-    const toggleFilter = global.elementNext(document.querySelectorAll(".toggle.is--filter"));
+    const toggleFilter = wrapper.querySelector(".toggle.is--filter");
     toggleFilter.onclick = grads.toggleFilterClick;
 
     grads.toggleAllAnim(true);
 }
 
-projects.init = function () {
-    dyncontent.filter(".project__list", ".project__item", ".filter__item.is--selected", "");
+
+
+
+// PROJECTS ONLY
+
+projects.filterClick = function (e) {
+
+    e.currentTarget.toggle("is--selected");
+    dyncontent.filter(...projects.filterParams, projects);
 }
 
+projects.init = function () {
+
+    dyncontent.filter(...projects.filterParams, projects, true);
+
+    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+    projects.filters = Array.from(wrapper.querySelectorAll(".filter__item"));
+
+    projects.filters.forEach(function (option) {
+        option.onclick = projects.filterClick;
+    });
+
+    const toggleAll = wrapper.querySelector(".toggle.is--all");
+    toggleAll.onclick = dyncontent.toggleAllClick;
+
+    const toggleFilter = wrapper.querySelector(".toggle.is--filter");
+    toggleFilter.onclick = dyncontent.toggleFilterClick;
+
+    dyncontent.toggleAllAnim(true);
+
+}
