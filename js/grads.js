@@ -89,10 +89,10 @@ dyncontent.filter = function (
 
     if (wrapper.getAttribute("data-barba-namespace").indexOf("graduates") !== -1) {
         grads.list = obj.list;
-        grads.items = obj.items;
+        grads.items = [...obj.items];
     } else {
         projects.list = obj.list;
-        projects.items = obj.items;
+        projects.items = [...obj.items];
     }
 
     let tl = gsap.timeline();
