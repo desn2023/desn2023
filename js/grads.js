@@ -5,6 +5,9 @@ let dyncontent = {}
 let grads = {
     filterParams: [".grads__list", ".grads__item", ".grads__option.is--selected", ".grads__td"],
     animFirst: true,
+    randomAgain: false,
+    randomSort: false,
+    alphaSort: false,
     animIn: {
         opacity: 1,
         duration: 0.25,
@@ -21,6 +24,9 @@ let grads = {
 let projects = {
     filterParams: [".project__list", ".project__item", ".filter__item.is--selected", ".project__td"],
     animFirst: true,
+    randomAgain: true,
+    randomSort: true,
+    alphaSort: false,
     animIn: {
         opacity: 1,
         duration: 0.25,
@@ -77,9 +83,7 @@ dyncontent.filter = function (
     itemSelect = ".grads__item", 
     catSelect = ".grads__option.is--selected",
     topSelect = ".grads__td",
-    obj = grads, // or projects,
-    randomize = false,
-    alpha = false
+    obj = grads // or projects
 ) {
 
     let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
@@ -94,14 +98,23 @@ dyncontent.filter = function (
 
     // alphabetize
 
-    if (alpha && obj.animFirst && namespace.indexOf("graduates") !== -1) {
-        obj.items = global.alphaArray(obj.items, ".is--itemname");
+    if (namespace.indexOf("work") !== -1) {
+        if (obj.alphaSort) {
+            obj.items = global.alphaArray(obj.items, ".is--itemname");
+            projects.randomAgain = true;
+        }
     }
 
     // randomize
 
-    if (randomize && obj.animFirst) {
+    if (obj.randomSort && obj.randomAgain) {
         obj.items = global.shuffleArray(obj.items);
+        
+        if (namespace.indexOf("work") !== -1) {
+            projects.randomAgain = false;            
+        } else if (namespace.indexOf("graduates") !== -1) {
+            grads.randomAgain = false;             
+        }
     }
 
     // populate global object
@@ -590,11 +603,11 @@ projects.filterClick = function (e) {
 }
 
 projects.alphaClick = function (e) {
-    if (e.currentTarget.classList.contains("is--selected")) {
-        dyncontent.filter(...projects.filterParams, projects, true);
-    } else {
-        dyncontent.filter(...projects.filterParams, projects, false, true);
-    }
+
+    projects.alphaSort = !projects.alphaSort;
+    projects.randomSort = !projects.randomSort;
+
+    dyncontent.filter(...projects.filterParams, projects);
 
     e.currentTarget.classList.toggle("is--selected");
 }

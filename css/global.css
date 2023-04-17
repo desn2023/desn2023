@@ -44,7 +44,7 @@
         border-bottom-color: white;
     }
 
-    .filter__item:hover, .toggle:hover {
+    .filter__item:hover, .toggle:hover, .sort__item:hover {
         opacity: 1;
     }
 
@@ -79,6 +79,10 @@
 
 .disciplines__item:last-child .title.is--bullet {
     display: none;
+}
+
+.sort__item.is--selected {
+    opacity: 1;
 }
 
 .filter__item.is--selected .filter__dot, .sort__item.is--selected .filter__dot {
