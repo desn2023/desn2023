@@ -1,4 +1,4 @@
-console.log("v67 sort disciplines of grads on home page");
+console.log("v68 switch grads to new dyncontent functions");
 
 let body = document.querySelector("body");
 let global;

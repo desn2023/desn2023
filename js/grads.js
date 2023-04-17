@@ -325,124 +325,124 @@ dyncontent.toggleFilterClick = function (e) {
 
 // GRADS ONLY
 
-grads.toggleAllAnim = function (instant = false) {
+// grads.toggleAllAnim = function (instant = false) {
 
-    let n;
+//     let n;
 
-    if (instant) {
-        n = 0;
-    } else {
-        n = 1000;
-    }
+//     if (instant) {
+//         n = 0;
+//     } else {
+//         n = 1000;
+//     }
 
-    let tl = gsap.timeline();
+//     let tl = gsap.timeline();
 
-    tl.to(".filter__wrapper__wrapper", {
-        duration: Math.min(0.2, n),
-        ease: "none",
-        opacity: 0
-    });
+//     tl.to(".filter__wrapper__wrapper", {
+//         duration: Math.min(0.2, n),
+//         ease: "none",
+//         opacity: 0
+//     });
 
-    tl.to(".toggle.is--all", {
-        duration: Math.min(0.2, n),
-        ease: "none",
-        opacity: 1
-    }, "<");
+//     tl.to(".toggle.is--all", {
+//         duration: Math.min(0.2, n),
+//         ease: "none",
+//         opacity: 1
+//     }, "<");
 
-    tl.to(".toggle.is--filter", {
-        duration: Math.min(0.2, n),
-        ease: "none",
-        opacity: 0.5
-    }, "<0.1");
+//     tl.to(".toggle.is--filter", {
+//         duration: Math.min(0.2, n),
+//         ease: "none",
+//         opacity: 0.5
+//     }, "<0.1");
 
-    tl.to(".selector.is--mobile", {
-        duration: Math.min(0.4, n),
-        ease: "power2.inOut",
-        translateX: "0%"
-    }, "<");
+//     tl.to(".selector.is--mobile", {
+//         duration: Math.min(0.4, n),
+//         ease: "power2.inOut",
+//         translateX: "0%"
+//     }, "<");
 
-    tl.to(".filter__wrapper__wrapper", {
-        duration: Math.min(0.4, n),
-        ease: "power2.inOut",
-        height: 0
-    }, "<");
-}
+//     tl.to(".filter__wrapper__wrapper", {
+//         duration: Math.min(0.4, n),
+//         ease: "power2.inOut",
+//         height: 0
+//     }, "<");
+// }
 
-grads.filter = function () { // fire this function on page load
+// grads.filter = function () { // fire this function on page load
 
-    // get the grads list element
-    grads.list = global.elementNext(document.querySelectorAll(".grads__list"));
+//     // get the grads list element
+//     grads.list = global.elementNext(document.querySelectorAll(".grads__list"));
 
-    // get all grads items in array/nodelist
-    grads.items = Array.from(grads.list.querySelectorAll(".grads__item"));
+//     // get all grads items in array/nodelist
+//     grads.items = Array.from(grads.list.querySelectorAll(".grads__item"));
 
-    let animInTl;
+//     let animInTl;
 
-    if (grads.animFirst) {
-        grads.items.forEach(function (item) {
-            item.style.opacity = 0;
-        });
-        animInTl = gsap.timeline();
-        grads.animFirst = false;
-    } else {
-        animInTl = gsap.timeline();
-        animInTl.to(grads.items, grads.animOut);
-    }
+//     if (grads.animFirst) {
+//         grads.items.forEach(function (item) {
+//             item.style.opacity = 0;
+//         });
+//         animInTl = gsap.timeline();
+//         grads.animFirst = false;
+//     } else {
+//         animInTl = gsap.timeline();
+//         animInTl.to(grads.items, grads.animOut);
+//     }
 
-    let categoryElem = document.querySelector(".grads__option.is--selected");
-    let categoryTxt = categoryElem.innerText.replace(/(\r\n|\n|\r)/gm, ""); // e.g. "Branding"
+//     let categoryElem = document.querySelector(".grads__option.is--selected");
+//     let categoryTxt = categoryElem.innerText.replace(/(\r\n|\n|\r)/gm, ""); // e.g. "Branding"
 
-    // convert to array
-    grads.items = Array.from(grads.items);
+//     // convert to array
+//     grads.items = Array.from(grads.items);
 
-    // filtered items
+//     // filtered items
 
-    let filteredItems = [];
+//     let filteredItems = [];
 
-    grads.items.forEach(function (item) {
+//     grads.items.forEach(function (item) {
 
-        // sort disciplines
+//         // sort disciplines
 
-        let disciplinesList = item.querySelector(".disciplines__list");
+//         let disciplinesList = item.querySelector(".disciplines__list");
 
-        let disciplineTop = item.querySelector(".grads__td");
-        let disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
+//         let disciplineTop = item.querySelector(".grads__td");
+//         let disciplineH1s = Array.from(disciplinesList.querySelectorAll(".discipline > .title:not(.is--bullet)"));
 
-        let topItem;
-        disciplineH1s.forEach(function (h1, index) {
-            if (h1.innerText == disciplineTop.innerText && index !== 0) {
-                topItem = h1.parentElement.parentElement;
-            }
-        });
+//         let topItem;
+//         disciplineH1s.forEach(function (h1, index) {
+//             if (h1.innerText == disciplineTop.innerText && index !== 0) {
+//                 topItem = h1.parentElement.parentElement;
+//             }
+//         });
 
-        if (topItem !== undefined) {
-            topItem.remove();
-            disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
-        }
+//         if (topItem !== undefined) {
+//             topItem.remove();
+//             disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
+//         }
 
-        // remove items that don't match filter
+//         // remove items that don't match filter
 
-        if (categoryTxt.indexOf("All Disciplines") !== -1) {
-            grads.items.forEach(function (item) {
-                item.style.display = "block";
-                filteredItems.push(item);
-            });
-        } else {
-            if (disciplinesList.innerHTML.indexOf(categoryTxt) == -1) {
-                item.style.display = "none";
-            } else {
-                item.style.display = "block";
-                filteredItems.push(item);
-            }
-        }
-    });
+//         if (categoryTxt.indexOf("All Disciplines") !== -1) {
+//             grads.items.forEach(function (item) {
+//                 item.style.display = "block";
+//                 filteredItems.push(item);
+//             });
+//         } else {
+//             if (disciplinesList.innerHTML.indexOf(categoryTxt) == -1) {
+//                 item.style.display = "none";
+//             } else {
+//                 item.style.display = "block";
+//                 filteredItems.push(item);
+//             }
+//         }
+//     });
 
-    setTimeout(function () {
-        gsap.killTweensOf(".grads__item");
-        animInTl.to(filteredItems, grads.animIn);
-    }, grads.animIn.duration * 1000 + 50);
+//     setTimeout(function () {
+//         gsap.killTweensOf(".grads__item");
+//         animInTl.to(filteredItems, grads.animIn);
+//     }, grads.animIn.duration * 1000 + 50);
 
-}
+// }
 
 grads.optionClick = function (e) {
     if (!e.currentTarget.classList.contains("is--selected")) {
@@ -484,7 +484,7 @@ grads.optionClick = function (e) {
             }
         });
 
-        grads.filter();
+        dyncontent.filter();
     }
 }
 
@@ -508,65 +508,65 @@ grads.filterClick = function (e) {
         }
     });
 
-    grads.filter();
+    dyncontent.filter();
 }
 
-grads.toggleAllClick = function (e) {
+// grads.toggleAllClick = function (e) {
 
-    grads.toggleAllAnim();
+//     grads.toggleAllAnim();
 
-    grads.filters.forEach(function (select) {
-        select.classList.remove("is--selected");
-    });
+//     grads.filters.forEach(function (select) {
+//         select.classList.remove("is--selected");
+//     });
 
-    grads.options.forEach(function (option) {
-        if (option.innerText.indexOf("All Disciplines") !== -1) {
-            option.classList.add("is--selected");
-        } else {
-            option.classList.remove("is--selected");
-        }
-    });
+//     grads.options.forEach(function (option) {
+//         if (option.innerText.indexOf("All Disciplines") !== -1) {
+//             option.classList.add("is--selected");
+//         } else {
+//             option.classList.remove("is--selected");
+//         }
+//     });
 
-    grads.filter();
-}
+//     grads.filter();
+// }
 
-grads.toggleFilterClick = function (e) {
-    let tl = gsap.timeline();
+// grads.toggleFilterClick = function (e) {
+//     let tl = gsap.timeline();
 
-    tl.to(e.currentTarget, {
-        duration: 0.2,
-        ease: "none",
-        opacity: 1
-    });
+//     tl.to(e.currentTarget, {
+//         duration: 0.2,
+//         ease: "none",
+//         opacity: 1
+//     });
 
-    tl.to(".toggle.is--all", {
-        duration: 0.2,
-        ease: "none",
-        opacity: 0.5
-    }, "<0.1");
+//     tl.to(".toggle.is--all", {
+//         duration: 0.2,
+//         ease: "none",
+//         opacity: 0.5
+//     }, "<0.1");
 
-    tl.to(".selector.is--mobile", {
-        duration: 0.4,
-        ease: "power2.inOut",
-        translateX: "100%"
-    }, "<");
+//     tl.to(".selector.is--mobile", {
+//         duration: 0.4,
+//         ease: "power2.inOut",
+//         translateX: "100%"
+//     }, "<");
 
-    tl.to(".filter__wrapper__wrapper", {
-        duration: 0.4,
-        ease: "power2.inOut",
-        height: "auto"
-    }, "<");
+//     tl.to(".filter__wrapper__wrapper", {
+//         duration: 0.4,
+//         ease: "power2.inOut",
+//         height: "auto"
+//     }, "<");
 
-    tl.to(".filter__wrapper__wrapper", {
-        duration: 0.2,
-        ease: "none",
-        opacity: 1
-    }, "<0.1");
-}
+//     tl.to(".filter__wrapper__wrapper", {
+//         duration: 0.2,
+//         ease: "none",
+//         opacity: 1
+//     }, "<0.1");
+// }
 
 grads.init = function () {
 
-    grads.filter();
+    dyncontent.filter();
 
     let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
@@ -583,12 +583,12 @@ grads.init = function () {
     });
 
     const toggleAll = wrapper.querySelector(".toggle.is--all");
-    toggleAll.onclick = grads.toggleAllClick;
+    toggleAll.onclick = dyncontent.toggleAllClick;
 
     const toggleFilter = wrapper.querySelector(".toggle.is--filter");
-    toggleFilter.onclick = grads.toggleFilterClick;
+    toggleFilter.onclick = dyncontent.toggleFilterClick;
 
-    grads.toggleAllAnim(true);
+    dyncontent.toggleAllAnim(true);
 }
 
 
