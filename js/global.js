@@ -9,7 +9,7 @@ global = { // global values and methods
     // IMPORTANT VARIABLES
 
     namespaces: ["home", "about", "profile", "events", "casestudy", "graduates", "work"],
-    invertSelector: ".logo__wordmark, .nav__links, .nav__search, .menu__mobile",
+    invertSelector: ".logo__wordmark, .nav__links, .search__background, .menu__mobile",
     blackPages: ["home", "profile", "events"],
     whitePages: ["graduates", "work", "about", "casestudy"],
     countdownDeadline: "2023/04/20 16:00",
@@ -45,15 +45,90 @@ global = { // global values and methods
         delayToBlack: 0.2
     },
 
-    openSearch: function () {
-        // Once scrolling is complete, simulate a click on the search button
-        global.searchTrigger.click();
-        setTimeout(function () {
-            global.searchInput.focus();
-        }, 300);
+    // openSearch: function () {
+    //     // Once scrolling is complete, simulate a click on the search button
+    //     global.searchTrigger.click();
+    //     setTimeout(function () {
+    //         global.searchInput.focus();
+    //     }, 300);
+    // },
+
+    searchTrans: function(open = false) {
+
+        let navSearch = document.querySelector(".nav__search");
+
+        if (open) { // if search is open, close it
+
+            let tl = gsap.timeline({
+                onComplete: function() {
+                    navSearch.style.display = "none";
+                }
+            });
+            tl.to(".nav__search", {
+                opacity: 0,
+                duration: 0.2,
+                ease: "none"
+            });
+            tl.to(".search__input", {
+                opacity: 0,
+                duration: 0.1,
+                ease: "none"
+            }, "<");
+            tl.to(".search__button", {
+                opacity: 0,
+                duration: 0.1,
+                ease: "none"
+            }, "<");
+            tl.to(".search__bar", {
+                height: "0px",
+                duration: 0.7,
+                ease: "power3.inOut"
+            });
+            tl.to(".wrapper", {
+                translateY: 0,
+                duration: 0.7,
+                ease: "power3.inOut"
+            }, "<");
+
+        } else { // if search is closed, open it
+
+            navSearch.style.display = "block";
+
+            let tl = gsap.timeline({
+                onComplete: function() {
+                    global.searchInput.focus();
+                }
+            });
+            tl.to(".search__bar", {
+                height: "350px",
+                duration: 0.7,
+                ease: "power3.inOut"
+            });
+            tl.to(".wrapper", {
+                translateY: 300,
+                duration: 0.7,
+                ease: "power3.inOut"
+            }, "<");
+            tl.to(".nav__search", {
+                opacity: 1,
+                duration: 0.2,
+                ease: "none"
+            }, "<0.1");
+            tl.to(".search__input", {
+                opacity: 1,
+                duration: 0.1,
+                ease: "none"
+            }, "<0.6");
+            tl.to(".search__button", {
+                opacity: 1,
+                duration: 0.1,
+                ease: "none"
+            }, "<0.6");
+
+        }
     },
 
-    scrollClickSearch: function () {
+    scrollClickSearch: function() {
         // Check if the page is already at the top
         if (window.pageYOffset == 0) {
             // If the page is already at the top, simulate a click on the search button immediately
@@ -64,14 +139,14 @@ global = { // global values and methods
                 duration: 0.5,
                 scrollTo: 0,
                 ease: "power2.inOut",
-                onComplete: function () {
+                onComplete: function() {
                     global.openSearch();
                 }
             });
         }
     },
 
-    homeInit: function () { // randomize featured work and reveal home content
+    homeInit: function() { // randomize featured work and reveal home content
 
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
@@ -105,7 +180,7 @@ global = { // global values and methods
 
         let gradsItems = Array.from(wrapper.querySelectorAll(".grads__item"));
 
-        gradsItems.forEach(function (item) {
+        gradsItems.forEach(function(item) {
             dyncontent.sortDisciplines(item, ".grads__td");
         });
 
@@ -116,7 +191,7 @@ global = { // global values and methods
         });
     },
 
-    bannerIn: function (after) { // banner transition
+    bannerIn: function(after) { // banner transition
         let tl = gsap.timeline({
             onComplete: after
         });
@@ -134,7 +209,7 @@ global = { // global values and methods
         }
     },
 
-    bannerOut: function (after) { // banner transition
+    bannerOut: function(after) { // banner transition
         let tl = gsap.timeline({
             onComplete: after
         });
@@ -152,7 +227,7 @@ global = { // global values and methods
         }
     },
 
-    caseStudyInit: function () {
+    caseStudyInit: function() {
 
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
@@ -161,7 +236,7 @@ global = { // global values and methods
 
         // metadata expand and collapse
 
-        triggerProjectData.onclick = function () {
+        triggerProjectData.onclick = function() {
 
             if (projectData.style.height != "auto") {
                 projectData.style.height = "auto";
@@ -173,9 +248,7 @@ global = { // global values and methods
                     wrapper.querySelector(".dropdown__icon").style.transform = "rotate(90deg)";
                 }, 200);
 
-            }
-
-            else if (projectData.style.height != 0) {
+            } else if (projectData.style.height != 0) {
                 projectData.style.height = 0;
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.width = "20px";
@@ -188,7 +261,7 @@ global = { // global values and methods
         }
     },
 
-    invertNav: function (pct, dur = 0, eas = "none") { // sets invert filter on nav elements
+    invertNav: function(pct, dur = 0, eas = "none") { // sets invert filter on nav elements
         gsap.to(global.invertSelector, {
             filter: "invert(" + pct + ")",
             duration: dur,
@@ -196,7 +269,7 @@ global = { // global values and methods
         });
     },
 
-    navBg: function (colour, dur = 0, eas = "none") { // sets nav bg
+    navBg: function(colour, dur = 0, eas = "none") { // sets nav bg
         gsap.to(global.nav, {
             backgroundColor: colour,
             duration: dur,
@@ -204,7 +277,7 @@ global = { // global values and methods
         });
     },
 
-    bodyBg: function (colour, dur = 0, eas = "none") { // sets body bg
+    bodyBg: function(colour, dur = 0, eas = "none") { // sets body bg
         gsap.to(body, {
             backgroundColor: colour,
             duration: dur,
@@ -212,16 +285,16 @@ global = { // global values and methods
         })
     },
 
-    mobileMenuClose: function () { // simulates click of mobile menu close button
+    mobileMenuClose: function() { // simulates click of mobile menu close button
         if (global.mobileMenuBg.style.display == "block") {
             global.mobileMenuCloseBtn.click();
-            setTimeout(function () { return null; }, 400);
+            setTimeout(function() { return null; }, 400);
         } else {
             return null;
         }
     },
 
-    resizeSlider: function (slider) { // doesn't work
+    resizeSlider: function(slider) { // doesn't work
         let firstImg = slider.querySelector(".cs__img");
         let firstImgHeight = firstImg.clientHeight;
 
@@ -229,15 +302,15 @@ global = { // global values and methods
         wSlider.style.height = firstImgHeight + "px";
     },
 
-    resizeAllSliders: function () { // sets height of sliders to auto
+    resizeAllSliders: function() { // sets height of sliders to auto
         let sliders = Array.from(document.querySelectorAll(".slider"));
-        sliders.forEach(function (slider) {
+        sliders.forEach(function(slider) {
             // global.resizeSlider(slider);
             slider.style.height = "auto";
         });
     },
 
-    shuffleArray: function (array) { // shuffle items in array
+    shuffleArray: function(array) { // shuffle items in array
 
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -247,7 +320,7 @@ global = { // global values and methods
         return array;
     },
 
-    alphaArray: function (arr, selector) { // sorts array of HTML elements alphabetically by child innerText
+    alphaArray: function(arr, selector) { // sorts array of HTML elements alphabetically by child innerText
         return Array.from(arr).sort((a, b) => {
             const aText = a.querySelector(selector).innerText;
             const bText = b.querySelector(selector).innerText;
@@ -260,8 +333,8 @@ global = { // global values and methods
             return 0;
         });
     },
-      
-    replaceChar: function (input) { // deletes domain, line breaks, slashes from string
+
+    replaceChar: function(input) { // deletes domain, line breaks, slashes from string
 
         // replace domain
         input = input.replace(
@@ -283,11 +356,11 @@ global = { // global values and methods
         return input;
     },
 
-    isElement: function (input) { // returns true if input is an element
+    isElement: function(input) { // returns true if input is an element
         return input instanceof Element;
     },
 
-    hrefToNamespace: function (href) { // converts URL to namespace
+    hrefToNamespace: function(href) { // converts URL to namespace
 
         href = global.replaceChar(href);
 
@@ -310,7 +383,7 @@ global = { // global values and methods
 
     },
 
-    elementNext: function (nodelist) { // returns first-and-only, or second element of nodelist
+    elementNext: function(nodelist) { // returns first-and-only, or second element of nodelist
 
         if (global.isElement(nodelist)) {
             return nodelist;
@@ -331,7 +404,7 @@ global = { // global values and methods
         return element;
     },
 
-    checkNavScroll: function () { // returns true if opaque nav is on
+    checkNavScroll: function() { // returns true if opaque nav is on
 
         let banner = document.querySelector(".banner");
         let marker = document.querySelector(".marker");
@@ -348,7 +421,7 @@ global = { // global values and methods
         }
     },
 
-    navScroll: function () { // creates intersection observer to watch marker
+    navScroll: function() { // creates intersection observer to watch marker
 
         let margin;
 
@@ -372,7 +445,7 @@ global = { // global values and methods
         // get target barba container
         let container = global.elementNext(document.querySelectorAll(".wrapper"));
 
-        let callback = function (entries, observer) {
+        let callback = function(entries, observer) {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) { // if marker is in viewport
 
@@ -413,13 +486,13 @@ global = { // global values and methods
         }
     },
 
-    preventScroll: function () {
-        window.onscroll = function () {
+    preventScroll: function() {
+        window.onscroll = function() {
             window.scrollTo(0, 0);
         }
     },
 
-    countdownInit: function () { // set and start countdown
+    countdownInit: function() { // set and start countdown
 
         // moved deadline to splashParams
 
@@ -451,7 +524,7 @@ global = { // global values and methods
             let minutes = document.getElementById(id + '-minutes')
             let seconds = document.getElementById(id + '-seconds')
 
-            var timeinterval = setInterval(function () {
+            var timeinterval = setInterval(function() {
                 var time = getTimeRemaining(endtime);
 
                 if (time.total <= 0) {
@@ -475,8 +548,7 @@ global = { // global values and methods
 barba.init({
     preventRunning: true,
     sync: true,
-    transitions: [
-        {
+    transitions: [{
             name: 'white-white-transition',
 
             from: { namespace: global.whitePages },
@@ -876,15 +948,14 @@ barba.init({
         }
     ],
 
-    views: [
-        {
+    views: [{
             namespace: 'home',
             afterEnter() {
                 // reset penrose
                 penrose.counter = 0;
                 penrose.init();
                 global.homeInit();
-                window.onresize = function () {
+                window.onresize = function() {
                     global.mobileMenuClose();
                     penrose.setSize();
                 }
@@ -893,7 +964,7 @@ barba.init({
         {
             namespace: 'graduates',
             afterEnter() {
-                window.onresize = function () {
+                window.onresize = function() {
                     global.mobileMenuClose();
                 }
                 grads.init();
@@ -902,16 +973,16 @@ barba.init({
         {
             namespace: 'work',
             afterEnter() {
-                window.onresize = function () {
-                    global.mobileMenuClose();
-                }
-                // projects.init();
+                window.onresize = function() {
+                        global.mobileMenuClose();
+                    }
+                    // projects.init();
             }
         },
         {
             namespace: 'events',
             afterEnter() {
-                window.onresize = function () {
+                window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
@@ -919,7 +990,7 @@ barba.init({
         {
             namespace: 'about',
             afterEnter() {
-                window.onresize = function () {
+                window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
@@ -927,7 +998,7 @@ barba.init({
         {
             namespace: 'profile',
             afterEnter() {
-                window.onresize = function () {
+                window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
@@ -938,7 +1009,7 @@ barba.init({
                 global.caseStudyInit();
                 // cmsSlider();
                 // global.resizeAllSliders();
-                window.onresize = function () {
+                window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
