@@ -1,4 +1,4 @@
-console.log("v66 hide elements");
+console.log("v67 sort disciplines of grads on home page");
 
 let body = document.querySelector("body");
 let global;
@@ -100,6 +100,14 @@ global = { // global values and methods
 
         // remove from small
         randSmall[0].remove();
+
+        // reorder disciplines
+
+        let gradsItems = Array.from(wrapper.querySelectorAll(".grads__item"));
+
+        gradsItems.forEach(function (item) {
+            dyncontent.sortDisciplines(item, ".grads__td");
+        });
 
         gsap.to(".home__content > .container", {
             opacity: 1,
