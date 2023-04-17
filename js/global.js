@@ -1,4 +1,4 @@
-console.log("v63 alpha sort fix");
+console.log("v65 case study init");
 
 let body = document.querySelector("body");
 let global;
@@ -141,6 +141,42 @@ global = { // global values and methods
                 opacity: 0,
                 duration: 0
             });
+        }
+    },
+
+    caseStudyInit: function () {
+
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        let projectData = wrapper.querySelector(".cs__metadata");
+        let triggerProjectData = wrapper.querySelector(".dropdown__trigger");
+
+        // metadata expand and collapse
+
+        triggerProjectData.onclick = function () {
+
+            if (projectData.style.height != "auto") {
+                projectData.style.height = "auto";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.height = 0;
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.width = 0;
+                setTimeout(() => {
+                    wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
+                    wrapper.querySelector(".dropdown__icon").style.transform = "rotate(90deg)";
+                }, 200);
+
+            }
+
+            else if (projectData.style.height != 0) {
+                projectData.style.height = 0;
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.width = "20px";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.height = "1px";
+                setTimeout(() => {
+                    wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
+                    wrapper.querySelector(".dropdown__icon").style.transform = "rotate(0deg)";
+                }, 200);
+            }
         }
     },
 
@@ -891,6 +927,7 @@ barba.init({
         {
             namespace: 'casestudy',
             afterEnter() {
+                global.caseStudyInit();
                 // cmsSlider();
                 // global.resizeAllSliders();
                 window.onresize = function () {
