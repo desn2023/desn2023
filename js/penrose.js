@@ -16,7 +16,7 @@ const penrose = {
     heartInterval: 300,
 
     colours: [
-        [".top", "#333333"],
+        [".top", "#4D4D4D"], // formerly #333333
         [".left", "white"],
         [".right", "black"]
     ],
@@ -227,6 +227,13 @@ penrose.setColours = function (colours = penrose.colours, gsapVarObj) { // sets 
                 gsap.to(sect, gsapVarObj);
             }
         });
+    });
+}
+
+penrose.setOpacity = function (selector = ".sect.top", opac = 1, dur = 0.4) {
+    gsap.to(selector, {
+        opacity: opac,
+        duration: dur       
     });
 }
 

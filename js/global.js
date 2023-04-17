@@ -1,4 +1,4 @@
-console.log("v68 switch grads to new dyncontent functions");
+console.log("v69 penrose work");
 
 let body = document.querySelector("body");
 let global;
