@@ -1,4 +1,4 @@
-console.log("v65 case study init");
+console.log("v66 hide elements");
 
 let body = document.querySelector("body");
 let global;

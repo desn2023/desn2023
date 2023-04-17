@@ -63,7 +63,8 @@
     height: auto;
 }
 
-.hide {
+.wrapper[data-barba-namespace*="graduates"] .grads__item,
+.wrapper[data-barba-namespace*="work"] .project__item {
     display: none;
     opacity: 0;
 }
