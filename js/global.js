@@ -1,4 +1,4 @@
-console.log("v69 penrose work");
+console.log("v70 disabled project init");
 
 let body = document.querySelector("body");
 let global;
@@ -905,7 +905,7 @@ barba.init({
                 window.onresize = function () {
                     global.mobileMenuClose();
                 }
-                projects.init();
+                // projects.init();
             }
         },
         {
