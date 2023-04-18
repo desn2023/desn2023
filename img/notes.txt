@@ -23,9 +23,13 @@ class for ALL lazy loading images: "lazy"
 combo class for lazy loading <img> elements: "ll--img"
 combo class for lazy loading elements with background-image: "ll--bg"
 combo class for maximum width the image will appear at: "w--900" etc.
+do nothing if gif
 
 w=###&auto=format&lossless=1&dpr=1
 w=###&auto=format&lossless=1&dpr=2
 w=200&blur=150
 
 https://github.com/ganlanyuan/tiny-slider
+
+grad thumbnail: 1228px
+grad profile: 1860px

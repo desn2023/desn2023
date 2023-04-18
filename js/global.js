@@ -1,4 +1,4 @@
-console.log("v79 slider height");
+console.log("v81 projects init");
 
 let body = document.querySelector("body");
 let global;
@@ -1016,7 +1016,7 @@ barba.init({
                 window.onresize = function() {
                         global.mobileMenuClose();
                 }
-                // projects.init();
+                projects.init();
             }
         },
         {   namespace: 'events',
