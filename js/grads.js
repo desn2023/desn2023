@@ -579,12 +579,12 @@ grads.makeLineWidth = function () {
 
     // get width of child
     let widthOfLine = wrapper.querySelector(".grads__option.is--selected").firstChild.clientWidth;
-    lineElement.style.width = widthOfLine + "px";
+    // lineElement.style.width = widthOfLine + "px";
 
     // get x coordinates of child and subtract left page padding/margin
     let xPosOfLine = wrapper.querySelector(".grads__option.is--selected").firstChild.offsetLeft;
     //gsap to xpos of new selection
-    gsap.to(lineElement, { x: xPosOfLine - 40});
+    gsap.to(lineElement, { x: xPosOfLine - 40, width: widthOfLine + "px"});
 }
 
 // // get options div and run function on click
