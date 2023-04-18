@@ -1,4 +1,4 @@
-console.log("v70 disabled project init");
+console.log("v71 projects init");
 
 let body = document.querySelector("body");
 let global;
@@ -901,7 +901,7 @@ barba.init({
                 window.onresize = function() {
                         global.mobileMenuClose();
                     }
-                    // projects.init();
+                    projects.init();
             }
         },
         {

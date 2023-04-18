@@ -22,5 +22,8 @@ http://www.javascriptkit.com/dhtmltutors/domready.shtml
 class for ALL lazy loading images: "lazy"
 combo class for lazy loading <img> elements: "ll--img"
 combo class for lazy loading elements with background-image: "ll--bg"
-combo class for lazy loading search imgs/background-images: "ll--search"
-combo class for maximum width the image will appear at: "mw--500", "mw--1000" etc.
+combo class for maximum width the image will appear at: "w--900" etc.
+
+w=###&auto=format&lossless=1&dpr=1
+w=###&auto=format&lossless=1&dpr=2
+w=200&blur=150
