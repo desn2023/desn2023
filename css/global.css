@@ -78,6 +78,10 @@
     cursor: pointer;
 }
 
+.project__hidden {
+    display: none;
+}
+
 .disciplines__item:last-child .title.is--bullet {
     display: none;
 }

@@ -31,5 +31,9 @@ w=200&blur=150
 
 https://github.com/ganlanyuan/tiny-slider
 
-grad thumbnail: 1228px
-grad profile: 1860px
+grad thumbnail: 735px ---- fm=webp&lossless=1&w=735
+grad profile: 930px  ---- fm=webp&lossless=1&w=930
+project thumbnail: 616 x 387, 735 x 422, 1116 x 752 ---- fm=webp&lossless=1&fit=crop&w=1116&h=800
+fm=webp&lossless=1&fit=crop&w=1116&h=800
+project hero: convert ---- fm=webp&lossless=1
+project image: 1880px ---- fm=webp&lossless=1&w=1880
