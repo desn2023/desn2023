@@ -56,7 +56,7 @@ global = { // global values and methods
                     navSearch.style.display = "none";
                 }
             });
-            tl.to(".search__background", {
+            tl.to(".nav__search", {
                 opacity: 0,
                 duration: 0.2,
                 ease: "none"
@@ -85,7 +85,6 @@ global = { // global values and methods
         } else { // if search is closed, open it
 
             navSearch.style.display = "block";
-            navSearch.style.opacity = "0";
 
             let tl = gsap.timeline({
                 onComplete: function() {
@@ -102,11 +101,11 @@ global = { // global values and methods
                 duration: 0.7,
                 ease: "power3.inOut"
             }, "<");
-            tl.to(".search__background", {
+            tl.to(".nav__search", {
                 opacity: 1,
                 duration: 0.2,
                 ease: "none"
-            }, "<");
+            }, "<0.1");
             tl.to(".search__input", {
                 opacity: 1,
                 duration: 0.1,
