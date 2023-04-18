@@ -1,4 +1,4 @@
-console.log("v74 remove CMS slider");
+console.log("v75 tiny slider");
 
 let body = document.querySelector("body");
 let global;
@@ -154,6 +154,8 @@ global = { // global values and methods
 
     caseStudyInit: function() {
 
+        global.sliderInit();
+
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
         let projectData = wrapper.querySelector(".cs__metadata");
@@ -227,7 +229,7 @@ global = { // global values and methods
         wSlider.style.height = firstImgHeight + "px";
     },
 
-    resizeAllSliders: function() { // sets height of sliders to auto
+    resizeAllSliders: function () { // sets height of sliders to auto
         let sliders = Array.from(document.querySelectorAll(".slider"));
         sliders.forEach(function(slider) {
             // global.resizeSlider(slider);
@@ -235,8 +237,51 @@ global = { // global values and methods
         });
     },
 
-    sliderInit: function() {
+    createSlider: function (list, index) {
 
+        let csItems = Array.from(list.querySelectorAll(".cs__item"));
+
+        if (csItems !== null) {
+            if (csItems.length > 1) {
+                let container = document.createElement("div");
+                container.classList.add("tns__slider");
+                container.classList.add("tns--" + index);
+                // add more classes?
+                csItems.forEach(function (item) {
+                    item.remove();
+                    container.appendChild(item);
+                });
+
+                let csSlider = list.parentElement.parentElement;
+                csSlider.appendChild(container);
+
+                let slider = tns ({
+                    container: '.tns__slider.tns--' + index,
+                    items: list.length,
+                    mode: "gallery",
+                    // width?
+                    center: true,
+                    // controls: "bottom",
+                    // buttons
+                    // speed: 300,
+                    autoplay: true
+                });
+            }
+        }
+    },
+
+    sliderInit: function () {
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        let csListSliders = Array.from(wrapper.querySelectorAll(".cs__list.is--slider"));
+
+        if (csListSliders !== null) {
+            if (csListSliders.length > 0) {
+                csListSliders.forEach(function (list, index) {
+                    global.createSlider(list, index);
+                });
+            }
+        }
     },
 
     shuffleArray: function(array) { // shuffle items in array
@@ -920,7 +965,7 @@ barba.init({
                 window.onresize = function() {
                         global.mobileMenuClose();
                 }
-                projects.init();
+                // projects.init();
             }
         },
         {   namespace: 'events',
