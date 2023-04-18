@@ -363,5 +363,3 @@ function cmsSlider() {
         attributeKey: m
     });
 }
-
-cmsSlider();

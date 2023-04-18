@@ -1,4 +1,4 @@
-console.log("v71 projects init");
+console.log("v72 cmsSlider and cmsLoad");
 
 let body = document.querySelector("body");
 let global;
@@ -712,7 +712,7 @@ barba.init({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
-                cmsSlider();
+                // cmsSlider();
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
@@ -748,7 +748,7 @@ barba.init({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
-                cmsSlider();
+                // cmsSlider();
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
@@ -866,17 +866,17 @@ barba.init({
             afterEnter(data) {
                 global.bannerIn();
                 global.navBg("white");
-                cmsSlider();
+                // cmsSlider();
                 window.onscroll = "";
                 body.style.backgroundColor = "transparent";
             }
         }
     ],
 
-    views: [{
-            namespace: 'home',
+    views: [
+        {   namespace: 'home',
             afterEnter() {
-                // reset penrose
+                cmsLoad();
                 penrose.counter = 0;
                 penrose.init();
                 global.homeInit();
@@ -886,54 +886,68 @@ barba.init({
                 }
             }
         },
-        {
-            namespace: 'graduates',
+        {   namespace: 'graduates',
             afterEnter() {
+                cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
                 grads.init();
             }
         },
-        {
-            namespace: 'work',
+        {   namespace: 'work',
             afterEnter() {
+                cmsLoad();
+                window.fsAttributes = window.fsAttributes || [];
+                window.fsAttributes.push([
+                    'cmsload',
+                    (listInstances) => {
+                        console.log('cmsload Successfully loaded!');
+
+                        // The callback passes a `listInstances` array with all the `CMSList` instances on the page.
+                        const [listInstance] = listInstances;
+
+                        // The `renderitems` event runs whenever the list renders items after switching pages.
+                        listInstance.on('renderitems', (renderedItems) => {
+                            console.log(renderedItems);
+                            projects.init();
+                        });
+                    },
+                ]);
                 window.onresize = function() {
                         global.mobileMenuClose();
-                    }
-                    projects.init();
+                }
             }
         },
-        {
-            namespace: 'events',
+        {   namespace: 'events',
             afterEnter() {
+                cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
         },
-        {
-            namespace: 'about',
+        {   namespace: 'about',
             afterEnter() {
+                cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
         },
-        {
-            namespace: 'profile',
+        {   namespace: 'profile',
             afterEnter() {
+                cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
             }
         },
-        {
-            namespace: 'casestudy',
+        {   namespace: 'casestudy',
             afterEnter() {
+                cmsLoad();
                 global.caseStudyInit();
-                // cmsSlider();
-                // global.resizeAllSliders();
+                cmsSlider();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
