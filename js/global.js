@@ -1,4 +1,4 @@
-console.log("v78 slider height");
+console.log("v79 slider height");
 
 let body = document.querySelector("body");
 let global;
@@ -272,23 +272,23 @@ global = { // global values and methods
         if (csItems !== null) {
             if (csItems.length > 1) {
 
-                let minHeight = null;
+                // let minHeight = null;
 
                 let container = document.createElement("div");
                 container.classList.add("tns__slider");
                 container.classList.add("tns--" + index);
                 // add more classes?
                 csItems.forEach(function (item) {
-                    if (minHeight == null) {
-                        minHeight = item.clientHeight;
-                    } else {
-                        minHeight = Math.min(minHeight, item.clientHeight);
-                    }
+                    // if (minHeight == null) {
+                    //     minHeight = item.clientHeight;
+                    // } else {
+                    //     minHeight = Math.min(minHeight, item.clientHeight);
+                    // }
                     item.remove();
                     container.appendChild(item);
                 });
 
-                container.style.height = minHeight + "px";
+                // container.style.height = minHeight + "px";
 
                 let prevBtn = document.createElement("img");
                 prevBtn.classList.add("tns__prev");
@@ -315,6 +315,8 @@ global = { // global values and methods
                     prevButton: prevBtn,
                     nextButton: nextBtn
                 });
+
+                nextBtn
             }
         }
     },
@@ -1048,7 +1050,7 @@ barba.init({
                 // cmsSlider();
                 window.onresize = function() {
                     global.mobileMenuClose();
-                    global.resizeTinySliders();
+                    // global.resizeTinySliders();
                 }
             }
         }
