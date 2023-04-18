@@ -612,7 +612,19 @@ projects.alphaClick = function (e) {
     e.currentTarget.classList.toggle("is--selected");
 }
 
+projects.move = function () {
+    let projectHidden = document.querySelector(".project__hidden");
+    let projectWrapper = projectHidden.querySelector(".project__wrapper");
+    projectWrapper.remove();
+
+    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+    let projectDest = wrapper.querySelector(".project__dest");
+    projectDest.appendChild(projectWrapper);
+}
+
 projects.init = function () {
+
+    projects.move();
 
     dyncontent.filter(...projects.filterParams, projects, true);
 

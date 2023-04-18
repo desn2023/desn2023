@@ -1,4 +1,4 @@
-console.log("v81 projects init");
+console.log("v82 projects init 2");
 
 let body = document.querySelector("body");
 let global;
