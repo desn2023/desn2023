@@ -1,4 +1,4 @@
-console.log("v85 projects.setTimeout");
+console.log("v86 cms load");
 
 let body = document.querySelector("body");
 let global;
@@ -976,7 +976,7 @@ barba.init({
     views: [
         {   namespace: 'home',
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 penrose.counter = 0;
                 penrose.init();
                 global.homeInit();
@@ -988,7 +988,7 @@ barba.init({
         },
         {   namespace: 'graduates',
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
@@ -1000,7 +1000,7 @@ barba.init({
                 projects.moveBack();
             },
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 // window.fsAttributes = window.fsAttributes || [];
                 // window.fsAttributes.push([
                 //     'cmsload',
@@ -1025,7 +1025,7 @@ barba.init({
         },
         {   namespace: 'events',
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
@@ -1033,7 +1033,7 @@ barba.init({
         },
         {   namespace: 'about',
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
@@ -1041,7 +1041,7 @@ barba.init({
         },
         {   namespace: 'profile',
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
@@ -1049,7 +1049,7 @@ barba.init({
         },
         {   namespace: 'casestudy',
             afterEnter() {
-                cmsLoad();
+                // cmsLoad();
                 global.caseStudyInit();
                 // cmsSlider();
                 window.onresize = function() {

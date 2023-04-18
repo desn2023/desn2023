@@ -1037,3 +1037,5 @@ function cmsLoad() {
     });
     fe();
 }
+
+cmsLoad();
