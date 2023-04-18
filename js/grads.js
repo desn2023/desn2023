@@ -97,6 +97,18 @@ dyncontent.filter = function (
 
     let namespace = wrapper.getAttribute("data-barba-namespace");
 
+    // remove w-condition-invisible
+
+    let invisDis = Array.from(obj.list.querySelectorAll(".disciplines__item.w-condition-invisible"));
+
+    if (invisDis !== null && invisDis !== undefined) {
+        if (invisDis.length > 0) {
+            invisDis.forEach(function (dis) {
+                dis.remove();
+            });
+        }
+    }
+
     // alphabetize
 
     if (namespace.indexOf("work") !== -1) {
@@ -667,6 +679,7 @@ projects.populate = function () {
     itemCount -= itemsInvalid.length;
 
     if (itemCount >= projects.quantity) {
+        projects.move();
         projects.init();
     } else {
         projects.checkFs = setInterval(function () {
@@ -677,6 +690,7 @@ projects.populate = function () {
 
             if (itemCount >= projects.quantity) {
                 clearInterval(projects.checkFs);
+                projects.move();
                 projects.init();
             }
         }, 250);
@@ -684,8 +698,6 @@ projects.populate = function () {
 }
 
 projects.init = function () {
-
-    projects.move();
 
     dyncontent.filter(...projects.filterParams, projects, true);
 
