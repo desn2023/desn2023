@@ -1,4 +1,4 @@
-console.log("v83 grads line");
+console.log("v84 projects move back");
 
 let body = document.querySelector("body");
 let global;
@@ -996,6 +996,9 @@ barba.init({
             }
         },
         {   namespace: 'work',
+            beforeLeave() {
+                projects.moveBack();
+            },
             afterEnter() {
                 cmsLoad();
                 // window.fsAttributes = window.fsAttributes || [];

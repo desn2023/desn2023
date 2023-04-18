@@ -645,7 +645,17 @@ projects.move = function () {
 
     let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
     let projectDest = wrapper.querySelector(".project__dest");
+    projectDest.innerHTML = "";
     projectDest.appendChild(projectWrapper);
+}
+
+projects.moveBack = function () {
+    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+    let projectWrapper = wrapper.querySelector(".project__wrapper");
+    projectWrapper.remove();
+
+    let projectHidden = document.querySelector(".project__hidden");
+    projectHidden.appendChild(projectWrapper);    
 }
 
 projects.init = function () {
