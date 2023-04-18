@@ -106,10 +106,14 @@
 
 .results__input {pointer-events: none;}
 
+.tns__slider {
+    overflow: hidden;
+}
+
 .tns__prev {
     position: absolute;
     top: 50%;
-    left: 0px;
+    left: 6px;
     transform: translateY(-50%);
     cursor: pointer;
 }
@@ -117,7 +121,7 @@
 .tns__next {
     position: absolute;
     top: 50%;
-    right: 0px;
+    right: 6px;
     transform: translateY(-50%);
     cursor: pointer;
 }

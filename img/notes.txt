@@ -27,3 +27,5 @@ combo class for maximum width the image will appear at: "w--900" etc.
 w=###&auto=format&lossless=1&dpr=1
 w=###&auto=format&lossless=1&dpr=2
 w=200&blur=150
+
+https://github.com/ganlanyuan/tiny-slider
