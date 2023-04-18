@@ -27,6 +27,7 @@ let projects = {
     randomAgain: true,
     randomSort: true,
     alphaSort: false,
+    quantity: 113,
     animIn: {
         opacity: 1,
         duration: 0.25,
@@ -659,9 +660,27 @@ projects.moveBack = function () {
 }
 
 projects.populate = function () {
-    projects.checkFs = setInterval(function () {
-        
-    }, 500);
+    let projectHidden = document.querySelector(".project__hidden");
+
+    let itemCount = projectHidden.querySelector(".project__list").childElementCount;
+    let itemsInvalid = projectHidden.querySelectorAll(".project__list > *:not(.project__item)");
+    itemCount -= itemsInvalid.length;
+
+    if (itemCount >= projects.quantity) {
+        projects.init();
+    } else {
+        projects.checkFs = setInterval(function () {
+
+            let itemCount = projectHidden.querySelector(".project__list").childElementCount;
+            let itemsInvalid = projectHidden.querySelectorAll(".project__list > *:not(.project__item)");
+            itemCount -= itemsInvalid.length;
+
+            if (itemCount >= projects.quantity) {
+                clearInterval(projects.checkFs);
+                projects.init();
+            }
+        }, 250);
+    }
 }
 
 projects.init = function () {

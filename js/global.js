@@ -1,4 +1,4 @@
-console.log("v84 projects move back");
+console.log("v85 projects.setTimeout");
 
 let body = document.querySelector("body");
 let global;
@@ -1019,6 +1019,7 @@ barba.init({
                 window.onresize = function() {
                         global.mobileMenuClose();
                 }
+                projects.populate();
                 // projects.init();
             }
         },
