@@ -1,4 +1,4 @@
-console.log("v75 tiny slider");
+console.log("v76 tiny slider 2");
 
 let body = document.querySelector("body");
 let global;
@@ -252,8 +252,18 @@ global = { // global values and methods
                     container.appendChild(item);
                 });
 
+                let prevBtn = document.createElement("img");
+                prevBtn.classList.add("tns__prev");
+                prevBtn.setAttribute("src", "https://desn2023.github.io/desn2023/img/chevron-left.svg");
+
+                let nextBtn = document.createElement("img");
+                nextBtn.classList.add("tns__next");
+                nextBtn.setAttribute("src", "https://desn2023.github.io/desn2023/img/chevron-right.svg");
+
                 let csSlider = list.parentElement.parentElement;
                 csSlider.appendChild(container);
+                csSlider.appendChild(prevBtn);
+                csSlider.appendChild(nextBtn);
 
                 let slider = tns ({
                     container: '.tns__slider.tns--' + index,
@@ -264,7 +274,9 @@ global = { // global values and methods
                     // controls: "bottom",
                     // buttons
                     // speed: 300,
-                    autoplay: true
+                    autoplay: true,
+                    prevButton: prevBtn,
+                    nextButton: nextBtn
                 });
             }
         }
@@ -1018,3 +1030,14 @@ global.navScroll();
 global.countdownInit();
 
 global.searchBtn.onclick = global.scrollClickSearch;
+
+global.searchInput = document.querySelector('.search__input');
+global.searchMetadata = document.querySelector('.search__metadata');
+
+global.searchInput.addEventListener('input', () => {
+  if (global.searchInput.value.length > 0) {
+    global.searchMetadata.style.display = 'block';
+  } else {
+    global.searchMetadata.style.display = 'none';
+  }
+});

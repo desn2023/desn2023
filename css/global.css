@@ -105,3 +105,25 @@
 }
 
 .results__input {pointer-events: none;}
+
+.tns__prev {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+}
+
+.tns__next {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+}
+
+button[data-action*="start"] {
+    display: none;
+}
+
+.tns-nav {
+    display: none;
+}
