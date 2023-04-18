@@ -103,3 +103,5 @@
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
     mask-image: linear-gradient(to right, black 85%, transparent);
 }
+
+.results__input {pointer-events: none;}
