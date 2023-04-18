@@ -1,4 +1,4 @@
-console.log("v72 cmsSlider and cmsLoad");
+console.log("v74 remove CMS slider");
 
 let body = document.querySelector("body");
 let global;
@@ -233,6 +233,10 @@ global = { // global values and methods
             // global.resizeSlider(slider);
             slider.style.height = "auto";
         });
+    },
+
+    sliderInit: function() {
+
     },
 
     shuffleArray: function(array) { // shuffle items in array
@@ -947,7 +951,7 @@ barba.init({
             afterEnter() {
                 cmsLoad();
                 global.caseStudyInit();
-                cmsSlider();
+                // cmsSlider();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
