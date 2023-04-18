@@ -1,4 +1,4 @@
-console.log("v76 tiny slider 2");
+console.log("v77 tiny slider 3");
 
 let body = document.querySelector("body");
 let global;

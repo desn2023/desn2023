@@ -109,20 +109,23 @@
 .tns__prev {
     position: absolute;
     top: 50%;
-    left: 24px;
+    left: 0px;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .tns__next {
     position: absolute;
     top: 50%;
-    right: 24px;
+    right: 0px;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 
-button[data-action*="start"] {
+.tns-outer > button {
     display: none;
 }
+
 
 .tns-nav {
     display: none;
