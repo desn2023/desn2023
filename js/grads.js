@@ -484,6 +484,8 @@ grads.optionClick = function (e) {
             }
         });
 
+        grads.makeLineWidth();
+
         dyncontent.filter();
     }
 }
@@ -507,6 +509,8 @@ grads.filterClick = function (e) {
             option.classList.remove("is--selected");
         }
     });
+
+    grads.makeLineWidth();
 
     dyncontent.filter();
 }
@@ -563,6 +567,28 @@ grads.filterClick = function (e) {
 //         opacity: 1
 //     }, "<0.1");
 // }
+
+grads.makeLineWidth = function () {
+    // get line element
+    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+    
+    let lineElement = wrapper.querySelector(".baseline");
+
+    // get child of .grads__option.is--selected
+
+    // get width of child
+    let widthOfLine = wrapper.querySelector(".grads__option.is--selected").firstChild.clientWidth;
+    lineElement.style.width = widthOfLine + "px";
+
+    // get x coordinates of child and subtract left page padding/margin
+    let xPosOfLine = wrapper.querySelector(".grads__option.is--selected").firstChild.offsetLeft;
+    //gsap to xpos of new selection
+    gsap.to(lineElement, { x: xPosOfLine - 40});
+}
+
+// // get options div and run function on click
+// var disciplineOptions = document.querySelector(".grad__filters");
+// disciplineOptions.addEventListener("click",makeLineWidth);
 
 grads.init = function () {
 

@@ -1,4 +1,4 @@
-console.log("v82 projects init 2");
+console.log("v83 grads line");
 
 let body = document.querySelector("body");
 let global;
