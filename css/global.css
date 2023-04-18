@@ -32,7 +32,7 @@
 }
 
 @media (hover: hover) {
-    
+    .project__link:hover ~ .project .link.hover--black,
     .project__link:hover ~ .container .link.hover--black,
     .grad__link:hover ~ .grad__info .link.hover--black,
     .project__thumbnail:hover ~ .container .link.hover--black,
@@ -46,6 +46,10 @@
 
     .filter__item:hover, .toggle:hover, .sort__item:hover {
         opacity: 1;
+    }
+
+    .project__item .link.hover--black:hover .title.is--itemname {
+        border-bottom-color: black;
     }
 
 }
