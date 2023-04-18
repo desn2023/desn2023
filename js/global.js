@@ -1019,7 +1019,7 @@ barba.init({
                 window.onresize = function() {
                         global.mobileMenuClose();
                 }
-                projects.init();
+                // projects.init();
             }
         },
         {   namespace: 'events',

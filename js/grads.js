@@ -658,6 +658,12 @@ projects.moveBack = function () {
     projectHidden.appendChild(projectWrapper);    
 }
 
+projects.populate = function () {
+    projects.checkFs = setInterval(function () {
+        
+    }, 500);
+}
+
 projects.init = function () {
 
     projects.move();
