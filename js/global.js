@@ -1,4 +1,4 @@
-console.log("v87 width of line");
+console.log("v89 change number of projects");
 
 let body = document.querySelector("body");
 let global;
