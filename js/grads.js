@@ -237,7 +237,7 @@ dyncontent.toggleAllAnim = function (instant = false) {
 
     let tl = gsap.timeline({
         onComplete: function () {
-            const toggleFilter = wrapper.querySelector(".toggle.is--filter");
+            const toggleFilter = document.querySelector(".toggle.is--filter");
             toggleFilter.style.opacity = "";
         }
     });
@@ -307,7 +307,7 @@ dyncontent.toggleFilterClick = function (e) {
 
     let tl = gsap.timeline({
         onComplete: function () {
-            const toggleAll = wrapper.querySelector(".toggle.is--all");
+            const toggleAll = document.querySelector(".toggle.is--all");
             toggleAll.style.opacity = "";
         }
     });
