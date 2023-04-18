@@ -898,25 +898,25 @@ barba.init({
         {   namespace: 'work',
             afterEnter() {
                 cmsLoad();
-                window.fsAttributes = window.fsAttributes || [];
-                window.fsAttributes.push([
-                    'cmsload',
-                    (listInstances) => {
-                        console.log('cmsload Successfully loaded!');
+                // window.fsAttributes = window.fsAttributes || [];
+                // window.fsAttributes.push([
+                //     'cmsload',
+                //     (listInstances) => {
+                //         console.log('cmsload Successfully loaded!');
 
-                        // The callback passes a `listInstances` array with all the `CMSList` instances on the page.
-                        const [listInstance] = listInstances;
+                //         // The callback passes a `listInstances` array with all the `CMSList` instances on the page.
+                //         const [listInstance] = listInstances;
 
-                        // The `renderitems` event runs whenever the list renders items after switching pages.
-                        listInstance.on('renderitems', (renderedItems) => {
-                            console.log(renderedItems);
-                            projects.init();
-                        });
-                    },
-                ]);
+                //         // The `renderitems` event runs whenever the list renders items after switching pages.
+                //         listInstance.on('renderitems', (renderedItems) => {
+                //             console.log(renderedItems);
+                //         });
+                //     },
+                // ]);
                 window.onresize = function() {
                         global.mobileMenuClose();
                 }
+                projects.init();
             }
         },
         {   namespace: 'events',
