@@ -45,6 +45,14 @@ global = { // global values and methods
         delayToBlack: 0.2
     },
 
+    // openSearch: function () {
+    //     // Once scrolling is complete, simulate a click on the search button
+    //     global.searchTrigger.click();
+    //     setTimeout(function () {
+    //         global.searchInput.focus();
+    //     }, 300);
+    // },
+
     searchTrans: function(open = false) {
 
         let navSearch = document.querySelector(".nav__search");
@@ -124,7 +132,7 @@ global = { // global values and methods
         // Check if the page is already at the top
         if (window.pageYOffset == 0) {
             // If the page is already at the top, simulate a click on the search button immediately
-            global.searchTrans();
+            global.openSearch();
         } else {
             // If the page is not at the top, scroll to top using gsap ease transition
             gsap.to(window, {
@@ -132,7 +140,7 @@ global = { // global values and methods
                 scrollTo: 0,
                 ease: "power2.inOut",
                 onComplete: function() {
-                    global.searchTrans();
+                    global.openSearch();
                 }
             });
         }
