@@ -1,4 +1,4 @@
-console.log("v102 sort disciplines on profile/casestudy");
+console.log("v103 transition before");
 
 let body = document.querySelector("body");
 let global;
@@ -912,7 +912,7 @@ barba.init({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                return global.mobileMenuClose(), global.checkCloseSearch();
+                return global.mobileMenuClose();
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -1031,7 +1031,7 @@ barba.init({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                return global.mobileMenuClose(), global.checkCloseSearch();
+                return global.mobileMenuClose();
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
