@@ -1,4 +1,4 @@
-console.log("v105 toggle hovers");
+console.log("v106 profile and case study sort disciplines");
 
 let body = document.querySelector("body");
 let global;
@@ -223,6 +223,10 @@ global = { // global values and methods
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
         // sort disciplines
+
+        let csPrimary = wrapper.querySelector(".cs__primary");
+
+        dyncontent.sortDisciplines(csPrimary, ".project__td");
 
         let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
         if (projectItems !== null) {
@@ -1121,6 +1125,42 @@ barba.init({
         {   namespace: 'profile',
             afterEnter() {
                 // cmsLoad();
+                let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+                // grad profile disciplines
+
+                let disciplinesList = item.querySelector(".profile__disciplines"); // get disciplines list
+
+                // select top item
+            
+                let disciplineTop = wrapper.querySelector(topSelect);
+                let disciplineH1s;
+            
+                if (disciplinesList !== null) {
+                    disciplineH1s = Array.from(disciplinesList.querySelectorAll("div > .title"));
+                }
+            
+                let topItem;
+            
+                if (disciplineH1s !== null && disciplineH1s !== undefined) {
+                    if (disciplineH1s.length > 0) {
+                        disciplineH1s.forEach(function (h1, index) {
+                            if (h1.innerText == disciplineTop.innerText && index !== 0) {
+                                topItem = h1.parentElement;
+                            }
+                        });
+                    }
+                }
+            
+                // reorder
+            
+                if (topItem !== undefined) {
+                    topItem.remove();
+                    disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
+                }
+
+                // project disciplines
+
                 let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
                 if (projectItems !== null) {
                     if (projectItems.length > 0) {
