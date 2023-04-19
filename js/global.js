@@ -1,4 +1,4 @@
-console.log("v106 profile and case study sort disciplines");
+console.log("v107 project quantity");
 
 let body = document.querySelector("body");
 let global;
