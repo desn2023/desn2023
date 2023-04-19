@@ -1,4 +1,4 @@
-console.log("v94 more close search 2");
+console.log("v95 no close search before transition");
 
 let body = document.querySelector("body");
 let global;
@@ -838,7 +838,7 @@ barba.init({
                 } else {
                     global.invertNav(100, global.transParams.leave.duration, "power2.in");
                 }
-                return [global.mobileMenuClose(), global.checkCloseSearch()];
+                return global.mobileMenuClose();
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -885,7 +885,7 @@ barba.init({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                return [global.mobileMenuClose(), global.checkCloseSearch()];
+                return global.mobileMenuClose(), global.checkCloseSearch();
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -1004,7 +1004,7 @@ barba.init({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                return [global.mobileMenuClose(), global.checkCloseSearch()];
+                return global.mobileMenuClose(), global.checkCloseSearch();
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -1102,6 +1102,9 @@ barba.init({
         {   namespace: 'casestudy',
             afterEnter() {
                 // cmsLoad();
+                if (global.searchOpen) {
+                    global.searchClose.click();
+                }
                 global.caseStudyInit();
                 // cmsSlider();
                 window.onresize = function() {
