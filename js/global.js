@@ -1,4 +1,4 @@
-console.log("v98 sort disciplines fix 2");
+console.log("v100 search fix");
 
 let body = document.querySelector("body");
 let global;
@@ -49,7 +49,36 @@ global = { // global values and methods
         delayToBlack: 0.2
     },
 
-    openSearch: function() {
+    searchInit: function () {
+
+        // delete invisible ones
+
+        let searchList = document.querySelector(".project__list.is--search");
+        let invisDis = Array.from(searchList.querySelectorAll(".disciplines__item.w-condition-invisible"));
+
+        if (invisDis !== null) {
+            if (invisDis.length > 0) {
+                invisDis.forEach(function (dis) {
+                    dis.remove();
+                });
+            }
+        }
+
+        // sort disciplines
+
+        let searchItems = Array.from(searchList.querySelectorAll(".project__item"));
+
+        if (searchItems !== null) { 
+            if (searchItems.length > 0) {
+                searchItems.forEach(function (item) {
+                    dyncontent.sortDisciplines(item, ".project__td");
+                });
+            }
+        }
+
+    },
+
+    openSearch: function () {
         // Once scrolling is complete, simulate a click on the search button
         global.searchTrigger.click();
         global.searchOpen = true;
@@ -1116,6 +1145,30 @@ if (global.blackPages.indexOf(global.initNamespace) == -1) {
 
 global.navScroll();
 global.countdownInit();
+
+(function () { // prepare search
+    let searchList = document.querySelector(".project__list.is--search");
+
+    let itemCount = searchList.childElementCount;
+    let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
+    itemCount -= itemsInvalid.length;
+
+    if (itemCount >= projects.quantity) {
+        global.searchInit();
+    } else {
+        global.searchCheckFs = setInterval(function () {
+
+            let itemCount = searchList.childElementCount;
+            let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
+            itemCount -= itemsInvalid.length;
+
+            if (itemCount >= projects.quantity) {
+                clearInterval(projects.searchCheckFs);
+                global.searchInit();
+            }
+        }, 250);
+    }
+})();
 
 global.searchBtn.onclick = global.scrollClickSearch;
 global.searchMobile.onclick = global.scrollClickSearch;
