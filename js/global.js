@@ -1,4 +1,4 @@
-console.log("v101 search fix 2");
+console.log("v102 sort disciplines on profile/casestudy");
 
 let body = document.querySelector("body");
 let global;
@@ -218,11 +218,22 @@ global = { // global values and methods
         }
     },
 
-    caseStudyInit: function() {
-
-        global.sliderInit();
+    caseStudyInit: function () {
 
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        // sort disciplines
+
+        let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
+        if (projectItems !== null) {
+            if (projectItems.length > 0) {
+                projectItems.forEach(function (item) {
+                    dyncontent.sortDisciplines(item, ".project__td");
+                });
+            }
+        }
+
+        global.sliderInit();
 
         let projectData = wrapper.querySelector(".cs__metadata");
         let triggerProjectData = wrapper.querySelector(".dropdown__trigger");
@@ -1110,6 +1121,14 @@ barba.init({
         {   namespace: 'profile',
             afterEnter() {
                 // cmsLoad();
+                let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
+                if (projectItems !== null) {
+                    if (projectItems.length > 0) {
+                        projectItems.forEach(function (item) {
+                            dyncontent.sortDisciplines(item, ".project__td");
+                        });
+                    }
+                }
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
