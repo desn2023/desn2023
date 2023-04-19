@@ -150,7 +150,12 @@ penrose.mouseLeave = function (e) {
 
     gsap.killTweensOf(".sect.top", "fill");
 
-    penrose.setColours([penrose.colours[0]], {
+    // penrose.setColours([penrose.colours[0]], {
+    //     duration: 0.5
+    // });
+
+    gsap.to(".sect.top", {
+        fill: "#333333",
         duration: 0.5
     });
 
@@ -427,7 +432,7 @@ penrose.killAnim = function () {
 
     gsap.to(".sect.top", {
         fill: "#4D4D4D",
-        duration: 0.4
+        duration: 0.5
     });
 
     penrose.mouse = true;
