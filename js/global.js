@@ -1,4 +1,4 @@
-console.log("v91 debug barba");
+console.log("v92 barba timeout slider");
 
 let body = document.querySelector("body");
 let global;
@@ -312,11 +312,10 @@ global = { // global values and methods
                     // controls: "bottom",
                     // speed: 300,
                     autoplay: true,
+                    speed: 800,
                     prevButton: prevBtn,
                     nextButton: nextBtn
                 });
-
-                nextBtn
             }
         }
     },
@@ -574,7 +573,7 @@ barba.init({
     debug: true,
     preventRunning: true,
     sync: true,
-    timeout: 30000,
+    timeout: 20000,
     transitions: [{
             name: 'white-white-transition',
 
