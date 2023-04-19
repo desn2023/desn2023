@@ -1,4 +1,4 @@
-console.log("v94 more close search");
+console.log("v94 more close search 2");
 
 let body = document.querySelector("body");
 let global;
