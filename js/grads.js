@@ -239,7 +239,14 @@ dyncontent.toggleAllAnim = function (instant = false) {
         n = 1000;
     }
 
-    let tl = gsap.timeline();
+    let tl = gsap.timeline({
+        onComplete: function () {
+            let toggleFilter = document.querySelector(".toggle.is--filter");
+            if (toggleFilter !== null) {
+                toggleFilter.style.opacity = "";
+            }
+        }
+    });
 
     tl.to(".filter__wrapper__wrapper", {
         duration: Math.min(0.2, n),
@@ -304,7 +311,14 @@ dyncontent.toggleAllClick = function (e) {
 
 dyncontent.toggleFilterClick = function (e) {
 
-    let tl = gsap.timeline();
+    let tl = gsap.timeline({
+        onComplete: function () {
+            let toggleAll = document.querySelector(".toggle.is--all");
+            if (toggleAll !== null) {
+                toggleAll.style.opacity = "";
+            }
+        }
+    });
 
     tl.to(e.currentTarget, {
         duration: 0.2,

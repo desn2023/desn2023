@@ -1,4 +1,4 @@
-console.log("v103 transition before");
+console.log("v105 toggle hovers");
 
 let body = document.querySelector("body");
 let global;
