@@ -89,20 +89,6 @@ global = { // global values and methods
         }
     },
 
-    checkCloseSearch: function () { // check if search is closed and close
-
-        if (global.searchOpen) {
-            
-            searchClose.click();
-            setTimeout(function () {
-                return null;
-            }, 400);
-
-        } else {
-            return null;
-        }
-    },
-
     scrollClickSearch: function() {
         // Check if the page is already at the top
         if (window.pageYOffset == 0) {
@@ -1100,11 +1086,11 @@ barba.init({
             }
         },
         {   namespace: 'casestudy',
+            beforeEnter() {
+                global.searchClose.click();
+            },
             afterEnter() {
                 // cmsLoad();
-                if (global.searchOpen) {
-                    global.searchClose.click();
-                }
                 global.caseStudyInit();
                 // cmsSlider();
                 window.onresize = function() {
