@@ -1,4 +1,4 @@
-console.log("v94 sortDisciplines error");
+console.log("v92 toggle hover fix");
 
 let body = document.querySelector("body");
 let global;
