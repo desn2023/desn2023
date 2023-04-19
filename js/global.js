@@ -28,6 +28,7 @@ global = { // global values and methods
     searchInput: document.querySelector(".search__input"),
     searchClose: document.querySelector(".search__link.is--close"),
     searchMobile: document.querySelector(".icon__menu:first-child"),
+    searchBackground: document.querySelector(".search__background"),
 
     // TRANSITIONS
 
@@ -348,7 +349,7 @@ global = { // global values and methods
                     // controls: "bottom",
                     // speed: 300,
                     autoplay: true,
-                    speed: 800,
+                    speed: 150,
                     prevButton: prevBtn,
                     nextButton: nextBtn
                 });
@@ -1119,6 +1120,7 @@ global.countdownInit();
 global.searchBtn.onclick = global.scrollClickSearch;
 global.searchMobile.onclick = global.scrollClickSearch;
 global.searchClose.onmouseup = global.closeSearch;
+global.searchBackground.onmosueup = global.closeSearch;
 
 global.searchInput = document.querySelector('.search__input');
 global.searchMetadata = document.querySelector('.search__metadata');
