@@ -1,4 +1,4 @@
-console.log("v100 search fix");
+console.log("v101 search fix 2");
 
 let body = document.querySelector("body");
 let global;
@@ -1173,7 +1173,7 @@ global.countdownInit();
 global.searchBtn.onclick = global.scrollClickSearch;
 global.searchMobile.onclick = global.scrollClickSearch;
 global.searchClose.onmouseup = global.closeSearch;
-global.searchBackground.onmosueup = global.closeSearch;
+global.searchBackground.onmouseup = global.closeSearch;
 
 global.searchInput = document.querySelector('.search__input');
 global.searchMetadata = document.querySelector('.search__metadata');
