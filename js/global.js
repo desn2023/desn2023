@@ -1,4 +1,4 @@
-console.log("v90 change number of projects to 115");
+console.log("v91 debug barba");
 
 let body = document.querySelector("body");
 let global;
@@ -11,7 +11,7 @@ global = { // global values and methods
     namespaces: ["home", "about", "profile", "events", "casestudy", "graduates", "work"],
     invertSelector: ".logo__wordmark, .nav__links, .search__background, .menu__mobile",
     blackPages: ["home", "profile", "events"],
-    whitePages: ["graduates", "work", "about", "casestudy"],
+    whitePages: ["graduates", "work", "about"],
     countdownDeadline: "2023/04/20 16:00",
     initNamespace: document.querySelector(".wrapper").getAttribute("data-barba-namespace"),
 
@@ -571,8 +571,10 @@ global = { // global values and methods
 
 
 barba.init({
+    debug: true,
     preventRunning: true,
     sync: true,
+    timeout: 30000,
     transitions: [{
             name: 'white-white-transition',
 
