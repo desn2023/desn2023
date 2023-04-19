@@ -87,10 +87,6 @@ global = { // global values and methods
                 global.invertNav(0, 0.4);
             }
         }
-        
-        setTimeout(function () {
-            return null;
-        }, 400);
     },
 
     checkCloseSearch: function () { // check if search is closed and close
