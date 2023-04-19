@@ -46,20 +46,6 @@ let projects = {
 
 // GRADS AND PROJECTS
 
-dyncontent.findSortDisciplines = function () {
-    let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
-
-    let items = Array.from(wrapper.querySelectorAll(".project__item, .grads__item"));
-
-    if (items !== null) {
-        if (items.length > 0) {
-            items.forEach(function (item) {
-                dyncontent.sortDisciplines(item, ".grads__td, .project__td");
-            });
-        }
-    }
-}
-
 dyncontent.sortDisciplines = function (item, topSelect) {
 
     let disciplinesList = item.querySelector(".disciplines__list"); // get disciplines list
@@ -69,13 +55,13 @@ dyncontent.sortDisciplines = function (item, topSelect) {
     let disciplineTop = item.querySelector(topSelect);
     let disciplineH1s;
 
-    if (disciplinesList !== null) {
+    if (disciplinesList !== null && disciplineH1s !== undefined) {
         disciplineH1s = Array.from(disciplinesList.querySelectorAll(".disciplines__wrapper > .title:not(.is--bullet)"));
     }
 
     let topItem;
 
-    if (disciplineH1s !== null && disciplineTop !== null) {
+    if (disciplineH1s !== null && disciplineH1s !== undefined) {
         if (disciplineH1s.length > 0) {
             disciplineH1s.forEach(function (h1, index) {
                 if (h1.innerText == disciplineTop.innerText && index !== 0) {
@@ -87,7 +73,7 @@ dyncontent.sortDisciplines = function (item, topSelect) {
 
     // reorder
 
-    if (topItem !== undefined && disciplinesList !== null) {
+    if (topItem !== undefined) {
         topItem.remove();
         disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
     }

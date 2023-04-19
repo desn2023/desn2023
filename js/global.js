@@ -1,4 +1,4 @@
-console.log("v96 sortDisciplines on all pages except profile, home");
+console.log("v94 sortDisciplines error");
 
 let body = document.querySelector("body");
 let global;
@@ -103,13 +103,11 @@ global = { // global values and methods
 
         // reorder disciplines
 
-        dyncontent.findSortDisciplines();
+        let gradsItems = Array.from(wrapper.querySelectorAll(".grads__item"));
 
-        // let gradsItems = Array.from(wrapper.querySelectorAll(".grads__item"));
-
-        // gradsItems.forEach(function(item) {
-        //     dyncontent.sortDisciplines(item, ".grads__td");
-        // });
+        gradsItems.forEach(function(item) {
+            dyncontent.sortDisciplines(item, ".grads__td");
+        });
 
         gsap.to(".home__content > .container", {
             opacity: 1,
@@ -157,8 +155,6 @@ global = { // global values and methods
     caseStudyInit: function() {
 
         global.sliderInit();
-
-        dyncontent.findSortDisciplines();
 
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
@@ -1046,7 +1042,6 @@ barba.init({
         {   namespace: 'profile',
             afterEnter() {
                 // cmsLoad();
-                dyncontent.findSortDisciplines();
                 window.onresize = function() {
                     global.mobileMenuClose();
                 }
