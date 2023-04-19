@@ -1,4 +1,4 @@
-console.log("v92 barba timeout slider");
+console.log("v94 more close search");
 
 let body = document.querySelector("body");
 let global;
@@ -14,6 +14,7 @@ global = { // global values and methods
     whitePages: ["graduates", "work", "about"],
     countdownDeadline: "2023/04/20 16:00",
     initNamespace: document.querySelector(".wrapper").getAttribute("data-barba-namespace"),
+    searchOpen: false,
 
 
     // GLOBAL ELEMENTS
@@ -26,6 +27,7 @@ global = { // global values and methods
     searchTrigger: document.querySelector(".search__trigger"),
     searchInput: document.querySelector(".search__input"),
     searchClose: document.querySelector(".search__link.is--close"),
+    searchMobile: document.querySelector(".icon__menu:first-child"),
 
     // TRANSITIONS
 
@@ -49,6 +51,7 @@ global = { // global values and methods
     openSearch: function() {
         // Once scrolling is complete, simulate a click on the search button
         global.searchTrigger.click();
+        global.searchOpen = true;
 
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
         let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
@@ -65,10 +68,13 @@ global = { // global values and methods
 
         setTimeout(function() {
             global.searchInput.focus();
-        }, 300);
+        }, 400);
     },
 
     closeSearch: function () {
+
+        global.searchOpen = false;
+
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
         let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
 
@@ -80,7 +86,25 @@ global = { // global values and methods
             } else { // if any other black page
                 global.invertNav(0, 0.4);
             }
-        }    
+        }
+        
+        setTimeout(function () {
+            return null;
+        }, 400);
+    },
+
+    checkCloseSearch: function () { // check if search is closed and close
+
+        if (global.searchOpen) {
+            
+            searchClose.click();
+            setTimeout(function () {
+                return null;
+            }, 400);
+
+        } else {
+            return null;
+        }
     },
 
     scrollClickSearch: function() {
@@ -604,7 +628,8 @@ barba.init({
     preventRunning: true,
     sync: true,
     timeout: 20000,
-    transitions: [{
+    transitions: [
+        {
             name: 'white-white-transition',
 
             from: { namespace: global.whitePages },
@@ -817,7 +842,7 @@ barba.init({
                 } else {
                     global.invertNav(100, global.transParams.leave.duration, "power2.in");
                 }
-                return global.mobileMenuClose();
+                return [global.mobileMenuClose(), global.checkCloseSearch()];
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -864,7 +889,7 @@ barba.init({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                return global.mobileMenuClose();
+                return [global.mobileMenuClose(), global.checkCloseSearch()];
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -983,7 +1008,7 @@ barba.init({
                 if (global.observer !== undefined && global.observer !== null) {
                     global.observer.disconnect();
                 }
-                return global.mobileMenuClose();
+                return [global.mobileMenuClose(), global.checkCloseSearch()];
             },
             leave(data) {
                 return gsap.to(data.current.container, global.transParams.leave);
@@ -1105,6 +1130,7 @@ global.navScroll();
 global.countdownInit();
 
 global.searchBtn.onclick = global.scrollClickSearch;
+global.searchMobile.onclick = global.scrollClickSearch;
 global.searchClose.onmouseup = global.closeSearch;
 
 global.searchInput = document.querySelector('.search__input');
