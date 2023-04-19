@@ -1,4 +1,4 @@
-console.log("v107 project quantity");
+console.log("v108 penrose edits");
 
 let body = document.querySelector("body");
 let global;

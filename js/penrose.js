@@ -230,10 +230,11 @@ penrose.setColours = function (colours = penrose.colours, gsapVarObj) { // sets 
     });
 }
 
-penrose.setOpacity = function (selector = ".sect.top", opac = 1, dur = 0.4) {
+penrose.setOpacity = function (selector = ".sect.top", opac = 1, dur = 0.4, eas = "none") {
     gsap.to(selector, {
         opacity: opac,
-        duration: dur       
+        duration: dur,
+        ease: eas      
     });
 }
 
@@ -375,6 +376,11 @@ penrose.initAnim = function () {
 
     penrose.mouse = false;
 
+    gsap.to(".sect.top", {
+        fill: "#333333",
+        duration: 0.4
+    });
+
     if (
         penrose.tweensZoneEnter !== undefined &&
         penrose.tweensZoneEnter !== null &&
@@ -418,6 +424,12 @@ penrose.killAnim = function () {
     penrose.anim.kill();
     penrose.pointer.width = penrose.zoneSizeW / penrose.zoneMultiplyAnim;
     penrose.pointer.height = penrose.zoneSizeH / penrose.zoneMultiplyAnim;
+
+    gsap.to(".sect.top", {
+        fill: "#4D4D4D",
+        duration: 0.4
+    });
+
     penrose.mouse = true;
 }
 
