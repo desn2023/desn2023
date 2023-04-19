@@ -182,6 +182,10 @@ dyncontent.filter = function (
             item.style.display = "block";
         });
 
+        obj.items.forEach(function (item) {
+            dyncontent.sortDisciplines(item, topSelect);
+        });
+
     } else {
         obj.items.forEach(function (item) {
 

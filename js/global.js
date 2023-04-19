@@ -1,4 +1,4 @@
-console.log("v95 no close search before transition");
+console.log("v97 sort disciplines fix");
 
 let body = document.querySelector("body");
 let global;
@@ -1087,7 +1087,9 @@ barba.init({
         },
         {   namespace: 'casestudy',
             beforeEnter() {
-                global.searchClose.click();
+                if (global.searchOpen) {
+                    global.searchClose.click();
+                }
             },
             afterEnter() {
                 // cmsLoad();
