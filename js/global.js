@@ -1,4 +1,4 @@
-console.log("v97 sort disciplines fix");
+console.log("v98 sort disciplines fix 2");
 
 let body = document.querySelector("body");
 let global;

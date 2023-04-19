@@ -55,7 +55,7 @@ dyncontent.sortDisciplines = function (item, topSelect) {
     let disciplineTop = item.querySelector(topSelect);
     let disciplineH1s;
 
-    if (disciplinesList !== null && disciplineH1s !== undefined) {
+    if (disciplinesList !== null) {
         disciplineH1s = Array.from(disciplinesList.querySelectorAll(".disciplines__item > .title:not(.is--bullet)"));
     }
 
