@@ -82,8 +82,7 @@
     display: none;
 }
 
-.disciplines__item:last-child .title.is--bullet,
-.disciplines:last-child .title.is--bullet {
+.disciplines__item:last-child .title.is--bullet {
     display: none;
 }
 
