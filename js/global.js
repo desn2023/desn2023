@@ -25,6 +25,7 @@ global = { // global values and methods
     searchBtn: document.querySelector(".nav__links.is--search"),
     searchTrigger: document.querySelector(".search__trigger"),
     searchInput: document.querySelector(".search__input"),
+    searchClose: document.querySelector(".search__link.is--close"),
 
     // TRANSITIONS
 
@@ -48,9 +49,38 @@ global = { // global values and methods
     openSearch: function() {
         // Once scrolling is complete, simulate a click on the search button
         global.searchTrigger.click();
+
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+        let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
+
+        if (global.blackPages.indexOf(namespace) !== -1) { // if black page
+            if (namespace.indexOf("home") !== -1) { // if home
+                if (!global.checkNavScroll()) { // if home and not scrolled down
+                    global.invertNav(100, 0.4);
+                }
+            } else { // if any other black page
+                global.invertNav(100, 0.4);
+            }
+        }
+
         setTimeout(function() {
             global.searchInput.focus();
         }, 300);
+    },
+
+    closeSearch: function () {
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+        let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
+
+        if (global.blackPages.indexOf(namespace) !== -1) { // if black page
+            if (namespace.indexOf("home") !== -1) { // if home
+                if (!global.checkNavScroll()) { // if home and not scrolled down
+                    global.invertNav(0, 0.4);
+                }
+            } else { // if any other black page
+                global.invertNav(0, 0.4);
+            }
+        }    
     },
 
     scrollClickSearch: function() {
@@ -1075,6 +1105,7 @@ global.navScroll();
 global.countdownInit();
 
 global.searchBtn.onclick = global.scrollClickSearch;
+global.searchClose.onmouseup = global.closeSearch;
 
 global.searchInput = document.querySelector('.search__input');
 global.searchMetadata = document.querySelector('.search__metadata');
