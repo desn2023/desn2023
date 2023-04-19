@@ -235,12 +235,7 @@ dyncontent.toggleAllAnim = function (instant = false) {
         n = 1000;
     }
 
-    let tl = gsap.timeline({
-        onComplete: function () {
-            const toggleFilter = wrapper.querySelector(".toggle.is--filter");
-            toggleFilter.style.opacity = "";
-        }
-    });
+    let tl = gsap.timeline();
 
     tl.to(".filter__wrapper__wrapper", {
         duration: Math.min(0.2, n),
@@ -305,12 +300,7 @@ dyncontent.toggleAllClick = function (e) {
 
 dyncontent.toggleFilterClick = function (e) {
 
-    let tl = gsap.timeline({
-        onComplete: function () {
-            const toggleAll = wrapper.querySelector(".toggle.is--all");
-            toggleAll.style.opacity = "";
-        }
-    });
+    let tl = gsap.timeline();
 
     tl.to(e.currentTarget, {
         duration: 0.2,

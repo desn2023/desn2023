@@ -1,4 +1,4 @@
-console.log("v92 toggle hover fix");
+console.log("v90 change number of projects to 115");
 
 let body = document.querySelector("body");
 let global;
