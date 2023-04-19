@@ -155,7 +155,7 @@ penrose.mouseLeave = function (e) {
     // });
 
     gsap.to(".sect.top", {
-        fill: "#333333",
+        fill: "#292929",
         duration: 0.5
     });
 
