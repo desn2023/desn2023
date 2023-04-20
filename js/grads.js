@@ -27,7 +27,7 @@ let projects = {
     randomAgain: true,
     randomSort: true,
     alphaSort: false,
-    quantity: 123,
+    quantity: 132,
     animIn: {
         opacity: 1,
         duration: 0.25,
