@@ -89,10 +89,10 @@ global = { // global values and methods
         if (global.blackPages.indexOf(namespace) !== -1) { // if black page
             if (namespace.indexOf("home") !== -1) { // if home
                 if (!global.checkNavScroll()) { // if home and not scrolled down
-                    global.invertNav(100, 0.4);
+                    global.invertNav(100, 0.4, "none", true);
                 }
             } else { // if any other black page
-                global.invertNav(100, 0.4);
+                global.invertNav(100, 0.4, "none", true);
             }
         }
 
@@ -269,8 +269,15 @@ global = { // global values and methods
         }
     },
 
-    invertNav: function(pct, dur = 0, eas = "none") { // sets invert filter on nav elements
-        gsap.to(global.invertSelector, {
+    invertNav: function(pct, dur = 0, eas = "none", notBg = false) { // sets invert filter on nav elements
+
+        let selector = global.invertSelector;
+
+        if (notBg) {
+            selector = selector.replace(".search__background, ","");
+        }
+
+        gsap.to(selector, {
             filter: "invert(" + pct + ")",
             duration: dur,
             ease: eas

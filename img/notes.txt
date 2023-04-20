@@ -35,5 +35,8 @@ grad thumbnail: 735px ---- fm=webp&lossless=1&w=735
 grad profile: 930px  ---- fm=webp&lossless=1&w=930
 project thumbnail: 616 x 387, 735 x 422, 1116 x 752 ---- fm=webp&lossless=1&fit=crop&w=1116&h=800
 fm=webp&lossless=1&fit=crop&w=1116&h=800
-project hero: convert ---- fm=webp&lossless=1
-project image: 1880px ---- fm=webp&lossless=1&w=1880
+
+fm=webp&fit=crop&w=735&h=422
+
+project hero: convert ---- fm=webp&w=1920
+project image: 1880px ---- fm=webp&lossless=1&w=1880 (TAKE OUT SIZE LIMIT)
