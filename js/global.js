@@ -1068,6 +1068,7 @@ barba.init({
                 // cmsLoad();
                 penrose.counter = 0;
                 penrose.init();
+                showreelModalInit();
                 global.homeInit();
                 window.onresize = function() {
                     global.mobileMenuClose();
@@ -1261,50 +1262,45 @@ global.searchInput.addEventListener('input', () => {
 
 // MODAL OPEN/CLOSE
 
-
-// Check if Webflow is already defined or not
-var Webflow = Webflow || [];
-
-// When DOM is ready, execute the code inside the function
-document.addEventListener("DOMContentLoaded", function() {
-    // Select the elements
-    var iframe = document.querySelector('iframe');
-    var modal = document.querySelector('.showreel__modal');
-
-    // Create a new Vimeo player instance
-    var player = new Vimeo.Player(iframe);
-
-    // Add click event listener to play button
-    document.querySelector('#btnPlay').addEventListener('click', function() {
-        // Show the modal and fade it in
-        modal.style.display = 'block';
-        modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-
-        // Start playing the video
-        player.play();
-    });
-
-    // Add click event listener to reset button
-    document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
-        // Pause the video and reset the time
-        player.pause();
-        player.setCurrentTime(0);
-
-        // Fade out the modal and hide it
-        modal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' })
-            .onfinish = function() {
-                modal.style.display = 'none';
-            };
-    });
-});
-
-//hover effcect for modal
-
 document.addEventListener('DOMContentLoaded', function() {
-    showreelHover();
+    showreelModalInit();
 });
 
-function showreelHover() {
+function showreelModalInit() {
+    // When DOM is ready, execute the code inside the function
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the elements
+        var iframe = document.querySelector('iframe');
+        var modal = document.querySelector('.showreel__modal');
+
+        // Create a new Vimeo player instance
+        var player = new Vimeo.Player(iframe);
+
+        // Add click event listener to play button
+        document.querySelector('#btnPlay').addEventListener('click', function() {
+            // Show the modal and fade it in
+            modal.style.display = 'block';
+            modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
+
+            // Start playing the video
+            player.play();
+        });
+
+        // Add click event listener to reset button
+        document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
+            // Pause the video and reset the time
+            player.pause();
+            player.setCurrentTime(0);
+
+            // Fade out the modal and hide it
+            modal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' })
+                .onfinish = function() {
+                    modal.style.display = 'none';
+                };
+        });
+    });
+
+    //hover effcect for modal
 
     let showreelContainer = document.querySelector('.showreel__container');
     let showreelOverlay = document.querySelector('.showreel__overlay');
