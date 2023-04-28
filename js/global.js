@@ -1,4 +1,4 @@
-console.log("v111 showreel modal hover effect");
+console.log("v112 showreel modal hover effect edit");
 
 let body = document.querySelector("body");
 let global;
@@ -1306,8 +1306,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function showreelHover() {
 
-    let showreelContainer = document.querySelectorAll('.showreel__container');
-    let showreelOverlay = document.querySelectorAll('.showreel__overlay');
+    let showreelContainer = document.querySelector('.showreel__container');
+    let showreelOverlay = document.querySelector('.showreel__overlay');
 
     showreelContainer.addEventListener('mouseover', function() {
         gsap.to(showreelOverlay.style, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.2)' });
