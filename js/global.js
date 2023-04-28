@@ -49,7 +49,7 @@ global = { // global values and methods
         delayToBlack: 0.2
     },
 
-    searchInit: function () {
+    searchInit: function() {
 
         // delete invisible ones
 
@@ -58,7 +58,7 @@ global = { // global values and methods
 
         if (invisDis !== null) {
             if (invisDis.length > 0) {
-                invisDis.forEach(function (dis) {
+                invisDis.forEach(function(dis) {
                     dis.remove();
                 });
             }
@@ -68,9 +68,9 @@ global = { // global values and methods
 
         let searchItems = Array.from(searchList.querySelectorAll(".project__item"));
 
-        if (searchItems !== null) { 
+        if (searchItems !== null) {
             if (searchItems.length > 0) {
-                searchItems.forEach(function (item) {
+                searchItems.forEach(function(item) {
                     dyncontent.sortDisciplines(item, ".project__td");
                 });
             }
@@ -78,7 +78,7 @@ global = { // global values and methods
 
     },
 
-    openSearch: function () {
+    openSearch: function() {
         // Once scrolling is complete, simulate a click on the search button
         global.searchTrigger.click();
         global.searchOpen = true;
@@ -101,7 +101,7 @@ global = { // global values and methods
         }, 400);
     },
 
-    closeSearch: function () {
+    closeSearch: function() {
 
         global.searchOpen = false;
 
@@ -218,7 +218,7 @@ global = { // global values and methods
         }
     },
 
-    caseStudyInit: function () {
+    caseStudyInit: function() {
 
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
@@ -231,7 +231,7 @@ global = { // global values and methods
         let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
         if (projectItems !== null) {
             if (projectItems.length > 0) {
-                projectItems.forEach(function (item) {
+                projectItems.forEach(function(item) {
                     dyncontent.sortDisciplines(item, ".project__td");
                 });
             }
@@ -274,7 +274,7 @@ global = { // global values and methods
         let selector = global.invertSelector;
 
         if (notBg) {
-            selector = selector.replace(".search__background, ","");
+            selector = selector.replace(".search__background, ", "");
         }
 
         gsap.to(selector, {
@@ -325,12 +325,12 @@ global = { // global values and methods
     //     });
     // },
 
-    resizeSliderHeight: function (slider) {
+    resizeSliderHeight: function(slider) {
         let items = Array.from(slider.querySelectorAll(".cs__item"));
         if (items !== null) {
             if (items.length > 0) {
                 let minHeight = null;
-                items.forEach(function (item) {
+                items.forEach(function(item) {
                     if (minHeight == null) {
                         minHeight = item.clientHeight;
                     } else {
@@ -342,18 +342,18 @@ global = { // global values and methods
         }
     },
 
-    resizeTinySliders: function () {
+    resizeTinySliders: function() {
         let sliders = Array.from(document.querySelectorAll(".tns__slider"));
         if (sliders !== null) {
             if (sliders.length > 0) {
-                sliders.forEach(function (slider) {
+                sliders.forEach(function(slider) {
                     global.resizeSliderHeight(slider);
                 });
             }
         }
     },
 
-    createSlider: function (list, index) {
+    createSlider: function(list, index) {
 
         let csItems = Array.from(list.querySelectorAll(".cs__item"));
 
@@ -366,7 +366,7 @@ global = { // global values and methods
                 container.classList.add("tns__slider");
                 container.classList.add("tns--" + index);
                 // add more classes?
-                csItems.forEach(function (item) {
+                csItems.forEach(function(item) {
                     // if (minHeight == null) {
                     //     minHeight = item.clientHeight;
                     // } else {
@@ -391,7 +391,7 @@ global = { // global values and methods
                 csSlider.appendChild(prevBtn);
                 csSlider.appendChild(nextBtn);
 
-                let slider = tns ({
+                let slider = tns({
                     container: '.tns__slider.tns--' + index,
                     items: list.length,
                     mode: "gallery",
@@ -408,14 +408,14 @@ global = { // global values and methods
         }
     },
 
-    sliderInit: function () {
+    sliderInit: function() {
         let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
         let csListSliders = Array.from(wrapper.querySelectorAll(".cs__list.is--slider"));
 
         if (csListSliders !== null) {
             if (csListSliders.length > 0) {
-                csListSliders.forEach(function (list, index) {
+                csListSliders.forEach(function(list, index) {
                     global.createSlider(list, index);
                 });
             }
@@ -662,8 +662,7 @@ barba.init({
     preventRunning: true,
     sync: true,
     timeout: 20000,
-    transitions: [
-        {
+    transitions: [{
             name: 'white-white-transition',
 
             from: { namespace: global.whitePages },
@@ -1063,8 +1062,8 @@ barba.init({
         }
     ],
 
-    views: [
-        {   namespace: 'home',
+    views: [{
+            namespace: 'home',
             afterEnter() {
                 // cmsLoad();
                 penrose.counter = 0;
@@ -1076,7 +1075,8 @@ barba.init({
                 }
             }
         },
-        {   namespace: 'graduates',
+        {
+            namespace: 'graduates',
             afterEnter() {
                 // cmsLoad();
                 window.onresize = function() {
@@ -1085,7 +1085,8 @@ barba.init({
                 grads.init();
             }
         },
-        {   namespace: 'work',
+        {
+            namespace: 'work',
             beforeLeave() {
                 projects.moveBack();
             },
@@ -1107,13 +1108,14 @@ barba.init({
                 //     },
                 // ]);
                 window.onresize = function() {
-                        global.mobileMenuClose();
+                    global.mobileMenuClose();
                 }
                 projects.populate();
                 // projects.init();
             }
         },
-        {   namespace: 'events',
+        {
+            namespace: 'events',
             afterEnter() {
                 // cmsLoad();
                 window.onresize = function() {
@@ -1121,7 +1123,8 @@ barba.init({
                 }
             }
         },
-        {   namespace: 'about',
+        {
+            namespace: 'about',
             afterEnter() {
                 // cmsLoad();
                 window.onresize = function() {
@@ -1129,7 +1132,8 @@ barba.init({
                 }
             }
         },
-        {   namespace: 'profile',
+        {
+            namespace: 'profile',
             afterEnter() {
                 // cmsLoad();
                 let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
@@ -1139,28 +1143,28 @@ barba.init({
                 let disciplinesList = item.querySelector(".profile__disciplines"); // get disciplines list
 
                 // select top item
-            
+
                 let disciplineTop = wrapper.querySelector(topSelect);
                 let disciplineH1s;
-            
+
                 if (disciplinesList !== null) {
                     disciplineH1s = Array.from(disciplinesList.querySelectorAll("div > .title"));
                 }
-            
+
                 let topItem;
-            
+
                 if (disciplineH1s !== null && disciplineH1s !== undefined) {
                     if (disciplineH1s.length > 0) {
-                        disciplineH1s.forEach(function (h1, index) {
+                        disciplineH1s.forEach(function(h1, index) {
                             if (h1.innerText == disciplineTop.innerText && index !== 0) {
                                 topItem = h1.parentElement;
                             }
                         });
                     }
                 }
-            
+
                 // reorder
-            
+
                 if (topItem !== undefined) {
                     topItem.remove();
                     disciplinesList.insertBefore(topItem, disciplinesList.firstChild);
@@ -1171,7 +1175,7 @@ barba.init({
                 let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
                 if (projectItems !== null) {
                     if (projectItems.length > 0) {
-                        projectItems.forEach(function (item) {
+                        projectItems.forEach(function(item) {
                             dyncontent.sortDisciplines(item, ".project__td");
                         });
                     }
@@ -1181,7 +1185,8 @@ barba.init({
                 }
             }
         },
-        {   namespace: 'casestudy',
+        {
+            namespace: 'casestudy',
             beforeEnter() {
                 if (global.searchOpen) {
                     global.searchClose.click();
@@ -1212,7 +1217,7 @@ if (global.blackPages.indexOf(global.initNamespace) == -1) {
 global.navScroll();
 global.countdownInit();
 
-(function () { // prepare search
+(function() { // prepare search
     let searchList = document.querySelector(".project__list.is--search");
 
     let itemCount = searchList.childElementCount;
@@ -1222,7 +1227,7 @@ global.countdownInit();
     if (itemCount >= projects.quantity) {
         global.searchInit();
     } else {
-        global.searchCheckFs = setInterval(function () {
+        global.searchCheckFs = setInterval(function() {
 
             let itemCount = searchList.childElementCount;
             let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
@@ -1245,9 +1250,34 @@ global.searchInput = document.querySelector('.search__input');
 global.searchMetadata = document.querySelector('.search__metadata');
 
 global.searchInput.addEventListener('input', () => {
-  if (global.searchInput.value.length > 0) {
-    global.searchMetadata.style.display = 'block';
-  } else {
-    global.searchMetadata.style.display = 'none';
-  }
+    if (global.searchInput.value.length > 0) {
+        global.searchMetadata.style.display = 'block';
+    } else {
+        global.searchMetadata.style.display = 'none';
+    }
+});
+
+
+
+// Modal Open/Close
+
+
+
+var Webflow = Webflow || [];
+Webflow.push(function() {
+    // DOMready has fired
+    // May now use jQuery and Webflow API
+
+    var iframe = document.querySelector('iframe');
+    var player = new Vimeo.Player(iframe);
+
+    $('#btnPlay').click(function() {
+        player.play();
+    });
+
+    $('#btnReset').click(function() {
+        player.pause();
+        player.setCurrentTime(0);
+    });
+
 });
