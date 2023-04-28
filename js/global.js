@@ -1,4 +1,4 @@
-console.log("v114 showreel modal hover effect edit");
+console.log("v115 showreel modal init");
 
 let body = document.querySelector("body");
 let global;
