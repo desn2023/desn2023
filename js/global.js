@@ -1,4 +1,4 @@
-console.log("v110 showreel modal edit 1");
+console.log("v111 showreel modal hover effect");
 
 let body = document.querySelector("body");
 let global;
@@ -1259,8 +1259,7 @@ global.searchInput.addEventListener('input', () => {
 
 
 
-// Modal Open/Close
-
+// MODAL OPEN/CLOSE
 
 
 // Check if Webflow is already defined or not
@@ -1298,3 +1297,24 @@ document.addEventListener("DOMContentLoaded", function() {
             };
     });
 });
+
+//hover effcect for modal
+
+document.addEventListener('DOMContentLoaded', function() {
+    showreelHover();
+});
+
+function showreelHover() {
+
+    let showreelContainer = document.querySelectorAll('.showreel__container');
+    let showreelOverlay = document.querySelectorAll('.showreel__overlay');
+
+    showreelContainer.addEventListener('mouseover', function() {
+        gsap.to(showreelOverlay.style, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.2)' });
+    });
+
+    showreelContainer.addEventListener('mouseout', function() {
+        gsap.to(showreelOverlay.style, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.4)' });
+
+    })
+};
