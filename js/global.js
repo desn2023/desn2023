@@ -1286,7 +1286,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Add click event listener to reset button
-    document.querySelector('#btnReset').addEventListener('click', function() {
+    document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
         // Pause the video and reset the time
         player.pause();
         player.setCurrentTime(0);
