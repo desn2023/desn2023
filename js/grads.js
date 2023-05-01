@@ -636,14 +636,20 @@ grads.init = function () {
     grads.filters = Array.from(wrapper.querySelectorAll(".filter__item"));
 
     grads.filters.forEach(function (option) {
-        option.onclick = grads.filterClick;
+        // option.onclick = grads.filterClick;
+        option.addEventListener("click", global.debounce(grads.filterClick, 250, true));
+        option.addEventListener("touchstart", global.debounce(grads.filterClick, 250, true));
     });
 
     const toggleAll = wrapper.querySelector(".toggle.is--all");
-    toggleAll.onclick = dyncontent.toggleAllClick;
+    // toggleAll.onclick = dyncontent.toggleAllClick;
+    toggleAll.addEventListener("click", global.debounce(dyncontent.toggleAllClick, 250, true));
+    toggleAll.addEventListener("touchstart", global.debounce(dyncontent.toggleAllClick, 250, true));
 
     const toggleFilter = wrapper.querySelector(".toggle.is--filter");
-    toggleFilter.onclick = dyncontent.toggleFilterClick;
+    // toggleFilter.onclick = dyncontent.toggleFilterClick;
+    toggleFilter.addEventListener("click", global.debounce(dyncontent.toggleFilterClick, 250, true));
+    toggleFilter.addEventListener("touchstart", global.debounce(dyncontent.toggleFilterClick, 250, true));
 
     dyncontent.toggleAllAnim(true);
 }
