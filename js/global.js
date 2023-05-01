@@ -1,10 +1,15 @@
-console.log("v115 showreel modal init");
+console.log("v116 moving code");
 
 let body = document.querySelector("body");
 let global;
 let home;
 
-global = { // global values and methods
+
+
+
+// GLOBAL VALUES AND METHODS
+
+global = {
 
     // IMPORTANT VARIABLES
 
@@ -15,7 +20,6 @@ global = { // global values and methods
     countdownDeadline: "2023/04/20 16:00",
     initNamespace: document.querySelector(".wrapper").getAttribute("data-barba-namespace"),
     searchOpen: false,
-
 
     // GLOBAL ELEMENTS
 
@@ -29,6 +33,9 @@ global = { // global values and methods
     searchClose: document.querySelector(".search__link.is--close"),
     searchMobile: document.querySelector(".icon__menu:first-child"),
     searchBackground: document.querySelector(".search__background"),
+
+
+
 
     // TRANSITIONS
 
@@ -47,139 +54,6 @@ global = { // global values and methods
         },
 
         delayToBlack: 0.2
-    },
-
-    searchInit: function() {
-
-        // delete invisible ones
-
-        let searchList = document.querySelector(".project__list.is--search");
-        let invisDis = Array.from(searchList.querySelectorAll(".disciplines__item.w-condition-invisible"));
-
-        if (invisDis !== null) {
-            if (invisDis.length > 0) {
-                invisDis.forEach(function(dis) {
-                    dis.remove();
-                });
-            }
-        }
-
-        // sort disciplines
-
-        let searchItems = Array.from(searchList.querySelectorAll(".project__item"));
-
-        if (searchItems !== null) {
-            if (searchItems.length > 0) {
-                searchItems.forEach(function(item) {
-                    dyncontent.sortDisciplines(item, ".project__td");
-                });
-            }
-        }
-
-    },
-
-    openSearch: function() {
-        // Once scrolling is complete, simulate a click on the search button
-        global.searchTrigger.click();
-        global.searchOpen = true;
-
-        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
-        let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
-
-        if (global.blackPages.indexOf(namespace) !== -1) { // if black page
-            if (namespace.indexOf("home") !== -1) { // if home
-                if (!global.checkNavScroll()) { // if home and not scrolled down
-                    global.invertNav(100, 0.4, "none", true);
-                }
-            } else { // if any other black page
-                global.invertNav(100, 0.4, "none", true);
-            }
-        }
-
-        setTimeout(function() {
-            global.searchInput.focus();
-        }, 400);
-    },
-
-    closeSearch: function() {
-
-        global.searchOpen = false;
-
-        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
-        let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
-
-        if (global.blackPages.indexOf(namespace) !== -1) { // if black page
-            if (namespace.indexOf("home") !== -1) { // if home
-                if (!global.checkNavScroll()) { // if home and not scrolled down
-                    global.invertNav(0, 0.4);
-                }
-            } else { // if any other black page
-                global.invertNav(0, 0.4);
-            }
-        }
-    },
-
-    scrollClickSearch: function() {
-        // Check if the page is already at the top
-        if (window.pageYOffset == 0) {
-            // If the page is already at the top, simulate a click on the search button immediately
-            global.openSearch();
-        } else {
-            // If the page is not at the top, scroll to top using gsap ease transition
-            gsap.to(window, {
-                duration: 0.5,
-                scrollTo: 0,
-                ease: "power2.inOut",
-                onComplete: function() {
-                    global.openSearch();
-                }
-            });
-        }
-    },
-
-    homeInit: function() { // randomize featured work and reveal home content
-
-        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
-
-        // get all of the little ones
-        let featSmall = Array.from(wrapper.querySelectorAll(".project__list .project__item"));
-
-        // randomize the order
-        let randSmall = global.shuffleArray(featSmall);
-
-        //turn off all but 4
-        for (let i = 0; i < randSmall.length - 3; i++) {
-            // remove from html
-            randSmall[i].remove();
-        }
-
-        // turn off another and move it to the big feature
-        // get info and add it to the big one
-        let featBig = global.elementNext(document.querySelector(".is--hero"));
-
-        featBig.querySelector(".title.is--small:not(.is--grey)").innerHTML = randSmall[0].querySelector(".title:not(.is--small)").innerHTML;
-        featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
-        featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
-        featBig.querySelector(".project__thumbnail").href = randSmall[0].querySelector(".project__link").getAttribute("href");
-        featBig.querySelector(".link:not(.is--udl)").href = randSmall[0].querySelector(".link").getAttribute("href");
-        featBig.querySelector(".link.hover--black").href = randSmall[0].querySelector(".project__link").getAttribute("href");
-
-        // remove from small
-        randSmall[0].remove();
-
-        // reorder disciplines
-
-        let gradsItems = Array.from(wrapper.querySelectorAll(".grads__item"));
-
-        gradsItems.forEach(function(item) {
-            dyncontent.sortDisciplines(item, ".grads__td");
-        });
-
-        gsap.to(".home__content > .container", {
-            opacity: 1,
-            duration: 0.4,
-            ease: "power2.inOut"
-        });
     },
 
     bannerIn: function(after) { // banner transition
@@ -218,56 +92,143 @@ global = { // global values and methods
         }
     },
 
-    caseStudyInit: function() {
 
-        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+
+    // SEARCH
+
+    searchInit: function() { // set up search disciplines
+
+        // delete invisible ones
+
+        let searchList = document.querySelector(".project__list.is--search");
+        let invisDis = Array.from(searchList.querySelectorAll(".disciplines__item.w-condition-invisible"));
+
+        if (invisDis !== null) {
+            if (invisDis.length > 0) {
+                invisDis.forEach(function(dis) {
+                    dis.remove();
+                });
+            }
+        }
 
         // sort disciplines
 
-        let csPrimary = wrapper.querySelector(".cs__primary");
+        let searchItems = Array.from(searchList.querySelectorAll(".project__item"));
 
-        dyncontent.sortDisciplines(csPrimary, ".project__td");
-
-        let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
-        if (projectItems !== null) {
-            if (projectItems.length > 0) {
-                projectItems.forEach(function(item) {
+        if (searchItems !== null) {
+            if (searchItems.length > 0) {
+                searchItems.forEach(function(item) {
                     dyncontent.sortDisciplines(item, ".project__td");
                 });
             }
         }
 
-        global.sliderInit();
+    },
 
-        let projectData = wrapper.querySelector(".cs__metadata");
-        let triggerProjectData = wrapper.querySelector(".dropdown__trigger");
+    openSearch: function() { // trigger ix2 transition
+        // Once scrolling is complete, simulate a click on the search button
+        global.searchTrigger.click();
+        global.searchOpen = true;
 
-        // metadata expand and collapse
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+        let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
 
-        triggerProjectData.onclick = function() {
+        if (global.blackPages.indexOf(namespace) !== -1) { // if black page
+            if (namespace.indexOf("home") !== -1) { // if home
+                if (!global.checkNavScroll()) { // if home and not scrolled down
+                    global.invertNav(100, 0.4, "none", true);
+                }
+            } else { // if any other black page
+                global.invertNav(100, 0.4, "none", true);
+            }
+        }
 
-            if (projectData.style.height != "auto") {
-                projectData.style.height = "auto";
-                wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
-                wrapper.querySelector(".dropdown__line.is--horizontal").style.height = 0;
-                wrapper.querySelector(".dropdown__line.is--horizontal").style.width = 0;
-                setTimeout(() => {
-                    wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
-                    wrapper.querySelector(".dropdown__icon").style.transform = "rotate(90deg)";
-                }, 200);
+        setTimeout(function() {
+            global.searchInput.focus();
+        }, 400);
+    },
 
-            } else if (projectData.style.height != 0) {
-                projectData.style.height = 0;
-                wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
-                wrapper.querySelector(".dropdown__line.is--horizontal").style.width = "20px";
-                wrapper.querySelector(".dropdown__line.is--horizontal").style.height = "1px";
-                setTimeout(() => {
-                    wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
-                    wrapper.querySelector(".dropdown__icon").style.transform = "rotate(0deg)";
-                }, 200);
+    closeSearch: function() { // trigger ix2 transition
+
+        global.searchOpen = false;
+
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+        let namespace = global.replaceChar(wrapper.getAttribute("data-barba-namespace"));
+
+        if (global.blackPages.indexOf(namespace) !== -1) { // if black page
+            if (namespace.indexOf("home") !== -1) { // if home
+                if (!global.checkNavScroll()) { // if home and not scrolled down
+                    global.invertNav(0, 0.4);
+                }
+            } else { // if any other black page
+                global.invertNav(0, 0.4);
             }
         }
     },
+
+    scrollClickSearch: function() { // scroll to top first before openSearch()
+        // Check if the page is already at the top
+        if (window.pageYOffset == 0) {
+            // If the page is already at the top, simulate a click on the search button immediately
+            global.openSearch();
+        } else {
+            // If the page is not at the top, scroll to top using gsap ease transition
+            gsap.to(window, {
+                duration: 0.5,
+                scrollTo: 0,
+                ease: "power2.inOut",
+                onComplete: function() {
+                    global.openSearch();
+                }
+            });
+        }
+    },
+
+    prepareSearch: function() { // before init
+        let searchList = document.querySelector(".project__list.is--search");
+
+        let itemCount = searchList.childElementCount;
+        let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
+        itemCount -= itemsInvalid.length;
+    
+        if (itemCount >= projects.quantity) {
+            global.searchInit();
+        } else {
+            global.searchCheckFs = setInterval(function() {
+    
+                let itemCount = searchList.childElementCount;
+                let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
+                itemCount -= itemsInvalid.length;
+    
+                if (itemCount >= projects.quantity) {
+                    clearInterval(projects.searchCheckFs);
+                    global.searchInit();
+                }
+            }, 250);
+        }
+
+        global.searchBtn.onclick = global.scrollClickSearch;
+        global.searchMobile.onclick = global.scrollClickSearch;
+        global.searchClose.onmouseup = global.closeSearch;
+        global.searchBackground.onmouseup = global.closeSearch;
+
+        global.searchInput = document.querySelector('.search__input');
+        global.searchMetadata = document.querySelector('.search__metadata');
+
+        global.searchInput.addEventListener('input', () => {
+            if (global.searchInput.value.length > 0) {
+                global.searchMetadata.style.display = 'block';
+            } else {
+                global.searchMetadata.style.display = 'none';
+            }
+        });
+    },
+
+
+
+
+    // NAV
 
     invertNav: function(pct, dur = 0, eas = "none", notBg = false) { // sets invert filter on nav elements
 
@@ -309,21 +270,98 @@ global = { // global values and methods
         }
     },
 
-    // resizeSlider: function(slider) { // doesn't work
-    //         let firstImg = slider.querySelector(".cs__img");
-    //         let firstImgHeight = firstImg.clientHeight;
+    checkNavScroll: function() { // returns true if opaque nav is on
 
-    //         let wSlider = slider.querySelector(".slider");
-    //         wSlider.style.height = firstImgHeight + "px";
-    // },
+        let banner = document.querySelector(".banner");
+        let marker = document.querySelector(".marker");
+        let threshold = 93; // WITH BANNER
 
-    // resizeAllSliders: function () { // sets height of sliders to auto
-    //     let sliders = Array.from(document.querySelectorAll(".slider"));
-    //     sliders.forEach(function(slider) {
-    //         // global.resizeSlider(slider);
-    //         slider.style.height = "auto";
-    //     });
-    // },
+        if (banner == null) {
+            threshold = 43; // WITHOUT BANNER
+        }
+
+        if (marker.getBoundingClientRect().top <= threshold) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    navScroll: function() { // creates intersection observer to watch marker
+
+        let margin;
+
+        if (document.querySelector(".banner") == null) {
+            margin = "-43px 0px 0px 500px"; // WITHOUT BANNER
+        } else {
+            margin = "-93px 0px 0px 500px"; // WITH BANNER
+        }
+
+        let options = { // options for IntersectionObserver
+            root: null,
+            rootMargin: margin,
+            threshold: 0
+        }
+
+        // if global.observer exists, disconnect
+        if (global.observer !== undefined && global.observer !== null) {
+            global.observer.disconnect();
+        }
+
+        // get target barba container
+        let container = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        let callback = function(entries, observer) {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) { // if marker is in viewport
+
+                    global.navBg("transparent");
+
+                    let namespace = container.getAttribute("data-barba-namespace");
+
+                    if (
+                        global.blackPages.indexOf(namespace) == -1
+                    ) {
+                        global.invertNav(100); // if white page
+                    } else {
+                        global.invertNav(0); // if black page
+                    }
+                } else { // if marker not in viewport
+
+                    let namespace = container.getAttribute("data-barba-namespace");
+
+                    if (global.blackPages.indexOf(namespace) == -1 || namespace == "home") {
+                        // if white page or home, opaque nav is white
+                        global.navBg("white");
+                        global.invertNav(100);
+                    } else {
+                        // if black page, opaque nav is black
+                        global.navBg("black");
+                    }
+                }
+            });
+        }
+
+        // start observing
+
+        global.observer = new IntersectionObserver(callback, options);
+        global.marker = global.elementNext(document.querySelectorAll(".marker"));
+
+        if (global.marker !== undefined) {
+            global.observer.observe(global.marker);
+        }
+    },
+
+    preventScroll: function() {
+        window.onscroll = function() {
+            window.scrollTo(0, 0);
+        }
+    },
+
+
+
+
+    // SLIDERS
 
     resizeSliderHeight: function(slider) {
         let items = Array.from(slider.querySelectorAll(".cs__item"));
@@ -422,6 +460,112 @@ global = { // global values and methods
         }
     },
 
+
+
+    // SPECIAL FEATURES
+
+    showreelModalInit: function() {
+        // When DOM is ready, execute the code inside the function
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select the elements
+            var iframe = document.querySelector('iframe');
+            var modal = document.querySelector('.showreel__modal');
+    
+            // Create a new Vimeo player instance
+            var player = new Vimeo.Player(iframe);
+    
+            // Add click event listener to play button
+            document.querySelector('#btnPlay').addEventListener('click', function() {
+                // Show the modal and fade it in
+                modal.style.display = 'block';
+                modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
+    
+                // Start playing the video
+                player.play();
+            });
+    
+            // Add click event listener to reset button
+            document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
+                // Pause the video and reset the time
+                player.pause();
+                player.setCurrentTime(0);
+    
+                // Fade out the modal and hide it
+                modal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' })
+                    .onfinish = function() {
+                        modal.style.display = 'none';
+                    };
+            });
+        });
+    
+        // hover effcect for modal
+    
+        let showreelContainer = document.querySelector('.showreel__container');
+        let showreelOverlay = document.querySelector('.showreel__overlay');
+    
+        showreelContainer.addEventListener('mouseover', function() {
+            gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.1)' });
+        });
+    
+        showreelContainer.addEventListener('mouseout', function() {
+            gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.4)' });
+    
+        })
+    },
+
+    countdownInit: function() { // set and start countdown
+
+        // moved deadline to splashParams
+
+        function pad(num, size) {
+            var s = "0" + num;
+            return s.substring(s.length - size);
+        }
+
+        // fixes "Date.parse(date)" on safari
+        function parseDate(date) {
+            const parsed = Date.parse(date);
+            if (!isNaN(parsed)) return parsed
+            return Date.parse(date.replace(/-/g, '/').replace(/[a-z]+/gi, ' '));
+        }
+
+        function getTimeRemaining(endtime) {
+            let total = parseDate(endtime) - Date.parse(new Date())
+            let seconds = Math.floor((total / 1000) % 60)
+            let minutes = Math.floor((total / 1000 / 60) % 60)
+            let hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+            let days = Math.floor(total / (1000 * 60 * 60 * 24))
+
+            return { total, days, hours, minutes, seconds };
+        }
+
+        function clock(id, endtime) {
+            let days = document.getElementById(id + '-days')
+            let hours = document.getElementById(id + '-hours')
+            let minutes = document.getElementById(id + '-minutes')
+            let seconds = document.getElementById(id + '-seconds')
+
+            var timeinterval = setInterval(function() {
+                var time = getTimeRemaining(endtime);
+
+                if (time.total <= 0) {
+                    clearInterval(timeinterval);
+                } else {
+                    days.innerHTML = pad(time.days, 2);
+                    hours.innerHTML = pad(time.hours, 2);
+                    minutes.innerHTML = pad(time.minutes, 2);
+                    seconds.innerHTML = pad(time.seconds, 2);
+                }
+            }, 1000);
+        }
+
+        clock('js-clock', global.countdownDeadline);
+    },
+
+
+
+    // UTILITY
+
     shuffleArray: function(array) { // shuffle items in array
 
         for (let i = array.length - 1; i > 0; i--) {
@@ -516,146 +660,119 @@ global = { // global values and methods
         return element;
     },
 
-    checkNavScroll: function() { // returns true if opaque nav is on
 
-        let banner = document.querySelector(".banner");
-        let marker = document.querySelector(".marker");
-        let threshold = 93; // WITH BANNER
 
-        if (banner == null) {
-            threshold = 43; // WITHOUT BANNER
+
+    // PAGES
+
+    homeInit: function() { // randomize featured work and reveal home content
+
+        // penrose
+        penrose.counter = 0;
+        penrose.init();
+
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        // get all of the little ones
+        let featSmall = Array.from(wrapper.querySelectorAll(".project__list .project__item"));
+
+        // randomize the order
+        let randSmall = global.shuffleArray(featSmall);
+
+        //turn off all but 4
+        for (let i = 0; i < randSmall.length - 3; i++) {
+            // remove from html
+            randSmall[i].remove();
         }
 
-        if (marker.getBoundingClientRect().top <= threshold) {
-            return true;
-        } else {
-            return false;
-        }
+        // turn off another and move it to the big feature
+        // get info and add it to the big one
+        let featBig = global.elementNext(document.querySelector(".is--hero"));
+
+        featBig.querySelector(".title.is--small:not(.is--grey)").innerHTML = randSmall[0].querySelector(".title:not(.is--small)").innerHTML;
+        featBig.querySelector(".title.is--grey").innerHTML = randSmall[0].querySelector(".title.is--small").innerHTML;
+        featBig.querySelector(".project__thumbnail").style = randSmall[0].querySelector(".project__thumbnail").getAttribute("style");
+        featBig.querySelector(".project__thumbnail").href = randSmall[0].querySelector(".project__link").getAttribute("href");
+        featBig.querySelector(".link:not(.is--udl)").href = randSmall[0].querySelector(".link").getAttribute("href");
+        featBig.querySelector(".link.hover--black").href = randSmall[0].querySelector(".project__link").getAttribute("href");
+
+        // remove from small
+        randSmall[0].remove();
+
+        // reorder disciplines
+
+        let gradsItems = Array.from(wrapper.querySelectorAll(".grads__item"));
+
+        gradsItems.forEach(function(item) {
+            dyncontent.sortDisciplines(item, ".grads__td");
+        });
+
+        gsap.to(".home__content > .container", {
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.inOut"
+        });
+
+        // modal
+        global.showreelModalInit();
     },
 
-    navScroll: function() { // creates intersection observer to watch marker
+    caseStudyInit: function() {
 
-        let margin;
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
 
-        if (document.querySelector(".banner") == null) {
-            margin = "-43px 0px 0px 500px"; // WITHOUT BANNER
-        } else {
-            margin = "-93px 0px 0px 500px"; // WITH BANNER
+        // sort disciplines
+
+        let csPrimary = wrapper.querySelector(".cs__primary");
+
+        dyncontent.sortDisciplines(csPrimary, ".project__td");
+
+        let projectItems = Array.from(wrapper.querySelectorAll(".project__item"));
+        if (projectItems !== null) {
+            if (projectItems.length > 0) {
+                projectItems.forEach(function(item) {
+                    dyncontent.sortDisciplines(item, ".project__td");
+                });
+            }
         }
 
-        let options = { // options for IntersectionObserver
-            root: null,
-            rootMargin: margin,
-            threshold: 0
+        global.sliderInit();
+
+        let projectData = wrapper.querySelector(".cs__metadata");
+        let triggerProjectData = wrapper.querySelector(".dropdown__trigger");
+
+        // metadata expand and collapse
+
+        triggerProjectData.onclick = function() {
+
+            if (projectData.style.height != "auto") {
+                projectData.style.height = "auto";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.height = 0;
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.width = 0;
+                setTimeout(() => {
+                    wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
+                    wrapper.querySelector(".dropdown__icon").style.transform = "rotate(90deg)";
+                }, 200);
+
+            } else if (projectData.style.height != 0) {
+                projectData.style.height = 0;
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.width = "20px";
+                wrapper.querySelector(".dropdown__line.is--horizontal").style.height = "1px";
+                setTimeout(() => {
+                    wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
+                    wrapper.querySelector(".dropdown__icon").style.transform = "rotate(0deg)";
+                }, 200);
+            }
         }
-
-        // if global.observer exists, disconnect
-        if (global.observer !== undefined && global.observer !== null) {
-            global.observer.disconnect();
-        }
-
-        // get target barba container
-        let container = global.elementNext(document.querySelectorAll(".wrapper"));
-
-        let callback = function(entries, observer) {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) { // if marker is in viewport
-
-                    global.navBg("transparent");
-
-                    let namespace = container.getAttribute("data-barba-namespace");
-
-                    if (
-                        global.blackPages.indexOf(namespace) == -1
-                    ) {
-                        global.invertNav(100); // if white page
-                    } else {
-                        global.invertNav(0); // if black page
-                    }
-                } else { // if marker not in viewport
-
-                    let namespace = container.getAttribute("data-barba-namespace");
-
-                    if (global.blackPages.indexOf(namespace) == -1 || namespace == "home") {
-                        // if white page or home, opaque nav is white
-                        global.navBg("white");
-                        global.invertNav(100);
-                    } else {
-                        // if black page, opaque nav is black
-                        global.navBg("black");
-                    }
-                }
-            });
-        }
-
-        // start observing
-
-        global.observer = new IntersectionObserver(callback, options);
-        global.marker = global.elementNext(document.querySelectorAll(".marker"));
-
-        if (global.marker !== undefined) {
-            global.observer.observe(global.marker);
-        }
-    },
-
-    preventScroll: function() {
-        window.onscroll = function() {
-            window.scrollTo(0, 0);
-        }
-    },
-
-    countdownInit: function() { // set and start countdown
-
-        // moved deadline to splashParams
-
-        function pad(num, size) {
-            var s = "0" + num;
-            return s.substring(s.length - size);
-        }
-
-        // fixes "Date.parse(date)" on safari
-        function parseDate(date) {
-            const parsed = Date.parse(date);
-            if (!isNaN(parsed)) return parsed
-            return Date.parse(date.replace(/-/g, '/').replace(/[a-z]+/gi, ' '));
-        }
-
-        function getTimeRemaining(endtime) {
-            let total = parseDate(endtime) - Date.parse(new Date())
-            let seconds = Math.floor((total / 1000) % 60)
-            let minutes = Math.floor((total / 1000 / 60) % 60)
-            let hours = Math.floor((total / (1000 * 60 * 60)) % 24)
-            let days = Math.floor(total / (1000 * 60 * 60 * 24))
-
-            return { total, days, hours, minutes, seconds };
-        }
-
-        function clock(id, endtime) {
-            let days = document.getElementById(id + '-days')
-            let hours = document.getElementById(id + '-hours')
-            let minutes = document.getElementById(id + '-minutes')
-            let seconds = document.getElementById(id + '-seconds')
-
-            var timeinterval = setInterval(function() {
-                var time = getTimeRemaining(endtime);
-
-                if (time.total <= 0) {
-                    clearInterval(timeinterval);
-                } else {
-                    days.innerHTML = pad(time.days, 2);
-                    hours.innerHTML = pad(time.hours, 2);
-                    minutes.innerHTML = pad(time.minutes, 2);
-                    seconds.innerHTML = pad(time.seconds, 2);
-                }
-            }, 1000);
-        }
-
-        clock('js-clock', global.countdownDeadline);
     }
 }
 
 
 
+
+// BARBA PAGE TRANSITIONS
 
 barba.init({
     debug: true,
@@ -1065,10 +1182,6 @@ barba.init({
     views: [{
             namespace: 'home',
             afterEnter() {
-                // cmsLoad();
-                penrose.counter = 0;
-                penrose.init();
-                showreelModalInit();
                 global.homeInit();
                 window.onresize = function() {
                     global.mobileMenuClose();
@@ -1209,7 +1322,7 @@ barba.init({
 
 
 
-// on first load
+// FIRST LOAD
 
 if (global.blackPages.indexOf(global.initNamespace) == -1) {
     global.invertNav(100);
@@ -1217,100 +1330,4 @@ if (global.blackPages.indexOf(global.initNamespace) == -1) {
 
 global.navScroll();
 global.countdownInit();
-
-(function() { // prepare search
-    let searchList = document.querySelector(".project__list.is--search");
-
-    let itemCount = searchList.childElementCount;
-    let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
-    itemCount -= itemsInvalid.length;
-
-    if (itemCount >= projects.quantity) {
-        global.searchInit();
-    } else {
-        global.searchCheckFs = setInterval(function() {
-
-            let itemCount = searchList.childElementCount;
-            let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
-            itemCount -= itemsInvalid.length;
-
-            if (itemCount >= projects.quantity) {
-                clearInterval(projects.searchCheckFs);
-                global.searchInit();
-            }
-        }, 250);
-    }
-})();
-
-global.searchBtn.onclick = global.scrollClickSearch;
-global.searchMobile.onclick = global.scrollClickSearch;
-global.searchClose.onmouseup = global.closeSearch;
-global.searchBackground.onmouseup = global.closeSearch;
-
-global.searchInput = document.querySelector('.search__input');
-global.searchMetadata = document.querySelector('.search__metadata');
-
-global.searchInput.addEventListener('input', () => {
-    if (global.searchInput.value.length > 0) {
-        global.searchMetadata.style.display = 'block';
-    } else {
-        global.searchMetadata.style.display = 'none';
-    }
-});
-
-
-
-// MODAL OPEN/CLOSE
-
-document.addEventListener('DOMContentLoaded', function() {
-    showreelModalInit();
-});
-
-function showreelModalInit() {
-    // When DOM is ready, execute the code inside the function
-    document.addEventListener("DOMContentLoaded", function() {
-        // Select the elements
-        var iframe = document.querySelector('iframe');
-        var modal = document.querySelector('.showreel__modal');
-
-        // Create a new Vimeo player instance
-        var player = new Vimeo.Player(iframe);
-
-        // Add click event listener to play button
-        document.querySelector('#btnPlay').addEventListener('click', function() {
-            // Show the modal and fade it in
-            modal.style.display = 'block';
-            modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-
-            // Start playing the video
-            player.play();
-        });
-
-        // Add click event listener to reset button
-        document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
-            // Pause the video and reset the time
-            player.pause();
-            player.setCurrentTime(0);
-
-            // Fade out the modal and hide it
-            modal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' })
-                .onfinish = function() {
-                    modal.style.display = 'none';
-                };
-        });
-    });
-
-    //hover effcect for modal
-
-    let showreelContainer = document.querySelector('.showreel__container');
-    let showreelOverlay = document.querySelector('.showreel__overlay');
-
-    showreelContainer.addEventListener('mouseover', function() {
-        gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.1)' });
-    });
-
-    showreelContainer.addEventListener('mouseout', function() {
-        gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.4)' });
-
-    })
-};
+global.prepareSearch();
