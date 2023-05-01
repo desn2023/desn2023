@@ -1,4 +1,4 @@
-console.log("v120 searchInit fix");
+console.log("v121 modal edit");
 
 let body = document.querySelector("body");
 let global;
@@ -466,27 +466,27 @@ global = {
     // SPECIAL FEATURES
 
     showreelModalInit: function() {
+
         // When DOM is ready, execute the code inside the function
-        document.addEventListener("DOMContentLoaded", function() {
-            // Select the elements
-            var iframe = document.querySelector('iframe');
-            var modal = document.querySelector('.showreel__modal');
+        // Select the elements
+        let iframe = document.querySelector('iframe');
+        let modal = document.querySelector('.showreel__modal');
     
-            // Create a new Vimeo player instance
-            var player = new Vimeo.Player(iframe);
+        // Create a new Vimeo player instance
+        let player = new Vimeo.Player(iframe);
     
-            // Add click event listener to play button
-            document.querySelector('#btnPlay').addEventListener('click', function() {
+        // Add click event listener to play button
+        document.querySelector('#btnPlay').addEventListener('click', function() {
                 // Show the modal and fade it in
                 modal.style.display = 'block';
                 modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
     
                 // Start playing the video
                 player.play();
-            });
+        });
     
-            // Add click event listener to reset button
-            document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
+        // Add click event listener to reset button
+        document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
                 // Pause the video and reset the time
                 player.pause();
                 player.setCurrentTime(0);
@@ -496,11 +496,9 @@ global = {
                     .onfinish = function() {
                         modal.style.display = 'none';
                     };
-            });
         });
     
-        // hover effcect for modal
-    
+        // hover effect for modal
         let showreelContainer = document.querySelector('.showreel__container');
         let showreelOverlay = document.querySelector('.showreel__overlay');
     
@@ -511,7 +509,7 @@ global = {
         showreelContainer.addEventListener('mouseout', function() {
             gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.4)' });
     
-        })
+        });
     },
 
     countdownInit: function() { // set and start countdown
