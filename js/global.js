@@ -1,4 +1,4 @@
-console.log("v122 case study padding fix");
+console.log("v123 metadata dropdown improvement");
 
 let body = document.querySelector("body");
 let global;
@@ -762,7 +762,12 @@ global = {
         triggerProjectData.onclick = function() {
 
             if (projectData.style.height != "auto") {
-                projectData.style.height = "auto";
+                // projectData.style.height = "auto";
+                gsap.to(projectData, {
+                    duration: 0.8,
+                    height: "auto",
+                    ease: "power3.inOut"
+                });
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.height = 0;
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.width = 0;
@@ -772,7 +777,12 @@ global = {
                 }, 200);
 
             } else if (projectData.style.height != 0) {
-                projectData.style.height = 0;
+                // projectData.style.height = 0;
+                gsap.to(projectData, {
+                    duration: 0.8,
+                    height: 0,
+                    ease: "power3.inOut"
+                });
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.transition = "all 0.5s";
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.width = "20px";
                 wrapper.querySelector(".dropdown__line.is--horizontal").style.height = "1px";
