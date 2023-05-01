@@ -1,4 +1,4 @@
-console.log("v119 attempt to fix search disciplines");
+console.log("v120 searchInit fix");
 
 let body = document.querySelector("body");
 let global;
@@ -101,7 +101,7 @@ global = {
 
         // delete invisible ones
 
-        let searchList = document.querySelector(".project__list.is--search");
+        let searchList = document.querySelector(".grads__list.is--search");
         let invisDis = Array.from(searchList.querySelectorAll(".disciplines__item.w-condition-invisible"));
 
         if (invisDis !== null) {
