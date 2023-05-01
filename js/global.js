@@ -1,4 +1,4 @@
-console.log("v125 testing touchstart and debounce on grads");
+console.log("v126 touchstart/debounce on projects");
 
 let body = document.querySelector("body");
 let global;
