@@ -1,4 +1,4 @@
-console.log("v123 metadata dropdown improvement");
+console.log("v124 projects variable");
 
 let body = document.querySelector("body");
 let global;
