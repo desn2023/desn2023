@@ -29,6 +29,12 @@
     .profile__more .grads__list .grads__item:nth-child(3) {
         display: none;
     }
+
+    .subtract--margin {margin-bottom: -100px;}
+}
+
+@media (min-width: 992px) {
+    .subtract--margin {margin-bottom: -200px;}
 }
 
 @media (hover: hover) {
@@ -137,8 +143,4 @@
 
 .tns-nav {
     display: none;
-}
-
-.subtract--margin {
-    margin-bottom: -200px;
 }

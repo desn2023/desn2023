@@ -1,4 +1,4 @@
-console.log("v121 modal edit");
+console.log("v122 case study padding fix");
 
 let body = document.querySelector("body");
 let global;
