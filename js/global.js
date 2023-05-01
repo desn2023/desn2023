@@ -1,4 +1,4 @@
-console.log("v116 moving code");
+console.log("v117 search disciplines fix");
 
 let body = document.querySelector("body");
 let global;
@@ -186,10 +186,11 @@ global = {
     },
 
     prepareSearch: function() { // before init
+        
         let searchList = document.querySelector(".project__list.is--search");
 
         let itemCount = searchList.childElementCount;
-        let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
+        let itemsInvalid = searchList.parentElement.querySelectorAll(".project__list > :not(.project__item)");
         itemCount -= itemsInvalid.length;
     
         if (itemCount >= projects.quantity) {
@@ -198,7 +199,7 @@ global = {
             global.searchCheckFs = setInterval(function() {
     
                 let itemCount = searchList.childElementCount;
-                let itemsInvalid = searchList.querySelectorAll("*:not(.project__item)");
+                let itemsInvalid = searchList.parentElement.querySelectorAll(".project__list > :not(.project__item)");
                 itemCount -= itemsInvalid.length;
     
                 if (itemCount >= projects.quantity) {
