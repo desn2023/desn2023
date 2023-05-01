@@ -138,3 +138,7 @@
 .tns-nav {
     display: none;
 }
+
+.subtract--margin {
+    margin-bottom: -200px;
+}

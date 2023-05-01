@@ -1,4 +1,4 @@
-console.log("v117 search disciplines fix");
+console.log("v118 case study margin");
 
 let body = document.querySelector("body");
 let global;
@@ -563,6 +563,23 @@ global = {
         clock('js-clock', global.countdownDeadline);
     },
 
+    deleteLastMargin: function() {
+
+        let wrapper = global.elementNext(document.querySelectorAll(".wrapper"));
+
+        let csBlocks = Array.from(wrapper.querySelectorAll(".cs__images:not(.w-condition-invisible), .cs__video:not(.w-condition-invisible), .cs__text:not(.w-condition-invisible)"));
+
+        if (csBlocks !== null) {
+            if (csBlocks.length > 0) {
+                let lastBlock = csBlocks[csBlocks.length - 1];
+
+                if (lastBlock.classList.contains("cs__text")) {
+                    lastBlock.classList.add("subtract--margin");
+                }
+            }
+        }
+    },
+
 
 
     // UTILITY
@@ -765,6 +782,20 @@ global = {
                     wrapper.querySelector(".dropdown__icon").style.transition = "all 0.5s";
                     wrapper.querySelector(".dropdown__icon").style.transform = "rotate(0deg)";
                 }, 200);
+            }
+        }
+
+        // delete last margin
+
+        let csBlocks = Array.from(wrapper.querySelectorAll(".cs__images:not(.w-condition-invisible), .cs__video:not(.w-condition-invisible), .cs__text:not(.w-condition-invisible)"));
+        
+        if (csBlocks !== null) {
+            if (csBlocks.length > 0) {
+                let lastBlock = csBlocks[csBlocks.length - 1];
+
+                if (lastBlock.classList.contains("cs__text")) {
+                    lastBlock.classList.add("subtract--margin");
+                }
             }
         }
     }
