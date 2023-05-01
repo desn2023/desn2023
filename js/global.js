@@ -1,4 +1,4 @@
-console.log("v118 case study margin");
+console.log("v119 attempt to fix search disciplines");
 
 let body = document.querySelector("body");
 let global;
@@ -187,10 +187,10 @@ global = {
 
     prepareSearch: function() { // before init
         
-        let searchList = document.querySelector(".project__list.is--search");
+        let searchList = document.querySelector(".grads__list.is--search");
 
         let itemCount = searchList.childElementCount;
-        let itemsInvalid = searchList.parentElement.querySelectorAll(".project__list > :not(.project__item)");
+        let itemsInvalid = searchList.parentElement.querySelectorAll(".grads__list.is--search > :not(.project__item)");
         itemCount -= itemsInvalid.length;
     
         if (itemCount >= projects.quantity) {
@@ -199,7 +199,7 @@ global = {
             global.searchCheckFs = setInterval(function() {
     
                 let itemCount = searchList.childElementCount;
-                let itemsInvalid = searchList.parentElement.querySelectorAll(".project__list > :not(.project__item)");
+                let itemsInvalid = searchList.parentElement.querySelectorAll(".grads__list.is--search > :not(.project__item)");
                 itemCount -= itemsInvalid.length;
     
                 if (itemCount >= projects.quantity) {
@@ -788,7 +788,7 @@ global = {
         // delete last margin
 
         let csBlocks = Array.from(wrapper.querySelectorAll(".cs__images:not(.w-condition-invisible), .cs__video:not(.w-condition-invisible), .cs__text:not(.w-condition-invisible)"));
-        
+
         if (csBlocks !== null) {
             if (csBlocks.length > 0) {
                 let lastBlock = csBlocks[csBlocks.length - 1];
