@@ -1,4 +1,4 @@
-console.log("v127 touchend");
+console.log("v128 debounce troubleshoot");
 
 let body = document.querySelector("body");
 let global;

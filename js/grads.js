@@ -24,6 +24,7 @@ let grads = {
 let projects = {
     filterParams: [".project__list", ".project__item", ".filter__item.is--selected", ".project__td"],
     animFirst: true,
+    filterAgain: false,
     randomAgain: true,
     randomSort: true,
     alphaSort: false,
@@ -241,10 +242,10 @@ dyncontent.toggleAllAnim = function (instant = false) {
 
     let tl = gsap.timeline({
         onComplete: function () {
-            let toggleFilter = document.querySelector(".toggle.is--filter");
-            if (toggleFilter !== null) {
-                toggleFilter.style.opacity = "";
-            }
+            // let toggleFilter = document.querySelector(".toggle.is--filter");
+            // if (toggleFilter !== null) {
+            //     toggleFilter.style.opacity = "";
+            // }
         }
     });
 
@@ -313,10 +314,10 @@ dyncontent.toggleFilterClick = function (e) {
 
     let tl = gsap.timeline({
         onComplete: function () {
-            let toggleAll = document.querySelector(".toggle.is--all");
-            if (toggleAll !== null) {
-                toggleAll.style.opacity = "";
-            }
+            // let toggleAll = document.querySelector(".toggle.is--all");
+            // if (toggleAll !== null) {
+            //     toggleAll.style.opacity = "";
+            // }
         }
     });
 
@@ -660,7 +661,6 @@ grads.init = function () {
 // PROJECTS ONLY
 
 projects.filterClick = function (e) {
-
     e.currentTarget.classList.toggle("is--selected");
     dyncontent.filter(...projects.filterParams, projects);
 }
@@ -731,24 +731,24 @@ projects.init = function () {
 
     projects.filters.forEach(function (option) {
         // option.onclick = projects.filterClick;
-        option.addEventListener("click", global.debounce(projects.filterClick, 750, true));
-        option.addEventListener("touchend", global.debounce(projects.filterClick, 750, true));
+        option.addEventListener("click", global.debounce(projects.filterClick, 250, true));
+        option.addEventListener("touchstart", global.debounce(projects.filterClick, 250, true));
     });
 
     const toggleAll = wrapper.querySelector(".toggle.is--all");
     // toggleAll.onclick = dyncontent.toggleAllClick;
-    toggleAll.addEventListener("click", global.debounce(dyncontent.toggleAllClick, 750, true));
-    toggleAll.addEventListener("touchstart", global.debounce(dyncontent.toggleAllClick, 750, true));
+    toggleAll.addEventListener("click", global.debounce(dyncontent.toggleAllClick, 250, true));
+    toggleAll.addEventListener("touchstart", global.debounce(dyncontent.toggleAllClick, 250, true));
 
     const toggleFilter = wrapper.querySelector(".toggle.is--filter");
     // toggleFilter.onclick = dyncontent.toggleFilterClick;
-    toggleFilter.addEventListener("click", global.debounce(dyncontent.toggleFilterClick, 750, true));
-    toggleFilter.addEventListener("touchstart", global.debounce(dyncontent.toggleFilterClick, 750, true));
+    toggleFilter.addEventListener("click", global.debounce(dyncontent.toggleFilterClick, 250, true));
+    toggleFilter.addEventListener("touchstart", global.debounce(dyncontent.toggleFilterClick, 250, true));
 
     const alphaToggle = wrapper.querySelector(".sort__item");
     // alphaToggle.onclick = projects.alphaClick;
-    alphaToggle.addEventListener("click", global.debounce(projects.alphaClick, 750, true));
-    alphaToggle.addEventListener("touchstart", global.debounce(projects.alphaClick, 750, true));
+    alphaToggle.addEventListener("click", global.debounce(projects.alphaClick, 250, true));
+    alphaToggle.addEventListener("touchstart", global.debounce(projects.alphaClick, 250, true));
     
     dyncontent.toggleAllAnim(true);
 
