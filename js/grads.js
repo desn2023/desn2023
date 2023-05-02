@@ -731,24 +731,24 @@ projects.init = function () {
 
     projects.filters.forEach(function (option) {
         // option.onclick = projects.filterClick;
-        option.addEventListener("click", global.debounce(projects.filterClick, 250, true));
-        option.addEventListener("touchstart", global.debounce(projects.filterClick, 250, true));
+        option.addEventListener("click", global.debounce(projects.filterClick, 750, true));
+        option.addEventListener("touchend", global.debounce(projects.filterClick, 750, true));
     });
 
     const toggleAll = wrapper.querySelector(".toggle.is--all");
     // toggleAll.onclick = dyncontent.toggleAllClick;
-    toggleAll.addEventListener("click", global.debounce(dyncontent.toggleAllClick, 250, true));
-    toggleAll.addEventListener("touchstart", global.debounce(dyncontent.toggleAllClick, 250, true));
+    toggleAll.addEventListener("click", global.debounce(dyncontent.toggleAllClick, 750, true));
+    toggleAll.addEventListener("touchstart", global.debounce(dyncontent.toggleAllClick, 750, true));
 
     const toggleFilter = wrapper.querySelector(".toggle.is--filter");
     // toggleFilter.onclick = dyncontent.toggleFilterClick;
-    toggleFilter.addEventListener("click", global.debounce(dyncontent.toggleFilterClick, 250, true));
-    toggleFilter.addEventListener("touchstart", global.debounce(dyncontent.toggleFilterClick, 250, true));
+    toggleFilter.addEventListener("click", global.debounce(dyncontent.toggleFilterClick, 750, true));
+    toggleFilter.addEventListener("touchstart", global.debounce(dyncontent.toggleFilterClick, 750, true));
 
     const alphaToggle = wrapper.querySelector(".sort__item");
     // alphaToggle.onclick = projects.alphaClick;
-    alphaToggle.addEventListener("click", global.debounce(projects.alphaClick, 250, true));
-    alphaToggle.addEventListener("touchstart", global.debounce(projects.alphaClick, 250, true));
+    alphaToggle.addEventListener("click", global.debounce(projects.alphaClick, 750, true));
+    alphaToggle.addEventListener("touchstart", global.debounce(projects.alphaClick, 750, true));
     
     dyncontent.toggleAllAnim(true);
 

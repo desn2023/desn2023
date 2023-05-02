@@ -1,4 +1,4 @@
-console.log("v126 touchstart/debounce on projects");
+console.log("v127 touchend");
 
 let body = document.querySelector("body");
 let global;
