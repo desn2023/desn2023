@@ -1,4 +1,4 @@
-console.log("v128 trial and error touch events");
+console.log("v127 trial and error touch events");
 
 let body = document.querySelector("body");
 let global;
