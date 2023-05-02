@@ -1,4 +1,4 @@
-console.log("v128 debounce troubleshoot");
+console.log("v129 debounce troubleshoot 2");
 
 let body = document.querySelector("body");
 let global;

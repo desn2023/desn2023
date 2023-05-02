@@ -24,7 +24,7 @@ let grads = {
 let projects = {
     filterParams: [".project__list", ".project__item", ".filter__item.is--selected", ".project__td"],
     animFirst: true,
-    filterAgain: false,
+    filterAgain: true,
     randomAgain: true,
     randomSort: true,
     alphaSort: false,
@@ -661,8 +661,16 @@ grads.init = function () {
 // PROJECTS ONLY
 
 projects.filterClick = function (e) {
-    e.currentTarget.classList.toggle("is--selected");
-    dyncontent.filter(...projects.filterParams, projects);
+
+    if (projects.filterAgain) {
+        projects.filterAgain = false;
+        e.currentTarget.classList.toggle("is--selected");
+        dyncontent.filter(...projects.filterParams, projects);
+
+        setTimeout(function () {
+            projects.filterAgain = true;
+        }, 250);
+    }
 }
 
 projects.alphaClick = function (e) {
