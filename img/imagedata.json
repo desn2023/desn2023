@@ -1,126 +1,64 @@
 [
     {
-        "id": "attfDK5j6rerV48YD",
-        "width": 1950,
-        "height": 1300,
-        "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/h34bGIZXVIZzwZ-z-i9Jdg/8RpqRq24jpoiPeF_YtjyJ3Sks87zCeFlGvB4Ur_UUSwGVi3TqI9qAE3pHa5jEagV6vTF5mTFdzQyjp2vGxTM5dBq57RbDbQW10q9LCZc9GEAsCtrhIfUgQ0Qs1ycZPOuHNgXz1tDNc-wayWcmOTzcA/SBl5-KibIhKGx1jf7MgusfVLaRIYODOrDjaiibqAStk",
-        "filename": "0F006421-1303-476D-9D1D-EA19186D3753 1.png",
-        "size": 3755634,
-        "type": "image/png",
-        "thumbnails": {
-            "small": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/7qfhzZApq1DebrEG5b3RFA/O1uCjBMmtSrkjvW2359gnoKViZ0mm7OX3HXdCTFCArXA_h9qPur6DQM-9aB3wCpyLAN5p6vy077IaJP7rguLCw/PIG3Zf6-XwzGVFc6-_z2c0vfLeZFbv35P8XLNgnQVv0",
-                "width": 54,
-                "height": 36
-            },
-            "large": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/xfS4AxQ0jvgCthGQ1SjNjw/yCAUnEdNw5ILaITcWqFu58LaWSA6X6eYqaeHwU9YXFkJr-tcBP3sw5Wq3Q8Oomm8agnBDkpv716Y1Z9A_nBINQ/bqiXnoow2B3jZ2Asa5erf1jmoQoUqboOMOjgVLLlBGk",
-                "width": 768,
-                "height": 512
-            },
-            "full": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/yRH8bAszbfEh80f1vQuRMQ/mlc4L7SQHQNyZSIt2INsY_07aZOZa2aFmdbcg2WRaDcq9-4gvkepCmIsKzpF3816kA-Hkx_KZ4KxDljiQlVAlQ/dqHGKiQJqzu3yECwMb21mmvmj31r5pxXU3w6ZWoHSZ8",
-                "width": 3000,
-                "height": 3000
-            }
-        },
-        "xRecordId": "recg60YzvDBhmNv4l",
-        "xRecordName": "Urban Metamorphosis",
-        "xFileExt": "png",
-        "xFieldName": "Thumbnail image",
-        "xImgIndex": 0
-    },
-    {
-        "id": "attQWDPZ6FDn1rsHF",
-        "width": 1920,
-        "height": 1080,
-        "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/P9nD2Iw4m8L2sY96dtsCFQ/yxxo68bo_TvNKbta9iZ8VQyoeQXi3iUdcZc0BIlO6jszS9DaiVcUGW6YTIIuPyqSOjGyb4WVSv5SXnzCUkp6o76MuqGIOSnpJDVxn6vDGYA/HMD1OEsjvkqHdx8w8KuHl04z2DEw4GkcNpR6R1MCYl0",
-        "filename": "tumbnail4.png",
-        "size": 1332186,
-        "type": "image/png",
-        "thumbnails": {
-            "small": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/IMCD2gQo9J5GywNmRcaVQA/9tmlKzrXIsn12Q6ZH9iB5wA2E_1AZOuap9zqE3uKGhsGNUSSncs9Oov2yxTsVlN5borxJpggsLRJ1THXl1RYPA/IMyXnpHESlZYxeXp2QY5Vojy3E64QuRaTIyVmsQiqjE",
-                "width": 64,
-                "height": 36
-            },
-            "large": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/u7mpZ0Y0WaOn_oMXncIFMA/3P8VqigJGal1wWM3GAx1O9esCn3sUhp70HvnJl3ne2hQyoxK8pSSohXQK-8d-j9X8pQFMAkopYZCuw_NgKfodg/-dj5JFUxpU4FMT4qhZWyS3L0-XxDpPUSNghy42OVTVg",
-                "width": 910,
-                "height": 512
-            },
-            "full": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/WUG6QMjzDQFaGN0DznkIow/wsbf8RpYHm6YjoqKOjWzXH-pjV2iP4aurRkuGUPgRaaA8WYNNBYasdc8-If35gkW4c0ua05ohkv-hvRNo-Dmqw/zkiaJ5vUA8CpD0WO3DJoXViYX9Kee-XHGN0ljMQ7SkQ",
-                "width": 3000,
-                "height": 3000
-            }
-        },
-        "xRecordId": "rec1L6qvMvEHXV2p4",
-        "xRecordName": "Nightcrawler",
-        "xFileExt": "png",
-        "xFieldName": "Thumbnail image",
-        "xImgIndex": 0
-    },
-    {
-        "id": "attggrtGP7BcVvjMY",
-        "width": 2246,
-        "height": 1258,
-        "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/A2JUO6t-_ZzVW1lJSZE7OA/tc3wkLPavSt0ztmj_dYrjLEEt531xU3g1g7YJstYPIGE47wpXncihhz__nw7czvk92EA49E6Ryln6z6Dd5GiM4ClwgLYGE4ncW3haQS02Rg/v7n53xnR1i_V36_ge7fpv4uNSMoR47KhieLIAXhqpZg",
-        "filename": "Thumbnail2.jpg",
-        "size": 767193,
+        "id": "attL5J0TPQmtrzIOr",
+        "width": 6000,
+        "height": 4500,
+        "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/m7377IvqtgiC8ibhBS7Y2w/sbsuQWBN2GQdSKOkdcRM_iVoKq7TG8Nhla2-tg_QH0hufIAXT1ZEIYgETvzJPLs9HETDxSMjvQpmwz9cynzdeZO__j_xHzoNPRKhY8SEJiIw7WWE62PZIKG1eD0j5zBG/aVYCzq24xtrag9HIx69tiBKgB_ITx_aYrNpVVc6zgLo",
+        "filename": "Open Hardcover Book Mockup copy.jpg",
+        "size": 1907514,
         "type": "image/jpeg",
         "thumbnails": {
             "small": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/fRC3vgA-A2CS2f73YfqG_g/mabEqhtln-ym9ddBOHN3vT2dqTq90upeTMle7Et4R66vQO0V1uKRC_Ct_BiZ7TBT_lCyT0FUEafR5T4w8mW_Tg/BJb3F6topllba-oHGfoXMJFRkazfWPBXasDVUb4-RmA",
-                "width": 64,
+                "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/j9Exf62qZhtaDrHy72C9NA/cgPCtKpO3LRYEwv1iBdyT9TzyBYO_C16rd4tEKkqMX3igXcLP_fEez9tkjo5Ju41wbVhDpJLGyY1b7ppWez0Xg/-v8JY_9Gyq5RpmZ3UCAXw1kxuuwYrs51684Ori5M-jI",
+                "width": 48,
                 "height": 36
             },
             "large": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/QIM40h2h1MtBytU0frtRKA/OG-0W8ifCtA7RONExirP08m1PRH3UzCmUXeLZSaYkzoXJp6H9EBNvFj-6ITLooVd55aiS78K_NZLqS3YpNPZyg/dPTjVHaPm25c_9JLa7olV0Za-55MpGlsZxFPXET9pps",
-                "width": 914,
+                "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/1JGpdokoSb9Zgx28Qy6p5Q/x3CKs64hKOI72wRwdI-5sCD-PzagKN-FEFoHZ2KNfRgh-4UXmBct8hlwrTkst7g92hGcQ4c97n5moKyvDLGdUA/DLdFQLBKdPsHcdqXCPCp71yHV_3Qyo8GH-TJhCLm2zA",
+                "width": 683,
                 "height": 512
             },
             "full": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/_e_HFSGogQjJTXS0ROynMA/Q7knuCgvMoqpRWz_vyoUSQ5rcsKiv7MoR1DiXu6TbE19TGJaFUQPcxvS5DLkJ6DYXVr70rUm4ToEvm55EJhv9Q/JIS7yCMDeD077WNlO0Ntne--5ArDepA0fWFDlNjpSLE",
+                "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/OreXG8zFn8rd6OdE_5GGxg/jifZU8PYgONy9d3ZNK2qAUWzGV97k9iE0TUaNCWv3dkJEn9DLWuwck6umXbcPic5t5Js2yv4qIK298v9c2lnLQ/44i6lwc7oU91v9p1Ry_DVgiSfFLRNjRAtth6q2tz6qI",
                 "width": 3000,
                 "height": 3000
             }
         },
-        "xRecordId": "recY3MzftnA2hv6Rx",
-        "xRecordName": "Somer",
+        "xRecordId": "recOtxUBWmy9P3lVH",
+        "xRecordName": "The Door in the Wall",
         "xFileExt": "jpg",
         "xFieldName": "Thumbnail image",
         "xImgIndex": 0
     },
     {
-        "id": "attU6dA7Uaov1vZnY",
-        "width": 1920,
-        "height": 1080,
-        "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/g4-HHIWLWFOeIYPGnpynzA/hktQcqfRYvwEa07ibQVKqVZ8XAUgW4RuEx3Kbqev2acSTzW5Pad6TYrufb_nYz9yuRK4lE4SmCvmy2FRPM-e__AbYVD5PELhyP1jsiFHcq8/sZrS5K0_VgbBV6gU-8MS34MbzmNR5zoZnjbTZKgOAVc",
-        "filename": "Cover.png",
-        "size": 75254,
-        "type": "image/png",
+        "id": "attUTp7gRNaq11rRN",
+        "width": 6000,
+        "height": 4500,
+        "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/XpdMXdS_s_pPXpROXCoA2g/j17kev9JtjPQATzCsEG34cF_14oMPbXiebfhAYGR8kezCHOqUo-8OODzuBSAYLRaYG5omfC2ILwoqm2MjlSNqBwA0kdc4W8DgpEWQe41_QqagZI2bSVYyWOhdriCkUP0/spAyvxz-f3CYVww5YBsSzDJQo7NqtaH2_CxXoi_unKU",
+        "filename": "Open Hardcover Book Mockup copy.jpg",
+        "size": 1907514,
+        "type": "image/jpeg",
         "thumbnails": {
             "small": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/m8RcK1GUE5CcnEKYiz1YHw/Mn4jonTQ2R0fzfeNGH3zw0XzezX6DrVYoUorBCS2XLKrH5pIZABzU75bds3bQn7XGQrQDNy2YPgoIhuVBHpwDQ/ALFOLMQ7yA5R7REttYDhiqtW3N8EwzK-C1nrPSymHoM",
-                "width": 64,
+                "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/la9VAVRK1AiqY5LZKycOWw/HhQPeut7Oksqs5I76PO_Dq9BLWlGjKAyk6ejYacsWiHmFBB5f2gHyAN3icbVo_mphzuCHEntMZyWEZJWQnJacg/ZtgSbwfJyX6_9Z_oZwQRZu7NaINY_0jm63OKp2tIR4Q",
+                "width": 48,
                 "height": 36
             },
             "large": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/Nc5TlrZHIjEs_4ziSaaxiA/lmdWiC-34pJSJphS0Totd8P-Z50U0FO4Yv3Ql1agJtH98eVYAhAm54JKYPJ6zq4JaZNxpyCWp8AOKKps-viLgA/1lBxHCPdRpbjYETOhXmS0_3Ua1c98Pbhi3AhvSt4yg4",
-                "width": 910,
+                "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/2po1GdZSKmPCpT2xWc5ZMQ/mXDscbWX2pHIi1pGkdwCzYgRCwDxtHjfNErjeAqwQAh6wPVI9HcW6vlXFa7VvHRNhpdBUigm0Ghwlw5sfAActw/REJXBarN2isl9fEaXY8oh2Y3pIcVHd5LEao1PP6CwHY",
+                "width": 683,
                 "height": 512
             },
             "full": {
-                "url": "https://v5.airtableusercontent.com/v1/16/16/1682028000000/xW7Zf5H7juwB6HrLrsV7rg/0GkKDrL0lktdYsJzeSiqT6AYzgezfVENAR_bHu743SYN9xiLj2LP7EXWBDlEJX2Utmqsmo1W3EqTSRKdL463Jg/J4CUsYydZCR9LqYi937nI08XDrKfiFZ95UUcbEQ5jMg",
+                "url": "https://v5.airtableusercontent.com/v1/16/16/1683000000000/SsUB4WYypDOWZPVGfQItxA/IEVvNZ5PR3LT3r8j8X7ti75ZtV4kK6C64SJi4EbZKhGAR3TaNnVIt_mo4LH4pjYiUw6ogswNxFhAACTE8X671w/MKOyYCke885-lt0wB6x7zxrTAFpEYqkCTc3aKNRNuQY",
                 "width": 3000,
                 "height": 3000
             }
         },
-        "xRecordId": "reckWRcnu3imPhvT6",
-        "xRecordName": "Waypoint",
-        "xFileExt": "png",
-        "xFieldName": "Thumbnail image",
+        "xRecordId": "recOtxUBWmy9P3lVH",
+        "xRecordName": "The Door in the Wall",
+        "xFileExt": "jpg",
+        "xFieldName": "Hero image",
         "xImgIndex": 0
     }
 ]

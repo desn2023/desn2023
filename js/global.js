@@ -1,4 +1,4 @@
-console.log("v129 debounce troubleshoot 3");
+console.log("v129 projects filter compromise");
 
 let body = document.querySelector("body");
 let global;

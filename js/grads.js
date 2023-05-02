@@ -662,7 +662,16 @@ grads.init = function () {
 
 projects.filterClick = function (e) {
 
-    e.currentTarget.classList.toggle("is--selected");
+    if (!e.currentTarget.classList.contains("is--selected")) {
+
+        projects.filters.forEach(function (select) {
+            select.classList.remove("is--selected");
+        });
+
+        e.currentTarget.classList.add("is--selected");
+    }
+
+    // e.currentTarget.classList.toggle("is--selected");
     dyncontent.filter(...projects.filterParams, projects);
 
 }
@@ -733,8 +742,8 @@ projects.init = function () {
 
     projects.filters.forEach(function (option) {
         // option.onclick = projects.filterClick;
-        option.addEventListener("click", projects.filterClick);
-        option.addEventListener("touchstart", projects.filterClick);
+        option.addEventListener("click", global.debounce(projects.filterClick, 250, true));
+        option.addEventListener("touchstart", global.debounce(projects.filterClick, 250, true));
     });
 
     const toggleAll = wrapper.querySelector(".toggle.is--all");
