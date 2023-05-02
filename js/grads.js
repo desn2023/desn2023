@@ -662,15 +662,9 @@ grads.init = function () {
 
 projects.filterClick = function (e) {
 
-    if (projects.filterAgain) {
-        projects.filterAgain = false;
-        e.currentTarget.classList.toggle("is--selected");
-        dyncontent.filter(...projects.filterParams, projects);
+    e.currentTarget.classList.toggle("is--selected");
+    dyncontent.filter(...projects.filterParams, projects);
 
-        setTimeout(function () {
-            projects.filterAgain = true;
-        }, 250);
-    }
 }
 
 projects.alphaClick = function (e) {
@@ -739,8 +733,8 @@ projects.init = function () {
 
     projects.filters.forEach(function (option) {
         // option.onclick = projects.filterClick;
-        option.addEventListener("click", global.debounce(projects.filterClick, 250, true));
-        option.addEventListener("touchstart", global.debounce(projects.filterClick, 250, true));
+        option.addEventListener("click", projects.filterClick);
+        option.addEventListener("touchstart", projects.filterClick);
     });
 
     const toggleAll = wrapper.querySelector(".toggle.is--all");
