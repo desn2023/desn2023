@@ -1,4 +1,4 @@
-console.log("v127 trial and error touch events");
+console.log("v126 touchstart/debounce on projects");
 
 let body = document.querySelector("body");
 let global;
@@ -227,18 +227,10 @@ global = {
             }, 250);
         }
 
-        // global.searchBtn.onclick = global.scrollClickSearch;
-        global.searchBtn.addEventListener("click", global.debounce(global.scrollClickSearch, 250, true));
-        global.searchBtn.addEventListener("touchstart", global.debounce(global.scrollClickSearch, 250, true));
-
-        // global.searchMobile.onclick = global.scrollClickSearch;
-        global.searchMobile.addEventListener("click", global.debounce(global.scrollClickSearch, 250, true));
-        global.searchMobile.addEventListener("touchstart", global.debounce(global.scrollClickSearch, 250, true));
-
-        // global.searchClose.onmouseup = global.closeSearch;
-        global.searchClose.addEventListener("mouseup touchend", global.debounce(global.closeSearch, 250, true));
-        // global.searchBackground.onmouseup = global.closeSearch;
-        global.searchBackground.addEventListener("mouseup touchend", global.debounce(global.closeSearch, 250, true));
+        global.searchBtn.onclick = global.scrollClickSearch;
+        global.searchMobile.onclick = global.scrollClickSearch;
+        global.searchClose.onmouseup = global.closeSearch;
+        global.searchBackground.onmouseup = global.closeSearch;
 
         global.searchInput = document.querySelector('.search__input');
         global.searchMetadata = document.querySelector('.search__metadata');
@@ -502,17 +494,17 @@ global = {
         let player = new Vimeo.Player(iframe);
     
         // Add click event listener to play button
-        document.querySelector('#btnPlay').addEventListener('click touchstart', global.debounce(function() {
+        document.querySelector('#btnPlay').addEventListener('click', function() {
                 // Show the modal and fade it in
                 modal.style.display = 'block';
                 modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
     
                 // Start playing the video
                 player.play();
-        }, 250, true));
+        });
     
         // Add click event listener to reset button
-        document.querySelector('#btnReset, #btnClose').addEventListener('click touchstart', global.debounce(function() {
+        document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
                 // Pause the video and reset the time
                 player.pause();
                 player.setCurrentTime(0);
@@ -522,7 +514,7 @@ global = {
                     .onfinish = function() {
                         modal.style.display = 'none';
                     };
-        }, 250, true));
+        });
     
         // hover effect for modal
         let showreelContainer = document.querySelector('.showreel__container');
@@ -785,7 +777,7 @@ global = {
 
         // metadata expand and collapse
 
-        triggerProjectData.addEventListener("click", global.debounce(function() {
+        triggerProjectData.onclick = function() {
 
             if (projectData.style.height != "auto") {
                 // projectData.style.height = "auto";
@@ -817,7 +809,7 @@ global = {
                     wrapper.querySelector(".dropdown__icon").style.transform = "rotate(0deg)";
                 }, 200);
             }
-        }, 250, true));
+        }
 
         // delete last margin
 
