@@ -6,6 +6,11 @@ QUICK START INSTRUCTIONS
 2. Initialize scrolldem0 by running scrolldem0.init(); in the browser console.
 3. Press 'k' to play scroll animation.
 
+
+FUTURE FEATURES
+- Back/forward
+- Skipping numbers
+
 */
 
 const scrolldem0 = new Object();
@@ -17,8 +22,8 @@ scrolldem0.running = false; // whether a scrolldem0.list animation is currently 
 
 scrolldem0.anims = { // gsap animation parameters
     default: {
-        duration: 1,
-        ease: "power4.inOut"
+        duration: 1.4,
+        ease: "power5.inOut"
     }
 }
 
@@ -30,15 +35,14 @@ scrolldem0.list = [ // list of animations to play
     } */
 ]
 
-scrolldem0.init = function () { // start scrolldem0 engine
-
-    document.addEventListener('keydown', function (event) {
-        if (event.key === scrolldem0.trigger && !scrolldem0.running) {
-            scrolldem0.play();
-        }
-    });
-
-    console.log("scrolldem0 initialized");
+scrolldem0.ancestorList = function (element) {
+    var ancestors = [];
+    var currentElement = element.parentNode;
+    while (currentElement !== null) {
+        ancestors.push(currentElement);
+        currentElement = currentElement.parentNode;
+    }
+    return ancestors;
 }
 
 scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true) { // on keydown
@@ -63,7 +67,8 @@ scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true)
         playItem.offset = scrolldem0.offset;
     }
 
-    const destBound = document.querySelector(playItem.selector).getBoundingClientRect();
+    const destElem = document.querySelector(playItem.selector);
+    const destBound = destElem.getBoundingClientRect();
     const scrollDist = window.scrollY + destBound.top + playItem.offset;
 
     playItem.params.scrollTo = scrollDist;
@@ -71,10 +76,22 @@ scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true)
         scrolldem0.running = false;
     }
 
-    console.log("scrolldem0 scrolling");
     gsap.to(window, playItem.params);
+    console.log("scrolldem0 scrolling");
+    console.log(scrolldem0.ancestorList(destElem));
 
     if (movePlayhead) {
         scrolldem0.playhead++;
     }
-} 
+}
+
+scrolldem0.init = function () { // start scrolldem0 engine
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === scrolldem0.trigger && !scrolldem0.running) {
+            scrolldem0.play();
+        }
+    });
+
+    console.log("scrolldem0 initialized");
+}
