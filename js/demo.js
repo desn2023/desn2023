@@ -1,6 +1,17 @@
+/*
+
+QUICK START INSTRUCTIONS
+
+1. For each element you want to scroll to, set its id to "scrolldem0-0", "scrolldem0-1", "scrolldem0-2" etc.
+2. Initialize scrolldem0 by running scrolldem0.init(); in the browser console.
+3. Press 'k' to play scroll animation.
+
+*/
+
 const scrolldem0 = new Object();
 
-scrolldem0.offset = 150; // default distance to scroll past [+] or short of [-] destination element
+scrolldem0.trigger = 'k'; // keyboard key which triggers scroll animation
+scrolldem0.offset = -150; // default distance to scroll past [+] or short of [-] destination element
 scrolldem0.playhead = 0; // which scrolldem0.list animation to play on first keydown event
 scrolldem0.running = false; // whether a scrolldem0.list animation is currently in progress
 
@@ -13,19 +24,21 @@ scrolldem0.anims = { // gsap animation parameters
 
 scrolldem0.list = [ // list of animations to play
     /* {
-        selector: ""
-        params: {}
-        offset: undefined || null || integer
+        selector: "#scrolldem0-0",
+        params: scrolldem0.anims.default,
+        offset: undefined || null || -150
     } */
 ]
 
 scrolldem0.init = function () { // start scrolldem0 engine
 
     document.addEventListener('keydown', function (event) {
-        if (event.key === 'k' && !scrolldem0.running) {
+        if (event.key === scrolldem0.trigger && !scrolldem0.running) {
             scrolldem0.play();
         }
     });
+
+    console.log("scrolldem0 initialized");
 }
 
 scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true) { // on keydown
@@ -51,13 +64,14 @@ scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true)
     }
 
     const destBound = document.querySelector(playItem.selector).getBoundingClientRect();
-    const scrollDist = destBound.top + playItem.offset;
+    const scrollDist = window.scrollY + destBound.top + playItem.offset;
 
     playItem.params.scrollTo = scrollDist;
     playItem.params.onComplete = function () {
         scrolldem0.running = false;
     }
 
+    console.log("scrolldem0 scrolling");
     gsap.to(window, playItem.params);
 
     if (movePlayhead) {
