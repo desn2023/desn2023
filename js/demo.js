@@ -22,8 +22,8 @@ scrolldem0.running = false; // whether a scrolldem0.list animation is currently 
 
 scrolldem0.anims = { // gsap animation parameters
     default: {
-        duration: 1.1,
-        ease: "power5.inOut"
+        duration: 0.6,
+        ease: "power4.inOut"
     }
 }
 
