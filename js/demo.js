@@ -28,11 +28,11 @@ scrolldem0.anims = { // gsap animation parameters
 }
 
 scrolldem0.list = [ // list of animations to play
-    /* {
+    {
         selector: "#scrolldem0-0",
         params: scrolldem0.anims.default,
         offset: undefined || null || -150
-    } */
+    }
 ]
 
 scrolldem0.ancestorList = function(element) {
