@@ -31,12 +31,12 @@ scrolldem0.list = [ // list of animations to play
     {
         selector: "#scrolldem0-0",
         params: scrolldem0.anims.default,
-        offset: undefined || null || -90
+        offset: -90
     },
     {
         selector: "#scrolldem0-3",
         params: scrolldem0.anims.default,
-        offset: undefined || null || -115
+        offset: -115
     }
 ]
 
