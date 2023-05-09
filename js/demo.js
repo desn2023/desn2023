@@ -30,12 +30,11 @@ scrolldem0.anims = { // gsap animation parameters
 scrolldem0.list = [ // list of animations to play
     {
         selector: "#scrolldem0-0",
-        params: scrolldem0.anims.default,
         offset: -90
     },
+    {}, {},
     {
         selector: "#scrolldem0-3",
-        params: scrolldem0.anims.default,
         offset: -115
     }
 ]
