@@ -95,3 +95,5 @@ scrolldem0.init = function() { // start scrolldem0 engine
 
     console.log("scrolldem0 initialized");
 }
+
+scrolldem0.init();
