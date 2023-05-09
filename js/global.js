@@ -1,4 +1,4 @@
-console.log("v144 scrolldem0 adjustments");
+console.log("v145 casestudy fix");
 let body = document.querySelector("body");
 let global;
 let home;
@@ -822,7 +822,9 @@ global = {
                 let lastBlock = csBlocks[csBlocks.length - 1];
 
                 if (lastBlock.classList.contains("cs__text")) {
-                    lastBlock.classList.add("subtract--margin");
+                    if (lastBlock.innerText !== "" && lastBlock.innerText.length !== 0) {
+                        lastBlock.classList.add("subtract--margin");
+                    }
                 }
             }
         }
