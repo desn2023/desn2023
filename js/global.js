@@ -1,4 +1,4 @@
-console.log("v147 grad scrollthrough");
+console.log("v148 grad scrollthrough");
 let body = document.querySelector("body");
 let global;
 let home;
