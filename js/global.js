@@ -1,4 +1,4 @@
-console.log("v137 scrolldem0 fix");
+console.log("v138 scrolldem0 adjustments");
 let body = document.querySelector("body");
 let global;
 let home;
