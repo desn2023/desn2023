@@ -1,4 +1,4 @@
-console.log("v146 casestudy fix");
+console.log("v147 grad scrollthrough");
 let body = document.querySelector("body");
 let global;
 let home;
