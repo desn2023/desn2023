@@ -44,11 +44,15 @@ scrolldem0.list = [ // list of animations to play
         offset: -240
     },
     {
-        offset: -500
+        offset: 500
     },
     {
-        offset: -3000
-    }
+        offset: 2100
+    },
+    {
+        offset: 3100
+    },
+    {}, {}, {}
 ]
 
 scrolldem0.ancestorList = function(element) {

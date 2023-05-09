@@ -1,4 +1,4 @@
-console.log("v148 scrolldem0 improvements");
+console.log("v150 profile scrollthrough");
 let body = document.querySelector("body");
 let global;
 let home;
