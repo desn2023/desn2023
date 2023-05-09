@@ -1,4 +1,4 @@
-console.log("v133 casestudy last block fix");
+console.log("v134 casestudy last block fix 2");
 
 let body = document.querySelector("body");
 let global;
@@ -590,7 +590,7 @@ global = {
                 let lastBlock = csBlocks[csBlocks.length - 1];
 
                 if (lastBlock.classList.contains("cs__text")) {
-                    if (lastBlock.innerText !== "" || lastBlock.innerText.length == 0) {
+                    if (lastBlock.innerText !== "" && lastBlock.innerText.length !== 0) {
                         lastBlock.classList.add("subtract--margin");
                     }
                 }
