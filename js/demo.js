@@ -10,6 +10,10 @@ QUICK START INSTRUCTIONS
 FUTURE FEATURES
 - Back/forward
 - Skipping numbers
+- Starting from a number not 0
+- Use JavaScript classes instead
+- Specify animation index for list object
+- Import gsap?
 
 */
 
@@ -80,20 +84,25 @@ scrolldem0.play = function(playhead = scrolldem0.playhead, movePlayhead = true) 
     }
 
     const destElem = document.querySelector(playItem.selector);
-    const destBound = destElem.getBoundingClientRect();
-    const scrollDist = window.scrollY + destBound.top + playItem.offset;
 
-    playItem.params.scrollTo = scrollDist;
-    playItem.params.onComplete = function() {
-        scrolldem0.running = false;
-    }
-
-    gsap.to(window, playItem.params);
-    console.log("scrolldem0 scrolling");
-    console.log(scrolldem0.ancestorList(destElem));
-
-    if (movePlayhead) {
-        scrolldem0.playhead++;
+    if (destElem !== null) {
+        const destBound = destElem.getBoundingClientRect();
+        const scrollDist = window.scrollY + destBound.top + playItem.offset;
+    
+        playItem.params.scrollTo = scrollDist;
+        playItem.params.onComplete = function() {
+            scrolldem0.running = false;
+        }
+    
+        gsap.to(window, playItem.params);
+        console.log("scrolldem0 scrolling");
+        console.log(scrolldem0.ancestorList(destElem));
+    
+        if (movePlayhead) {
+            scrolldem0.playhead++;
+        }
+    } else {
+        scrolldem0.reinit();
     }
 }
 
@@ -102,10 +111,18 @@ scrolldem0.init = function() { // start scrolldem0 engine
     document.addEventListener('keydown', function(event) {
         if (event.key === scrolldem0.trigger && !scrolldem0.running) {
             scrolldem0.play();
+        } else if (event.key === "r") {
+            scrolldem0.reinit();
         }
     });
 
     console.log("scrolldem0 initialized");
+}
+
+scrolldem0.reinit = function() {
+    scrolldem0.playhead = 0;
+    scrolldem0.running = false;
+    console.log("scrolldem0 reinitialized");
 }
 
 scrolldem0.init();
