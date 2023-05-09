@@ -1,4 +1,4 @@
-console.log("v135 scrolldem0 fix");
+console.log("v136 scrolldem0 fix");
 
 let body = document.querySelector("body");
 let global;
@@ -37,11 +37,12 @@ global = {
 
     // DEBOUNCE
 
-    debounce: function (func, wait, immediate) {
+    debounce: function(func, wait, immediate) {
         var timeout;
-        return function () {
-            var context = this, args = arguments;
-            var later = function () {
+        return function() {
+            var context = this,
+                args = arguments;
+            var later = function() {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
@@ -204,22 +205,22 @@ global = {
     },
 
     prepareSearch: function() { // before init
-        
+
         let searchList = document.querySelector(".grads__list.is--search");
 
         let itemCount = searchList.childElementCount;
         let itemsInvalid = searchList.parentElement.querySelectorAll(".grads__list.is--search > :not(.project__item)");
         itemCount -= itemsInvalid.length;
-    
+
         if (itemCount >= projects.quantity) {
             global.searchInit();
         } else {
             global.searchCheckFs = setInterval(function() {
-    
+
                 let itemCount = searchList.childElementCount;
                 let itemsInvalid = searchList.parentElement.querySelectorAll(".grads__list.is--search > :not(.project__item)");
                 itemCount -= itemsInvalid.length;
-    
+
                 if (itemCount >= projects.quantity) {
                     clearInterval(projects.searchCheckFs);
                     global.searchInit();
@@ -489,44 +490,44 @@ global = {
         // Select the elements
         let iframe = document.querySelector('iframe');
         let modal = document.querySelector('.showreel__modal');
-    
+
         // Create a new Vimeo player instance
         let player = new Vimeo.Player(iframe);
-    
+
         // Add click event listener to play button
         document.querySelector('#btnPlay').addEventListener('click', function() {
-                // Show the modal and fade it in
-                modal.style.display = 'block';
-                modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
-    
-                // Start playing the video
-                player.play();
+            // Show the modal and fade it in
+            modal.style.display = 'block';
+            modal.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: 'forwards' });
+
+            // Start playing the video
+            player.play();
         });
-    
+
         // Add click event listener to reset button
         document.querySelector('#btnReset, #btnClose').addEventListener('click', function() {
-                // Pause the video and reset the time
-                player.pause();
-                player.setCurrentTime(0);
-    
-                // Fade out the modal and hide it
-                modal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' })
-                    .onfinish = function() {
-                        modal.style.display = 'none';
-                    };
+            // Pause the video and reset the time
+            player.pause();
+            player.setCurrentTime(0);
+
+            // Fade out the modal and hide it
+            modal.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' })
+                .onfinish = function() {
+                    modal.style.display = 'none';
+                };
         });
-    
+
         // hover effect for modal
         let showreelContainer = document.querySelector('.showreel__container');
         let showreelOverlay = document.querySelector('.showreel__overlay');
-    
+
         showreelContainer.addEventListener('mouseover', function() {
             gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.1)' });
         });
-    
+
         showreelContainer.addEventListener('mouseout', function() {
             gsap.to(showreelOverlay, { duration: 0.3, backgroundColor: 'rgba(0,0,0,0.4)' });
-    
+
         });
     },
 

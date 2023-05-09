@@ -22,7 +22,7 @@ scrolldem0.running = false; // whether a scrolldem0.list animation is currently 
 
 scrolldem0.anims = { // gsap animation parameters
     default: {
-        duration: 1.4,
+        duration: 1.1,
         ease: "power5.inOut"
     }
 }
@@ -35,7 +35,7 @@ scrolldem0.list = [ // list of animations to play
     } */
 ]
 
-scrolldem0.ancestorList = function (element) {
+scrolldem0.ancestorList = function(element) {
     var ancestors = [];
     var currentElement = element.parentNode;
     while (currentElement !== null) {
@@ -45,7 +45,7 @@ scrolldem0.ancestorList = function (element) {
     return ancestors;
 }
 
-scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true) { // on keydown
+scrolldem0.play = function(playhead = scrolldem0.playhead, movePlayhead = true) { // on keydown
 
     scrolldem0.running = true;
 
@@ -72,7 +72,7 @@ scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true)
     const scrollDist = window.scrollY + destBound.top + playItem.offset;
 
     playItem.params.scrollTo = scrollDist;
-    playItem.params.onComplete = function () {
+    playItem.params.onComplete = function() {
         scrolldem0.running = false;
     }
 
@@ -85,9 +85,9 @@ scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true)
     }
 }
 
-scrolldem0.init = function () { // start scrolldem0 engine
+scrolldem0.init = function() { // start scrolldem0 engine
 
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', function(event) {
         if (event.key === scrolldem0.trigger && !scrolldem0.running) {
             scrolldem0.play();
         }
@@ -95,3 +95,5 @@ scrolldem0.init = function () { // start scrolldem0 engine
 
     console.log("scrolldem0 initialized");
 }
+
+scrolldem0.init();
