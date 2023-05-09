@@ -1,4 +1,4 @@
-console.log("v145 casestudy fix");
+console.log("v146 casestudy fix");
 let body = document.querySelector("body");
 let global;
 let home;
