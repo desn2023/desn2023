@@ -49,7 +49,7 @@ scrolldem0.play = function (playhead = scrolldem0.playhead, movePlayhead = true)
 
     scrolldem0.running = true;
 
-    const playItem = new Object();
+    let playItem = new Object();
 
     if (scrolldem0.list[playhead] !== undefined) {
         playItem = scrolldem0.list[playhead];
