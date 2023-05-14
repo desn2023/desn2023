@@ -1,4 +1,4 @@
-console.log("v157 work list");
+console.log("v158 case study");
 let body = document.querySelector("body");
 let global;
 let home;
