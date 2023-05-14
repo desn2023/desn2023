@@ -65,7 +65,20 @@ scrolldem0.list = [ // list of animations to play
     }, {
         offset: 2275
     },
-    {}, {}, {}, {}, {}
+    {},
+    {
+        offset: -115
+    },
+    {
+        offset: -175
+    },
+    {
+        offset: 85
+    },
+    {
+        offset: -175
+    },
+    {}, {}, {}
 
 ]
 
