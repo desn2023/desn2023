@@ -47,12 +47,47 @@ scrolldem0.list = [ // list of animations to play
         offset: 500
     },
     {
-        offset: 2100
+        offset: 1800
     },
     {
         offset: 3100
     },
-    {}, {}, {}
+    {}, {}, {},
+    {
+        offset: 570
+    },
+    {
+        offset: -70
+    }, {
+        offset: 425
+    }, {
+        offset: 1350
+    }, {
+        offset: 2275
+    },
+    {},
+    {
+        offset: -115
+    },
+    {
+        offset: -175
+    },
+    {
+        offset: 85
+    },
+    {
+        offset: -175
+    },
+    {
+        offset: 2150
+    },
+    {
+        offset: -50
+    },
+    {
+        offset: -125
+    }
+
 ]
 
 scrolldem0.ancestorList = function(element) {
@@ -92,16 +127,16 @@ scrolldem0.play = function(playhead = scrolldem0.playhead, movePlayhead = true) 
     if (destElem !== null) {
         const destBound = destElem.getBoundingClientRect();
         const scrollDist = window.scrollY + destBound.top + playItem.offset;
-    
+
         playItem.params.scrollTo = scrollDist;
         playItem.params.onComplete = function() {
             scrolldem0.running = false;
         }
-    
+
         gsap.to(window, playItem.params);
         console.log("scrolldem0 scrolling");
         console.log(scrolldem0.ancestorList(destElem));
-    
+
         if (movePlayhead) {
             scrolldem0.playhead++;
         }
